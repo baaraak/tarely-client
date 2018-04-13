@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -11,7 +11,13 @@ import NotFound from '../misc/NotFound';
 
 import './app.css';
 
-class App extends Component {
+class App extends React.PureComponent {
+
+  componentWillReceiveProps(newProps) {
+  	if (newProps.globalError !== null) {
+
+    }
+  }
 
   componentDidMount() {
     document.querySelectorAll('body')[0].classList.add('loaded');

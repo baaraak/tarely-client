@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import {Button} from 'tarely-components';
 import "./home.css"
 
 export default class Home extends Component {
@@ -8,6 +8,7 @@ export default class Home extends Component {
       <div>
         <div className="jumbotron">
           <div className="container">
+            <Button label="fuck u" />
             <h1 className="display-3">Single Page Web App Template</h1>
             <p className="lead">
               This is yet another React based single page web application template.
