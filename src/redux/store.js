@@ -1,16 +1,15 @@
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
-import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
+import createSagaMiddleware from 'redux-saga'
 
 // Reducers
 import app from './reducers/app.reducer';
-import { selectedUsersPage, usersByPage } from './reducers/users';
 
 const logger = createLogger();
+const sagaMiddleware = createSagaMiddleware();
+
 const rootReducer = combineReducers({
   app,
-  selectedUsersPage,
-  usersByPage,
 });
 
 const initialState = {};
@@ -23,7 +22,7 @@ const configureStore = () => {
       rootReducer,
       initialState,
       compose(
-        applyMiddleware(thunkMiddleware, logger),
+        applyMiddleware(sagaMiddleware, logger),
         window.devToolsExtension ? window.devToolsExtension() : f => f
       )
     );
@@ -31,7 +30,7 @@ const configureStore = () => {
     store = createStore(
       rootReducer,
       initialState,
-      compose(applyMiddleware(thunkMiddleware), f => f)
+      compose(applyMiddleware(sagaMiddleware), f => f)
     );
   }
 

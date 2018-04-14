@@ -8,13 +8,11 @@ import getAppData from './services/getAppData';
 
 import App from "./views/app/App";
 
+import './icons/style.css';
 import "./index.css";
 
 
 getAppData().then((data) => {
-  console.log('*******************************');
-  console.log(data);
-  console.log('*******************************');
   ReactDOM.render(
     <Provider store={store}>
       <App />
