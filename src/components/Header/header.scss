@@ -1,0 +1,60 @@
+@import "../../styles/vars.scss";
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  background: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.3);
+
+  &__userInfo {
+    margin-left: auto;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+
+    .icon {
+      cursor: pointer;
+      font-size: 20px;
+    }
+  }
+
+  /* reset-antd header menu */
+  li.ant-menu-item {
+    font-size: 12px;
+  }
+  /* reset-antd header badges icons */
+  .ant-badge {
+    margin-right: 25px;
+  }
+  .ant-avatar {
+    cursor: pointer;
+  }
+}
+
+/* reset-antd dropdown avatar */
+.avatarMenu {
+    border-right: none !important;
+
+  .avatarMenu__item--profile {
+    display: flex;
+    flex-direction: column;
+  }
+  li.ant-menu-item.avatarMenu__item {
+    height: auto;
+    line-height: 20px;
+  }
+  .avatarMenu__item--profile span:first-child {
+    font-size: 16px;
+    color: #5f5f5f;
+    font-weight: 500;
+  }
+  .avatarMenu__item--profile span {
+    font-size: 12px;
+    color: #ccc;
+  }
+  .ant-popover-inner-content {
+    padding: 7px 7px 4px;
+  }
+}

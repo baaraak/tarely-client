@@ -3,30 +3,31 @@ import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import Header from '../../components/header/Header';
-// import Footer from '../../components/footer/Footer';
+import Header from '../../components/Header';
 import Home from '../home/Home';
 import NotFound from '../misc/NotFound';
+
+import GlobalErrorDialog from '../../components/GlobalErrorDialog';
+
+import {UNAUTHORIZED_REDIRECT_URL} from '../../services/constans';
 
 import './app.css';
 
 class App extends React.PureComponent {
 
-  componentWillReceiveProps(newProps) {
-  	if (newProps.globalError !== null) {
-
-    }
-  }
-
   componentDidMount() {
     document.querySelectorAll('body')[0].classList.add('loaded');
+  }
+
+  unAuthorizeRedirect() {
+    window.location.href = UNAUTHORIZED_REDIRECT_URL;
   }
 
   render() {
     return (
       <Router>
         <div className="container">
-          <Header likes={2} messages={0} />
+          <Header />
           <div className="appContent">
             <Switch>
               <Route exact path="/" component={Home}/>
@@ -34,7 +35,10 @@ class App extends React.PureComponent {
               <Route component={NotFound}/>
             </Switch>
           </div>
-          {/*<Footer/>*/}
+          <GlobalErrorDialog
+              handleClose={this.unAuthorizeRedirect}
+              globalError={this.props.globalError}
+            />
         </div>
       </Router>
     );
@@ -42,8 +46,7 @@ class App extends React.PureComponent {
 }
 
 App.propTypes = {
-  user: PropTypes.string,
-  dispatch: PropTypes.func.isRequired
+  user: PropTypes.object,
 };
 
 App.contextTypes = {

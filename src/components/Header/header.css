@@ -1,0 +1,42 @@
+.header {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  background: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.3);
+  /* reset-antd header menu */
+  /* reset-antd header badges icons */ }
+  .header__userInfo {
+    margin-left: auto;
+    margin-right: 20px;
+    display: flex;
+    align-items: center; }
+    .header__userInfo .icon {
+      cursor: pointer;
+      font-size: 20px; }
+  .header li.ant-menu-item {
+    font-size: 12px; }
+  .header .ant-badge {
+    margin-right: 25px; }
+  .header .ant-avatar {
+    cursor: pointer; }
+
+/* reset-antd dropdown avatar */
+.avatarMenu {
+  border-right: none !important; }
+  .avatarMenu .avatarMenu__item--profile {
+    display: flex;
+    flex-direction: column; }
+  .avatarMenu li.ant-menu-item.avatarMenu__item {
+    height: auto;
+    line-height: 20px; }
+  .avatarMenu .avatarMenu__item--profile span:first-child {
+    font-size: 16px;
+    color: #5f5f5f;
+    font-weight: 500; }
+  .avatarMenu .avatarMenu__item--profile span {
+    font-size: 12px;
+    color: #ccc; }
+  .avatarMenu .ant-popover-inner-content {
+    padding: 7px 7px 4px; }

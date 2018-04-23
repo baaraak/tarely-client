@@ -18,7 +18,6 @@ export default function callApi(url, method = 'GET', config = {}) {
     'Authorization': 'Bearer ' + token
   };
   const options = Object.assign(config, {method, headers});
-  console.log(options)
   return fetch(API_URI + url, options)
     .then(response => response.json())
     .then(json => {
