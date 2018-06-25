@@ -1,0 +1,164 @@
+@import "../../styles/vars.scss";
+
+.productPage {
+  .ant-tabs-nav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .ant-tabs-tab {
+    width: 100%;
+    text-align: center;
+    margin: 0;
+  }
+
+  .productPage__swiping {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .swiping-cards-productTitle {
+    font-size: 16px;
+    color: $black;
+    margin: 20px 0;
+    padding: 0 0 15px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    font-weight: $font-light;
+  }
+
+  .swiping-cards {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  #cards {
+    width: 100%;
+    height: 100%;
+  }
+
+  .ant-carousel .slick-initialized .slick-slide {
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ant-carousel .slick-slide img {
+    display: block;
+    user-select: none;
+    height: 300px;
+    width: auto !important;
+  }
+
+  .card {
+    position: absolute;
+    transition: box-shadow .3s;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: unset;
+    width: 100%;
+    height: 100%;
+  }
+
+  .animate {
+    transition: transform .3s;
+    box-shadow: none;
+  }
+
+  .inactive {
+    box-shadow: none;
+  }
+
+  .alert {
+    width: 45%;
+    min-height: 10%;
+    position: absolute;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity .5s;
+    color: white;
+    vertical-align: middle;
+    line-height: 3rem;
+  }
+
+  .alert-visible {
+    opacity: 1;
+  }
+
+  .alert-right {
+    top: 0;
+    right: 0;
+    background: green;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+  }
+
+  .alert-left {
+    top: 0;
+    left: 0;
+    background: red;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+  }
+
+  .swiping-cards-actionButtons {
+    display: flex;
+    width: 300px;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+    transform: translateY(-20px);
+
+    .button {
+      cursor: pointer;
+      width: 55px;
+      height: 55px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: rgba(0, 0, 0, 0.5);
+      margin: 0 5px;
+      border: 1px solid $blue_gray;
+      border-radius: 50%;
+      box-shadow: 0 3px 5px 2px rgba(0, 0, 0, 0.1);
+      background: linear-gradient(#fff, #ddd);
+      transition: all 0.2s ease-in;
+
+      &:hover {
+        color: $black;
+      }
+    }
+  }
+
+  .field {
+    display: flex;
+    margin: 10px 0;
+    font-size: 15px;
+  }
+
+  .footer-fieldLabel {
+    margin-right: 10px;
+    width: 100px;
+    font-weight: bold;
+    text-align: right;
+  }
+
+  &__swiping--loading {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+

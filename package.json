@@ -4,6 +4,7 @@
   "description": "tarely web client app",
   "proxy": "http://localhost:3001",
   "devDependencies": {
+    "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
@@ -13,6 +14,7 @@
   "dependencies": {
     "antd": "^3.4.1",
     "classnames": "^2.2.5",
+    "geolib": "^2.0.24",
     "isomorphic-fetch": "^2.2.1",
     "jwt-decode": "^2.2.0",
     "node-sass-chokidar": "^1.2.2",
@@ -20,11 +22,18 @@
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-highlight-words": "^0.11.0",
     "react-icons": "^2.2.7",
+    "react-places-autocomplete": "^7.1.1",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
+    "react-router-modal": "^1.3.5",
+    "react-router-transition": "^1.2.1",
+    "react-swipe-card": "^0.1.4",
+    "react-swipeable-views-core": "^0.12.11",
     "redux": "^3.7.2",
-    "redux-saga": "^0.16.0"
+    "redux-saga": "^0.16.0",
+    "validator": "^10.2.0"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
@@ -33,6 +42,8 @@
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "react-scripts build",
     "build": "npm-run-all build-css build-js",
+    "lint": "eslint --ext=js --ext=jsx src/*",
+    "lint:fix": "eslint --ext=js --ext=jsx src/* --fix",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }

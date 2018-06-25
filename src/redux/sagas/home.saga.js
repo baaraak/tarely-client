@@ -1,22 +1,21 @@
-import {put, call, takeLatest} from 'redux-saga/effects'
+import { put, call, takeLatest } from 'redux-saga/effects';
 
+import { DELETE_PRODUCT } from '../actions/home.actions';
+import { deleteUserProduct } from '../actions/app.actions';
 import callApi from '../../services/api';
-import {showGlobalMessageError} from '../actions/app.actions';
-import {GET_USER_PRODUCTS, productsLoaded} from '../actions/home.actions';
 
-
-function* fetchUserProducts() {
-    try {
-        const data = yield call(callApi, '/user/products');
-        yield put(productsLoaded(data.products));
-    } catch (err) {
-        yield put(showGlobalMessageError('cant fetch user products'));
-    }
-
+function* deleteProduct(action) {
+  try {
+    yield call(callApi, `/products/${action.productId}`, 'DELETE');
+    yield put(deleteUserProduct(action.productId));
+  } catch (e) {
+    // yield put(globalError(response.message));
+  }
 }
 
+
 function* homeSaga() {
-    yield takeLatest(GET_USER_PRODUCTS, fetchUserProducts);
+  yield takeLatest(DELETE_PRODUCT, deleteProduct);
 }
 
 export default homeSaga;

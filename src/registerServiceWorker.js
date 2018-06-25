@@ -1,6 +1,6 @@
 // In production, we register a service worker to serve assets from local cache.
 
-// This lets the app load faster on subsequent visits in production, and gives
+// This lets the App load faster on subsequent visits in production, and gives
 // it offline capabilities. However, it also means that developers (and users)
 // will only see deployed updates on the "N+1" visit to a page, since previously
 // cached resources are updated in the background.
@@ -14,7 +14,7 @@ export default function register() {
       const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
       navigator.serviceWorker
         .register(swUrl)
-        .then(registration => {
+        .then((registration) => {
           registration.onupdatefound = () => {
             const installingWorker = registration.installing;
             installingWorker.onstatechange = () => {
@@ -23,7 +23,7 @@ export default function register() {
                   // At this point, the old content will have been purged and
                   // the fresh content will have been added to the cache.
                   // It's the perfect time to display a "New content is
-                  // available; please refresh." message in your web app.
+                  // available; please refresh." message in your web App.
                   console.log('New content is available; please refresh.');
                 } else {
                   // At this point, everything has been precached.
@@ -35,7 +35,7 @@ export default function register() {
             };
           };
         })
-        .catch(error => {
+        .catch((error) => {
           console.error('Error during service worker registration:', error);
         });
     });
@@ -44,7 +44,7 @@ export default function register() {
 
 export function unregister() {
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.ready.then(registration => {
+    navigator.serviceWorker.ready.then((registration) => {
       registration.unregister();
     });
   }

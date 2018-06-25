@@ -1,10 +1,62 @@
 @import "reset.css";
+@import "vars.scss";
 
 body {
-  font-family: 'Rubik', sans-serif;
-  background: #fbfbff;
+  width: 100%;
+  height: 100%;
+  font-family: $font;
+  font-size: 13px;
+  margin: 0;
+  padding: 0;
+  color: $black;
+  background-color: $bright_gray;
 }
 
-a:hover {
-  transition: all 0.3s ease-in;
+a {
+  color: $blue;
+  outline: none;
+
+  &:hover,
+  &:visited {
+    text-decoration: none;
+  }
+}
+
+.ant-btn {
+  border-radius: 20px;
+}
+
+#root,
+.container {
+  height: 100%;
+}
+
+.appContent {
+  height: calc(100% - #{$headerHeight});
+  display: flex;
+}
+
+.page {
+  flex: 1;
+}
+
+.switch-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.switch-wrapper > div {
+  position: absolute;
+  width: 100%;
+}
+
+.priceSeparate {
+  margin: 0 10px;
+  display: inline-block;
+}
+
+.error {
+  line-height: 20px;
+  color: #f5222d;
+  font-size: 12px;
 }

@@ -3,9 +3,10 @@
   align-items: center;
   padding: 0 20px;
   background: #fff;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid #f1f4f6;
   box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.3);
-  /* reset-antd header menu */
+  height: 45px;
+  animation: slideHeaderIn 0.8s forwards;
   /* reset-antd header badges icons */ }
   .header__userInfo {
     margin-left: auto;
@@ -15,12 +16,29 @@
     .header__userInfo .icon {
       cursor: pointer;
       font-size: 20px; }
-  .header li.ant-menu-item {
-    font-size: 12px; }
+    .header__userInfo .ant-btn {
+      font-size: 11px; }
   .header .ant-badge {
     margin-right: 25px; }
   .header .ant-avatar {
     cursor: pointer; }
+  .header .ant-btn {
+    margin-right: 15px; }
+
+/* Header left navigation */
+.header__navigation {
+  display: flex;
+  align-items: center; }
+  .header__navigation .navigation__menu > a {
+    margin-left: 20px;
+    font-size: 13px;
+    color: #8e8f99;
+    font-weight: 300; }
+    .header__navigation .navigation__menu > a:hover {
+      color: #2c2c3d; }
+    .header__navigation .navigation__menu > a:focus {
+      text-decoration: none;
+      color: #0070c9; }
 
 /* reset-antd dropdown avatar */
 .avatarMenu {
@@ -40,3 +58,9 @@
     color: #ccc; }
   .avatarMenu .ant-popover-inner-content {
     padding: 7px 7px 4px; }
+
+@keyframes slideHeaderIn {
+  from {
+    transform: translateY(-45px); }
+  to {
+    transform: translateY(0); } }

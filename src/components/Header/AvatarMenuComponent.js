@@ -1,36 +1,45 @@
 import React from 'react';
-import {Menu, Icon} from 'antd';
+import { Link } from 'react-router-dom';
+import { Menu, Icon } from 'antd';
 
 const menuTitle = (userFullName, newMessages) => (
-    <div className='avatarMenu__item--profile'>
-        <span>{userFullName}</span>
-        <span>{newMessages || 0} new messages</span>
-    </div>
+  <div className="avatarMenu__item--profile">
+    <span>{userFullName}</span>
+    <span>{newMessages || 0} new messages</span>
+  </div>
 );
 
-const AvatarMenuComponent = ({userFullName, newMessages}) => (
-    <Menu selectable={false} style={{width: '200px'}} className='avatarMenu' >
-        <Menu.Item key="1" className='avatarMenu__item'>
-            {menuTitle(userFullName, newMessages)}
-        </Menu.Item>
-        <Menu.Divider/>
-        <Menu.Item key="2">
-            <Icon type="profile"/>
+const AvatarMenuComponent = ({ userFullName, newMessages }) => (
+  <Menu selectable={false} style={{ width: '200px' }} className="avatarMenu" >
+    <Menu.Item key="1" className="avatarMenu__item">
+      {menuTitle(userFullName, newMessages)}
+    </Menu.Item>
+    <Menu.Divider />
+    <Menu.Item key="2">
+      <Link to="/user/profile">
+        <Icon type="profile" />
             Profile
-        </Menu.Item>
-        <Menu.Item key="3">
-            <Icon type="setting"/>
+      </Link>
+    </Menu.Item>
+    <Menu.Item key="3">
+      <Link to="/user/settings">
+        <Icon type="setting" />
             Settings
-        </Menu.Item>
-        <Menu.Item key="4">
-            <Icon type="question-circle-o"/>
+      </Link>
+    </Menu.Item>
+    <Menu.Item key="4">
+      <Link to="/help">
+        <Icon type="question-circle-o" />
             Help
-        </Menu.Item>
-        <Menu.Item key="5">
-            <Icon type="logout"/>
+      </Link>
+    </Menu.Item>
+    <Menu.Item key="5">
+      <Link to="/logout">
+        <Icon type="logout" />
             Log out
-        </Menu.Item>
-    </Menu>
+      </Link>
+    </Menu.Item>
+  </Menu>
 
 );
 

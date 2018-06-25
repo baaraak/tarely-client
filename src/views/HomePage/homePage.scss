@@ -1,0 +1,11 @@
+.homePage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  .ant-card {
+    margin: 0 10px;
+    width: 400px;
+  }
+}

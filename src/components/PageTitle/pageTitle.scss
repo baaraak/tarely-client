@@ -1,0 +1,22 @@
+@import "../../styles/vars.scss";
+
+.pageTitle {
+  padding: 15px;
+  display: flex;
+  align-items: baseline;
+  box-shadow: 7px 5px 9px rgba(0, 0, 0, 0.05), inset 1px 0px 5px 0 rgba(0, 0, 0, 0.1);
+  border: 1px solid $gray;
+  background: #fff;
+  font-size: 15px;
+  margin-bottom: 50px;
+
+  &__label {
+    color: $black;
+    font-weight: $font-light;
+  }
+
+  &__icon {
+    margin: 0 10px;
+    font-size: 17px;
+  }
+}

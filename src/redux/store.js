@@ -1,42 +1,46 @@
-import {createStore, applyMiddleware, combineReducers, compose} from 'redux';
-import createSagaMiddleware, {END} from 'redux-saga'
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
+import createSagaMiddleware, { END } from 'redux-saga';
 
 // Reducers
 import app from './reducers/app.reducer';
 import home from './reducers/home.reducer';
+import product from './reducers/product.reducer';
+import auth from './reducers/auth.reducer';
 
 const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
-    app,
-    home,
+  app,
+  home,
+  product,
+  auth,
 });
 
 const initialState = {};
 
 const configureStore = () => {
-    let store;
+  let store;
 
-    if (module.hot) {
-        store = createStore(
-            rootReducer,
-            initialState,
-            compose(
-                applyMiddleware(sagaMiddleware),
-                window.devToolsExtension ? window.devToolsExtension() : f => f
-            )
-        );
-    } else {
-        store = createStore(
-            rootReducer,
-            initialState,
-            compose(applyMiddleware(sagaMiddleware), f => f)
-        );
-    }
+  if (module.hot) {
+    store = createStore(
+      rootReducer,
+      initialState,
+      compose(
+        applyMiddleware(sagaMiddleware),
+        window.devToolsExtension ? window.devToolsExtension() : f => f,
+      ),
+    );
+  } else {
+    store = createStore(
+      rootReducer,
+      initialState,
+      compose(applyMiddleware(sagaMiddleware), f => f),
+    );
+  }
 
-    store.runSaga = sagaMiddleware.run
-    store.close = () => store.dispatch(END)
-    return store;
+  store.runSaga = sagaMiddleware.run;
+  store.close = () => store.dispatch(END);
+  return store;
 };
 
 const store = configureStore();
