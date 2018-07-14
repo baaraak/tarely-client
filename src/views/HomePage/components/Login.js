@@ -8,8 +8,8 @@ class Login extends React.PureComponent {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        const { email, password } = values;
-        this.props.submit({ email, password });
+        const { loginEmail, loginPassword } = values;
+        this.props.submit({ email: loginEmail, password: loginPassword });
       }
     });
   }
