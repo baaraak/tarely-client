@@ -2,7 +2,10 @@
   "name": "tarely-web",
   "version": "1.0.0",
   "description": "tarely web client app",
-  "proxy": "http://localhost:3001",
+  "engines": {
+    "node": "8.11.1",
+    "npm": "6.0.0"
+  },
   "devDependencies": {
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
@@ -14,6 +17,8 @@
   "dependencies": {
     "antd": "^3.4.1",
     "classnames": "^2.2.5",
+    "emoji-js": "^3.4.1",
+    "emoji-mart": "^2.6.1",
     "geolib": "^2.0.24",
     "isomorphic-fetch": "^2.2.1",
     "jwt-decode": "^2.2.0",
@@ -31,6 +36,7 @@
     "react-router-transition": "^1.2.1",
     "react-swipe-card": "^0.1.4",
     "react-swipeable-views-core": "^0.12.11",
+    "react-textarea-autosize": "^7.0.3",
     "redux": "^3.7.2",
     "redux-saga": "^0.16.0",
     "validator": "^10.2.0"

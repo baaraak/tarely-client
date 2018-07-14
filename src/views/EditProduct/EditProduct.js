@@ -9,10 +9,6 @@ import EditProductForm from './EditProductForm';
 import { updateProduct } from '../../redux/actions/product.actions';
 
 class EditProduct extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentWillReceiveProps(nextProps) {
     if (this.props.editProductSuccess === null && this.props.editProductSuccess !== nextProps.editProductSuccess) {
       if (typeof nextProps.editProductSuccess === 'string') {

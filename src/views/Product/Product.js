@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Tabs } from 'antd';
 import { Route } from 'react-router-dom';
 
 import ProductMenu from './ProductMenu';
@@ -19,29 +18,42 @@ class Product extends React.Component {
     this.handleMenuClick = this.handleMenuClick.bind(this);
   }
 
+  componentWillMount() {
+    if (!this.props.products.some(p => p._id === this.props.match.params.id)) {
+      this.props.history.push('/');
+    }
+  }
+
   handleMenuClick({ key }) {
     if (key === this.state.currentView || !key) return;
     this.setState({ currentView: key });
   }
 
   render() {
+    const { id } = this.props.match.params;
     return (
       <div className="page productPage">
         <ProductMenu
           handleClick={this.handleMenuClick}
           currentView={this.state.currentView}
-          id={this.props.match.params.id}
+          id={id}
         />
 
         <Route
           path="/product/:id/swipe"
           exact
           render={() =>
-            <SwipingComponent productId={this.props.match.params.id} />
+            <SwipingComponent productId={id} />
+        }
+        />
+        <Route
+          path="/product/:id/matches"
+          exact
+          render={() =>
+            <MatchesComponent productId={id} />
         }
         />
         <Route path="/product/:id/browse" exact component={BrowseComponent} />
-        <Route path="/product/:id/matches" exact component={MatchesComponent} />
       </div>
     );
   }

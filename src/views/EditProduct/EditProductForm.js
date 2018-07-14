@@ -3,7 +3,6 @@ import {
   Form,
   Button,
   Icon,
-  Alert,
   Select,
   Input,
   InputNumber,
@@ -106,6 +105,7 @@ class EditProductForm extends React.PureComponent {
         thumbUrl: IMAGE_SRC + image,
       });
       images.push(image);
+      return image;
     });
     this.setState({
       fileList,

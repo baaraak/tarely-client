@@ -53,7 +53,7 @@ class SwipeCards extends Component {
   render() {
     const { index, containerSize } = this.state;
     const {
-      children, className, onSwipeTop, onSwipeBottom,
+      children, className
     } = this.props;
     if (!containerSize.x || !containerSize.y) return <div className={className} />;
     const _cards = children.reduce((memo, c, i) => {

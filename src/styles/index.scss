@@ -38,6 +38,7 @@ a {
 
 .page {
   flex: 1;
+  height: 100%;
 }
 
 .switch-wrapper {
@@ -48,6 +49,7 @@ a {
 .switch-wrapper > div {
   position: absolute;
   width: 100%;
+  height: 100%;
 }
 
 .priceSeparate {

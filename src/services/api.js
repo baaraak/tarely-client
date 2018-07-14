@@ -20,8 +20,6 @@ export default function callApi(url, method = 'GET', data) {
     .then(response => response.json())
     .then(json => json)
     .catch((error) => {
-      console.log('in err')
-      console.log(error)
       const response = error.response;
       if (response === undefined) {
 

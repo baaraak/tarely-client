@@ -5,6 +5,9 @@ import {
   EDIT_PRODUCT_FAIL,
   UPDATE_PRODUCT,
   GET_PRODUCT_SWIPING_LIST_SUCCESS,
+  GET_PRODUCT_MATCHES_SUCCCESS,
+  GET_MATCH_MESSAGES,
+  GET_MATCH_MESSAGES_SUCCESS,
 } from '../actions/product.actions';
 
 const initialState = {
@@ -12,6 +15,8 @@ const initialState = {
   productId: null,
   editProductSuccess: null,
   swipingList: null,
+  matches: null,
+  messages: null,
 };
 
 export default function product(state = initialState, action = {}) {
@@ -40,6 +45,18 @@ export default function product(state = initialState, action = {}) {
     case GET_PRODUCT_SWIPING_LIST_SUCCESS:
       return {
         swipingList: action.products,
+      };
+    case GET_PRODUCT_MATCHES_SUCCCESS:
+      return {
+        matches: action.products,
+      };
+    case GET_MATCH_MESSAGES:
+      return {
+        messages: action.null,
+      };
+    case GET_MATCH_MESSAGES_SUCCESS:
+      return {
+        messages: action.messages,
       };
     default:
       return state;

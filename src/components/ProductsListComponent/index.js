@@ -7,6 +7,14 @@ import { IMAGE_SRC } from '../../services/constans';
 
 const ProductsListComponent = ({ products, onDeleteProduct }) => (
   <div className="productsList">
+    <div className="productsList__product">
+      <div className="product__image"><Icon type="search" /></div>
+      <div className="product__title">Search</div>
+      <div className="product__description">Browse between products and bid on them</div>
+      <div className="product__footer">
+        <div className="product__icon"><Link to="/search" ><Icon type="global" /></Link></div>
+      </div>
+    </div>
     {products.map(product => (
       <div
         key={product._id}

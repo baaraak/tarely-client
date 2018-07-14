@@ -5,11 +5,17 @@ import {
   UPDATE_PRODUCT,
   GET_PRODUCT_SWIPING_LIST,
   HANDLE_SWIPE,
+  GET_PRODUCT_MATCHES,
+  GET_MATCH_MESSAGES,
+  SEND_MESSAGE,
   editProductSuccess,
   uploadProductSuccess,
   uploadProductFail,
   editProductFail,
   getProductSwipingListSuccess,
+  getProductMatchesListSuccess,
+  getMatchMessagesSuccess,
+  sendMessageSuccess,
 } from '../actions/product.actions';
 import { editUserProduct, addUserProduct } from '../actions/app.actions';
 import callApi from '../../services/api';
@@ -56,12 +62,42 @@ function* handleSwipeSubmit(action) {
   }
 }
 
+function* getProductMatches(action) {
+  const response = yield call(callApi, `/products/${action.id}/matches`, 'GET');
+  if (response) {
+    yield put(getProductMatchesListSuccess(response));
+  } else {
+    yield put(editProductFail(response.message));
+  }
+}
+
+function* getMatchMessages(action) {
+  const response = yield call(callApi, `/products/${action.roomId}/messages`, 'GET');
+  if (response.messages) {
+    yield put(getMatchMessagesSuccess(response.messages));
+  } else {
+    yield put(editProductFail(response.message));
+  }
+}
+
+function* sendMessage(action) {
+  const response = yield call(callApi, '/products/messages', 'POST', action.message);
+  if (response.success) {
+    yield put(sendMessageSuccess());
+  } else {
+    yield put(editProductFail(response.message));
+  }
+}
+
 
 function* productSaga() {
   yield takeLatest(UPLOAD_PRODUCT, uploadProduct);
   yield takeLatest(UPDATE_PRODUCT, updateProduct);
   yield takeLatest(GET_PRODUCT_SWIPING_LIST, getUserSwipingList);
   yield takeLatest(HANDLE_SWIPE, handleSwipeSubmit);
+  yield takeLatest(GET_PRODUCT_MATCHES, getProductMatches);
+  yield takeLatest(GET_MATCH_MESSAGES, getMatchMessages);
+  yield takeLatest(SEND_MESSAGE, sendMessage);
 }
 
 export default productSaga;

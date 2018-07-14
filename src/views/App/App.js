@@ -10,19 +10,12 @@ import Product from '../Product/Product';
 import UploadProduct from '../UploadProduct/UploadProduct';
 import EditProduct from '../EditProduct/EditProduct';
 import UserProfile from '../UserProfile/UserProfile';
+import Search from '../Search/Search';
 import NotFound from '../misc/NotFound';
-
-import GlobalErrorDialog from '../../components/GlobalErrorDialog';
-
-import { UNAUTHORIZED_REDIRECT_URL } from '../../services/constans';
 
 class App extends React.PureComponent {
   componentDidMount() {
     document.querySelectorAll('body')[0].classList.add('loaded');
-  }
-
-  unAuthorizeRedirect() {
-    window.location.href = UNAUTHORIZED_REDIRECT_URL;
   }
 
   logOut() {
@@ -34,7 +27,6 @@ class App extends React.PureComponent {
     return (
       <Router>
         <div className="container">
-
           <Header />
           <div className="appContent">
             <Switch>
@@ -50,16 +42,13 @@ class App extends React.PureComponent {
                 <Route exact path="/product/:id" component={Product} />
                 <Route exact path="/product/:id/:view" component={Product} />
                 <Route path="/user/profile/" component={UserProfile} />
+                <Route path="/search" component={Search} />
                 <Route path="/logout" render={this.logOut} />
                 <Route component={NotFound} />
               </AnimatedSwitch>
 
             </Switch>
           </div>
-          <GlobalErrorDialog
-            handleClose={this.unAuthorizeRedirect}
-            globalError={this.props.globalError}
-          />
         </div>
       </Router>
     );

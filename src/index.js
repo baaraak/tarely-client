@@ -14,7 +14,6 @@ import HomePage from './views/HomePage/HomePage';
 
 import './icons/style.css';
 import './styles/index.css';
-import callApi from './services/api';
 
 function renderApp(data) {
   store.dispatch(setUserProfile(data.user));
@@ -43,12 +42,16 @@ navigator.geolocation.getCurrentPosition(
     location = position.coords;
     initApp(location);
   },
-  null,
+  (err) => {
+    console.log('****************************');
+    console.log(err);
+    console.log('****************************');
+  },
   {
     enableHighAccuracy: true,
+    timeout: 5000,
   },
 );
-
 function initApp(location) {
   if (location) {
     getAppData(location).then((data) => {

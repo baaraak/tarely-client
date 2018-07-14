@@ -78,10 +78,6 @@ class SwipingComponent extends React.Component {
     if (this.state.isLoading) return <div className="productPage__swiping--loading"><Spin size="large" /></div>;
     if (!this.state.products.length) return this.renderNoProductsToSwipe();
     const product = this.state.products[this.state.index];
-    console.log('****************************');
-    console.log(this.state.products);
-    console.log(this.state.index);
-    console.log('****************************');
     const locationDistance = getDistance(product.location, this.props.userLocation);
     return (
       <div className="productPage__swiping">
