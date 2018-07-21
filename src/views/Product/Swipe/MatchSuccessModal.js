@@ -11,7 +11,7 @@ const MatchSuccessModal = ({ match, onClose, redirectToMatchRoom }) => (
                 <div className="matchSuccess__product">
                     <div className="product__title">{match.fromProduct.title}</div>
                     <div className="product__image">
-                        <img src={match.fromProduct.images[0]} alt="" />
+                        <img src={IMAGE_SRC + match.fromProduct.images[0]} alt="" />
                     </div>
                 </div>
                 <div className="matchSuccess__product">
