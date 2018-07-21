@@ -10,6 +10,8 @@ import {
   GET_PRODUCT_BROWSE_SUCCESS,
   GET_MATCH_MESSAGES_SUCCESS,
   GET_PRODUCT_BROWSE,
+  SWIPE_RESPONSE_MATCH,
+  CLOSE_MATCH_MODAL,
 } from '../actions/product.actions';
 
 const initialState = {
@@ -19,7 +21,8 @@ const initialState = {
   swipingList: null,
   matches: null,
   messages: null,
-  browse: null,
+  browse: undefined,
+  isMatch: false,
 };
 
 export default function product(state = initialState, action = {}) {
@@ -55,7 +58,7 @@ export default function product(state = initialState, action = {}) {
       };
     case GET_MATCH_MESSAGES:
       return {
-        messages: action.null,
+        messages: null,
       };
     case GET_MATCH_MESSAGES_SUCCESS:
       return {
@@ -63,11 +66,19 @@ export default function product(state = initialState, action = {}) {
       };
     case GET_PRODUCT_BROWSE:
       return {
-        browse: null,
+        browse: undefined,
       };
     case GET_PRODUCT_BROWSE_SUCCESS:
       return {
         browse: action.products,
+      };
+    case SWIPE_RESPONSE_MATCH:
+      return {
+        isMatch: action.match,
+      };
+    case CLOSE_MATCH_MODAL:
+      return {
+        isMatch: false,
       };
     default:
       return state;

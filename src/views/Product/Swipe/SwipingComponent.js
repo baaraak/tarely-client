@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 import { Carousel, Icon, Spin } from 'antd';
 import { getDistance } from 'geolib';
 
+import MatchSuccessModal from './MatchSuccessModal';
 import { IMAGE_SRC } from '../../../services/constans';
 import Cards from '../../../components/SwipeableView/Cards';
 import Card from '../../../components/SwipeableView/CardSwitcher';
 
-import { getProductSwipingList, handleSwipe } from '../../../redux/actions/product.actions';
+import { getProductSwipingList, handleSwipe, closeMatchModal } from '../../../redux/actions/product.actions';
 
 class SwipingComponent extends React.Component {
   constructor(props) {
@@ -20,6 +21,8 @@ class SwipingComponent extends React.Component {
     this.handleChangeIndex = this.handleChangeIndex.bind(this);
     this.onClick = this.onClick.bind(this);
     this.onEnd = this.onEnd.bind(this);
+    this.closeMatchModal = this.closeMatchModal.bind(this);
+    this.redirectToMatchRoom = this.redirectToMatchRoom.bind(this);
   }
   componentWillMount() {
     this.props.getProductSwipingList(this.props.productId);
@@ -27,7 +30,10 @@ class SwipingComponent extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.state.isLoading && this.props.products !== nextProps.products) {
-      this.setState({ products: nextProps.products, isLoading: false });
+      this.setState({ products: Array.isArray(nextProps.products) ? nextProps.products : [], isLoading: false });
+    }
+    if (nextProps.isMatch && this.props.isMatch !== nextProps.isMatch) {
+
     }
   }
 
@@ -74,6 +80,14 @@ class SwipingComponent extends React.Component {
     );
   }
 
+  closeMatchModal() {
+    this.props.closeMatchModal();
+  }
+
+  redirectToMatchRoom(roomID) {
+    this.props.history.push({ pathname: `/product/${this.props.productId}/matches/${roomID}` })
+  }
+
   render() {
     if (this.state.isLoading) return <div className="productPage__swiping--loading"><Spin size="large" /></div>;
     if (!this.state.products.length) return this.renderNoProductsToSwipe();
@@ -109,6 +123,7 @@ class SwipingComponent extends React.Component {
             {product.location.address}
           </div>
         </div>
+        {this.props.isMatch && <MatchSuccessModal redirectToMatchRoom={this.redirectToMatchRoom} onClose={this.closeMatchModal} match={this.props.isMatch} />}
       </div>
     );
   }
@@ -117,6 +132,7 @@ class SwipingComponent extends React.Component {
 const mapStateToProps = state => ({
   products: state.product.swipingList,
   userLocation: state.app.user.location,
+  isMatch: state.product.isMatch,
 });
 
-export default connect(mapStateToProps, { getProductSwipingList, handleSwipe })(SwipingComponent);
+export default connect(mapStateToProps, { getProductSwipingList, closeMatchModal, handleSwipe })(SwipingComponent);

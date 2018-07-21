@@ -42,12 +42,12 @@ class Product extends React.Component {
         <Route
           path="/product/:id/swipe"
           exact
-          render={() => <SwipingComponent productId={id} />}
+          render={() => <SwipingComponent history={this.props.history} productId={id} />}
         />
         <Route
-          path="/product/:id/matches"
+          path="/product/:id/matches/:roomId?"
           exact
-          render={() => <MatchesComponent productId={id} />}
+          render={() => <MatchesComponent match={this.props.match} history={this.props.history} productId={id} />}
         />
         <Route
           path="/product/:id/browse"

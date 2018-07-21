@@ -1,6 +1,4 @@
 import React from 'react';
-import { Icon } from 'antd'
-import { Link } from 'react-router-dom';
 
 import { IMAGE_SRC } from '../../../services/constans';
 

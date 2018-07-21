@@ -1,17 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Spin } from 'antd';
-import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+// import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import isEqual from 'lodash/isEqual';
 
 import BrowseFilters from './BrowseFilters';
 import BrowseProductsList from './BrowseProductsList';
 import { getProductBrowse } from '../../../redux/actions/product.actions';
-import Query from '../../../services/query';
 import ProductViewComponent from '../ProductViewComponent'
 
 function getParamValueByName(name, query) {
-  name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+  name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]');
   const regex = new RegExp(`[\\?&]${name}=([^&#]*)`);
   const results = regex.exec(query);
   return results === null
@@ -89,7 +88,6 @@ class BrowseComponent extends React.Component {
       default:
         return;
     }
-    // this.props.history.push({ search: {...this.state.values, ...newValue} });
     this.setState({ values: { ...this.state.values, ...newValue } });
   }
 

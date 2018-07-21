@@ -41,6 +41,7 @@ class App extends React.PureComponent {
                 <Route exact path="/product/edit/:id" component={EditProduct} />
                 <Route exact path="/product/:id" component={Product} />
                 <Route exact path="/product/:id/:view" component={Product} />
+                <Route exact path="/product/:id/:view/:roomId" component={Product} />
                 <Route path="/user/profile/" component={UserProfile} />
                 <Route path="/search" component={Search} />
                 <Route path="/logout" render={this.logOut} />

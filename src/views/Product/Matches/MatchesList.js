@@ -1,7 +1,8 @@
 import React from 'react';
+
 import { IMAGE_SRC } from '../../../services/constans';
 
-const MatchesList = ({ matches, currentRoomID, onClick }) => (
+const MatchesList = ({ matches, currentRoomID, onClick, productId }) => (
   <div className="matches__list">
     {matches.map((match) => {
       const { product } = match;

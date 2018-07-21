@@ -16,6 +16,7 @@ import {
   editProductFail,
   getProductSwipingListSuccess,
   getProductMatchesListSuccess,
+  handleSwipeResponseMatch,
   getMatchMessagesSuccess,
   sendMessageSuccess,
 } from '../actions/product.actions';
@@ -58,6 +59,9 @@ function* handleSwipeSubmit(action) {
     response = yield call(callApi, '/products/like', 'POST', { from, to });
   } else if (direction === 'left') {
     response = yield call(callApi, '/products/dislike', 'POST', { from, to });
+  }
+  if (response.isMatch && response.isMatch.roomID) {
+    yield put(handleSwipeResponseMatch(response.isMatch));
   }
   if (response.error) {
     // yield put(globalError(response.products));

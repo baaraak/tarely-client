@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Spin } from 'antd';
 import io from 'socket.io-client';
+import { Route } from 'react-router-dom';
 
 import MatchesList from './MatchesList';
 import MatchRoom from './MatchRoom';
@@ -32,14 +33,21 @@ class MatchesComponent extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.state.isLoading && this.props.matches !== nextProps.matches) {
-      const currentRoomID = nextProps.matches.length ? nextProps.matches[0].roomId : null;
+      const currentRoomID = this.props.match.params.roomId ?
+        this.props.match.params.roomId :
+        nextProps.matches.length ? nextProps.matches[0].roomId : null;
       this.setState({
         matches: nextProps.matches,
         currentRoomID,
         isLoading: false,
       });
+      this.redirectToRoom(currentRoomID);
       if (currentRoomID) this.props.getMatchMessages(currentRoomID);
     }
+  }
+
+  redirectToRoom(roomID) {
+    this.props.history.push({ pathname: `/product/${this.props.productId}/matches/${roomID}` });
   }
 
   initSocket() {
@@ -54,6 +62,7 @@ class MatchesComponent extends React.Component {
 
   changeCurrentMatch(currentRoomID) {
     if (this.state.currentRoomID === currentRoomID) return;
+    this.redirectToRoom(currentRoomID);
     this.setState({ currentRoomID });
     this.props.getMatchMessages(currentRoomID);
   }
@@ -93,6 +102,7 @@ class MatchesComponent extends React.Component {
     return (
       <div className="productPage__matches">
         <MatchesList
+          productId={this.props.productId}
           matches={matches}
           currentRoomID={currentRoomID}
           onClick={this.changeCurrentMatch}
@@ -104,7 +114,6 @@ class MatchesComponent extends React.Component {
           title={product.title}
           setContentRef={this.setContentRef}
         />
-        <ProductViewComponent product={product} />
       </div>
     );
   }

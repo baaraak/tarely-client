@@ -17,6 +17,8 @@ export const SEND_MESSAGE = 'SEND_MESSAGE';
 export const SEND_MESSAGE_SUCCESS = 'SEND_MESSAGE_SUCCESS';
 export const GET_PRODUCT_BROWSE = 'GET_PRODUCT_BROWSE';
 export const GET_PRODUCT_BROWSE_SUCCESS = 'GET_PRODUCT_BROWSE_SUCCESS';
+export const SWIPE_RESPONSE_MATCH = 'SWIPE_RESPONSE_MATCH';
+export const CLOSE_MATCH_MODAL = 'CLOSE_MATCH_MODAL';
 
 export function uploadProduct(product) {
   return {
@@ -133,5 +135,18 @@ export function getProductBrowseSucccess(products) {
   return {
     type: GET_PRODUCT_BROWSE_SUCCESS,
     products,
+  };
+}
+
+export function handleSwipeResponseMatch(match) {
+  return {
+    type: SWIPE_RESPONSE_MATCH,
+    match,
+  };
+}
+
+export function closeMatchModal() {
+  return {
+    type: CLOSE_MATCH_MODAL,
   };
 }
