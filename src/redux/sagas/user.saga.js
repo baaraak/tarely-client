@@ -5,10 +5,9 @@ import callApi from '../../services/api';
 
 
 function* updateUserProfile(action) {
-  const response = yield call(callApi, '/products', 'PUT', action.product);
-  if (response.product) {
-    yield put(updateUserProfileSuccess(response.product));
-    // yield put(editUserProduct(response.product));
+  const response = yield call(callApi, '/users', 'PUT', action.user);
+  if (response.success) {
+    yield put(updateUserProfileSuccess());
   } else {
     // yield put(editProductFail(response.message));
   }

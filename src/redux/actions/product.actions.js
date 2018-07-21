@@ -6,7 +6,8 @@ export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 export const EDIT_PRODUCT_SUCCESS = 'EDIT_PRODUCT_SUCCESS';
 export const EDIT_PRODUCT_FAIL = 'EDIT_PRODUCT_FAIL';
 export const GET_PRODUCT_SWIPING_LIST = 'GET_PRODUCT_SWIPING_LIST';
-export const GET_PRODUCT_SWIPING_LIST_SUCCESS = 'GET_PRODUCT_SWIPING_LIST_SUCCESS';
+export const GET_PRODUCT_SWIPING_LIST_SUCCESS =
+  'GET_PRODUCT_SWIPING_LIST_SUCCESS';
 export const HANDLE_SWIPE = 'HANDLE_SWIPE';
 export const GET_PRODUCT_MATCHES = 'GET_PRODUCT_MATCHES';
 export const GET_PRODUCT_MATCHES_SUCCCESS = 'GET_PRODUCT_MATCHES_SUCCCESS';
@@ -14,6 +15,8 @@ export const GET_MATCH_MESSAGES = 'GET_MATCH_MESSAGES';
 export const GET_MATCH_MESSAGES_SUCCESS = 'GET_MATCH_MESSAGES_SUCCESS';
 export const SEND_MESSAGE = 'SEND_MESSAGE';
 export const SEND_MESSAGE_SUCCESS = 'SEND_MESSAGE_SUCCESS';
+export const GET_PRODUCT_BROWSE = 'GET_PRODUCT_BROWSE';
+export const GET_PRODUCT_BROWSE_SUCCESS = 'GET_PRODUCT_BROWSE_SUCCESS';
 
 export function uploadProduct(product) {
   return {
@@ -105,7 +108,6 @@ export function getMatchMessagesSuccess(messages) {
   };
 }
 
-
 export function sendMessage(message) {
   return {
     type: SEND_MESSAGE,
@@ -119,3 +121,17 @@ export function sendMessageSuccess() {
   };
 }
 
+export function getProductBrowse(productId, query) {
+  return {
+    type: GET_PRODUCT_BROWSE,
+    productId,
+    query,
+  };
+}
+
+export function getProductBrowseSucccess(products) {
+  return {
+    type: GET_PRODUCT_BROWSE_SUCCESS,
+    products,
+  };
+}

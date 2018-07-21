@@ -6,6 +6,7 @@ import app from './reducers/app.reducer';
 import home from './reducers/home.reducer';
 import product from './reducers/product.reducer';
 import auth from './reducers/auth.reducer';
+import user from './reducers/user.reducer';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   home,
   product,
   auth,
+  user,
 });
 
 const initialState = {};

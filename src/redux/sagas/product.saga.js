@@ -8,6 +8,8 @@ import {
   GET_PRODUCT_MATCHES,
   GET_MATCH_MESSAGES,
   SEND_MESSAGE,
+  GET_PRODUCT_BROWSE,
+  getProductBrowseSucccess,
   editProductSuccess,
   uploadProductSuccess,
   uploadProductFail,
@@ -89,6 +91,15 @@ function* sendMessage(action) {
   }
 }
 
+function* getProductBrowse(action) {
+  const response = yield call(callApi, `/products/${action.productId}/browse?${action.query || ''}`, 'GET');
+  if (response.products) {
+    yield put(getProductBrowseSucccess(response.products));
+  } else {
+    // yield put(editProductFail(response.message));
+  }
+}
+
 
 function* productSaga() {
   yield takeLatest(UPLOAD_PRODUCT, uploadProduct);
@@ -98,6 +109,7 @@ function* productSaga() {
   yield takeLatest(GET_PRODUCT_MATCHES, getProductMatches);
   yield takeLatest(GET_MATCH_MESSAGES, getMatchMessages);
   yield takeLatest(SEND_MESSAGE, sendMessage);
+  yield takeLatest(GET_PRODUCT_BROWSE, getProductBrowse);
 }
 
 export default productSaga;

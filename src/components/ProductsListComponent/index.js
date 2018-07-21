@@ -30,7 +30,7 @@ const ProductsListComponent = ({ products, onDeleteProduct }) => (
           <div className="product__icon" onClick={() => onDeleteProduct(product._id)} ><Icon type="delete" /></div>
         </div>
       </div>
-      ))}
+    ))}
   </div>
 );
 

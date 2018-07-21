@@ -31,6 +31,7 @@ class Product extends React.Component {
 
   render() {
     const { id } = this.props.match.params;
+    const product = this.props.products.filter(p => p._id === id)[0];
     return (
       <div className="page productPage">
         <ProductMenu
@@ -38,22 +39,23 @@ class Product extends React.Component {
           currentView={this.state.currentView}
           id={id}
         />
-
         <Route
           path="/product/:id/swipe"
           exact
-          render={() =>
-            <SwipingComponent productId={id} />
-        }
+          render={() => <SwipingComponent productId={id} />}
         />
         <Route
           path="/product/:id/matches"
           exact
-          render={() =>
-            <MatchesComponent productId={id} />
-        }
+          render={() => <MatchesComponent productId={id} />}
         />
-        <Route path="/product/:id/browse" exact component={BrowseComponent} />
+        <Route
+          path="/product/:id/browse"
+          exact
+          render={() => (
+            <BrowseComponent product={product} history={this.props.history} />
+          )}
+        />
       </div>
     );
   }

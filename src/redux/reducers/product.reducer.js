@@ -7,7 +7,9 @@ import {
   GET_PRODUCT_SWIPING_LIST_SUCCESS,
   GET_PRODUCT_MATCHES_SUCCCESS,
   GET_MATCH_MESSAGES,
+  GET_PRODUCT_BROWSE_SUCCESS,
   GET_MATCH_MESSAGES_SUCCESS,
+  GET_PRODUCT_BROWSE,
 } from '../actions/product.actions';
 
 const initialState = {
@@ -17,6 +19,7 @@ const initialState = {
   swipingList: null,
   matches: null,
   messages: null,
+  browse: null,
 };
 
 export default function product(state = initialState, action = {}) {
@@ -57,6 +60,14 @@ export default function product(state = initialState, action = {}) {
     case GET_MATCH_MESSAGES_SUCCESS:
       return {
         messages: action.messages,
+      };
+    case GET_PRODUCT_BROWSE:
+      return {
+        browse: null,
+      };
+    case GET_PRODUCT_BROWSE_SUCCESS:
+      return {
+        browse: action.products,
       };
     default:
       return state;

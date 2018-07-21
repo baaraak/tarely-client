@@ -39,10 +39,8 @@ class EditUserProfileForm extends React.PureComponent {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log(values)
-        if (this.state.fileList[0].status !== 'done') {
-          delete values.avatar;
-        }
+        const file = this.state.fileList[0];
+        values.avatar = file.response ? file.response.path : null;
         this.props.onSubmit(values);
       }
     });
@@ -85,7 +83,7 @@ class EditUserProfileForm extends React.PureComponent {
               onChange={this.onUploadImage}
             >
               <Button>
-                <Icon type="upload" />Upload
+                <Icon type="upload" />Change
               </Button>
             </Upload>)}
           </FormItem>
@@ -146,7 +144,7 @@ class EditUserProfileForm extends React.PureComponent {
           htmlType="submit"
           className="upload__form--button"
         >
-          Next<Icon type="right" />
+          Update
         </Button>
       </Form>
     );

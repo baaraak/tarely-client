@@ -1,12 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Spin } from 'antd';
+import io from 'socket.io-client';
 
 import MatchesList from './MatchesList';
 import MatchRoom from './MatchRoom';
-import MatchProduct from './MatchProduct';
+import ProductViewComponent from '../ProductViewComponent';
 
 import { getProductMatches, handleSwipe, getMatchMessages, sendMessage } from '../../../redux/actions/product.actions';
+
+const socketUrl = 'http://localhost:9000';
 
 class MatchesComponent extends React.Component {
   constructor(props) {
@@ -15,13 +18,16 @@ class MatchesComponent extends React.Component {
       isLoading: true,
       matches: props.matches,
       currentRoomID: null,
+      socket: null,
     };
     this.changeCurrentMatch = this.changeCurrentMatch.bind(this);
     this.onSubmitMessage = this.onSubmitMessage.bind(this);
+    this.setContentRef = this.setContentRef.bind(this);
   }
 
   componentWillMount() {
     this.props.getProductMatches(this.props.productId);
+    this.initSocket();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -34,6 +40,16 @@ class MatchesComponent extends React.Component {
       });
       if (currentRoomID) this.props.getMatchMessages(currentRoomID);
     }
+  }
+
+  initSocket() {
+    const socket = io(socketUrl);
+
+    socket.on('connect', () => {
+      console.log('Socket Connected');
+    });
+
+    this.setState({ socket });
   }
 
   changeCurrentMatch(currentRoomID) {
@@ -54,6 +70,10 @@ class MatchesComponent extends React.Component {
     return this.state.matches.filter(m => m.roomId === this.state.currentRoomID)[0].product;
   }
 
+  setContentRef(ref) {
+    if (ref) ref.scrollTop = ref.scrollHeight;
+  }
+
   onSubmitMessage(body) {
     const message = {
       body,
@@ -61,6 +81,7 @@ class MatchesComponent extends React.Component {
       to: this.getCurrentProduct()._id,
       roomId: this.state.currentRoomID,
     };
+    // this.state.socket.emit('CHAT MESSAGE', message);
     this.props.sendMessage(message);
   }
 
@@ -81,8 +102,9 @@ class MatchesComponent extends React.Component {
           onSubmit={this.onSubmitMessage}
           messages={this.props.messages}
           title={product.title}
+          setContentRef={this.setContentRef}
         />
-        <MatchProduct product={product} />
+        <ProductViewComponent product={product} />
       </div>
     );
   }

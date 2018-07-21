@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Avatar, Popover, Button } from 'antd';
 
 import AvatarMenuComponent from './AvatarMenuComponent';
+import {IMAGE_SRC} from "../../services/constans";
 
 class HeaderUserInfo extends React.PureComponent {
   constructor(props) {
@@ -36,7 +37,7 @@ class HeaderUserInfo extends React.PureComponent {
           visible={this.state.avatarMenuVisible}
           onVisibleChange={this.handleAvatarMenuClicked}
         >
-          <Avatar icon="user" />
+          <Avatar src={IMAGE_SRC + this.props.user.avatar || 'avatar.png'} />
         </Popover>
       </div>
     );
