@@ -43,31 +43,22 @@ navigator.geolocation.getCurrentPosition(
     initApp(location);
   },
   (err) => {
-    console.log('****************************');
-    console.log(err);
-    console.log('****************************');
+    initApp({});
   },
   {
     enableHighAccuracy: true,
-    timeout: 5000,
+    timeout: 10000,
   },
 );
 function initApp(location) {
-  if (location) {
-    getAppData(location).then((data) => {
-      store.runSaga(rootSaga);
-      if (data.user) {
-        renderApp(data);
-      } else {
-        renderHomePage();
-      }
-    });
-  } else {
-    ReactDOM.render(
-      <NoLocation />,
-      document.getElementById('root'),
-    );
-  }
+  getAppData(location).then((data) => {
+    store.runSaga(rootSaga);
+    if (data.user) {
+      renderApp(data);
+    } else {
+      renderHomePage();
+    }
+  });
 }
 
 const NoLocation = () => (

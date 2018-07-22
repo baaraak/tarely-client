@@ -14,11 +14,11 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-prettier": "^2.6.2",
     "eslint-plugin-react": "^7.7.0",
-    "prettier": "^1.13.7",
-    "react-scripts": "1.0.17"
+    "prettier": "^1.13.7"
   },
   "dependencies": {
     "antd": "^3.4.1",
+    "react-scripts": "1.0.17",
     "classnames": "^2.2.5",
     "emoji-js": "^3.4.1",
     "emoji-mart": "^2.6.1",
