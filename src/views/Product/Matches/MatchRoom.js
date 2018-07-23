@@ -16,14 +16,14 @@ const MatchRoom = ({
     );
   });
 
-  if (!messages) return <Spin size="large" />;
+  if (!messages) return <div className="matches__messages"><Spin size="large" /></div>;
   return (
     <div className="matches__messages">
       <div className="matches__messages--title">{title}</div>
       <div className="matches__messages--content" ref={setContentRef}>
         {messages.length === 0 ?
           <div className="messages__empty">no messages yet</div> :
-         renderMessages()
+          renderMessages()
         }
       </div>
       <div className="matches__messages--input">

@@ -1,13 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Spin } from 'antd';
 // import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import isEqual from 'lodash/isEqual';
 
 import BrowseFilters from './BrowseFilters';
 import BrowseProductsList from './BrowseProductsList';
 import { getProductBrowse } from '../../../redux/actions/product.actions';
-import ProductViewComponent from '../ProductViewComponent'
+import ProductView from '../../../components/ProductView';
 
 function getParamValueByName(name, query) {
   name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]');
@@ -125,12 +124,6 @@ class BrowseComponent extends React.Component {
 
   render() {
     const { isLoading, values, currentProduct } = this.state;
-    if (isLoading)
-      return (
-        <div className="productPage__swiping--loading">
-          <Spin size="large" />
-        </div>
-      );
     return (
       <div className="productPage__browse">
         <BrowseFilters
@@ -141,8 +134,8 @@ class BrowseComponent extends React.Component {
           resetSearch={this.resetSearch}
           handleKeyPress={this.handleKeyPress}
         />
-        <BrowseProductsList product={this.props.product} onClick={this.onClickProduct} products={this.props.products} />
-        {currentProduct && <ProductViewComponent
+        <BrowseProductsList isLoading={isLoading} product={this.props.product} onClick={this.onClickProduct} products={this.props.products} />
+        {currentProduct && <ProductView
           product={currentProduct}
           onClose={this.onCloseProductView}
         />}

@@ -6,7 +6,7 @@ import { Route } from 'react-router-dom';
 
 import MatchesList from './MatchesList';
 import MatchRoom from './MatchRoom';
-import ProductViewComponent from '../ProductViewComponent';
+import ProductView from '../../../components/ProductView';
 
 import { getProductMatches, handleSwipe, getMatchMessages, sendMessage } from '../../../redux/actions/product.actions';
 
@@ -96,7 +96,7 @@ class MatchesComponent extends React.Component {
 
   render() {
     const { matches, currentRoomID, isLoading } = this.state;
-    if (isLoading) return <div className="productPage__swiping--loading"><Spin size="large" /></div>;
+    if (isLoading) return <div className="productPage__matches"><Spin size="large" /></div>;
     if (matches.length === 0) return this.renderNoMatches();
     const product = this.getCurrentProduct();
     return (
@@ -113,6 +113,9 @@ class MatchesComponent extends React.Component {
           messages={this.props.messages}
           title={product.title}
           setContentRef={this.setContentRef}
+        />
+        <ProductView
+          product={product}
         />
       </div>
     );

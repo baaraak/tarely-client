@@ -15,12 +15,14 @@ fi
 echo 'BUILD SCCESSED!!!';
 
 cp -rf ./build/ ../buildClient/
+cp -rf ./composer.json ../buildClient/
 
 echo 'COPY FOLDER!!!';
 
 cd ../buildClient
 
 echo 'CONTECTED TO BUILD DIRECTORY!!!';
+
 
 git init
 git remote add origin https://github.com/baaraak/tarely-client.git
