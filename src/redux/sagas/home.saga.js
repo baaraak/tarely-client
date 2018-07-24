@@ -13,10 +13,8 @@ function* deleteProduct(action) {
   }
 }
 
-
 function* homeSaga() {
   yield takeLatest(DELETE_PRODUCT, deleteProduct);
 }
 
 export default homeSaga;
-

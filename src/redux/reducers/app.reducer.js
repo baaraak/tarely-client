@@ -3,7 +3,8 @@ import {
   SET_USER_PROFILE,
   HIDE_GLOBAL_MESSAGE_ERROR,
   SET_CATEGORIES,
-  DELETE_USER_PRODUCT, ADD_USER_PRODUCT,
+  DELETE_USER_PRODUCT,
+  ADD_USER_PRODUCT,
   EDIT_USER_PRODUCT,
 } from '../actions/app.actions';
 
@@ -38,19 +39,27 @@ export default function app(state = initialState, action = {}) {
     case DELETE_USER_PRODUCT:
       return {
         ...state,
-        user: { ...state.user, products: state.user.products.filter(p => p._id !== action.productId) },
+        user: {
+          ...state.user,
+          products: state.user.products.filter(p => p._id !== action.productId),
+        },
       };
     case ADD_USER_PRODUCT:
       return {
         ...state,
-        user: { ...state.user, products: state.user.products.concat(action.product) },
+        user: {
+          ...state.user,
+          products: state.user.products.concat(action.product),
+        },
       };
     case EDIT_USER_PRODUCT:
       return {
         ...state,
         user: {
           ...state.user,
-          products: state.user.products.map(p => (p._id === action.product._id ? action.product : p)),
+          products: state.user.products.map(
+            p => (p._id === action.product._id ? action.product : p)
+          ),
         },
       };
     default:

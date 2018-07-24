@@ -10,7 +10,10 @@ import { updateProduct } from '../../redux/actions/product.actions';
 
 class EditProduct extends React.Component {
   componentWillReceiveProps(nextProps) {
-    if (this.props.editProductSuccess === null && this.props.editProductSuccess !== nextProps.editProductSuccess) {
+    if (
+      this.props.editProductSuccess === null &&
+      this.props.editProductSuccess !== nextProps.editProductSuccess
+    ) {
       if (typeof nextProps.editProductSuccess === 'string') {
         message.error(nextProps.editProductSuccess);
       } else {
@@ -20,7 +23,11 @@ class EditProduct extends React.Component {
   }
 
   getProduct() {
-    return this.props.products.filter(p => p._id === this.props.match.params.id)[0] || null;
+    return (
+      this.props.products.filter(
+        p => p._id === this.props.match.params.id
+      )[0] || null
+    );
   }
   render() {
     const product = this.getProduct();
@@ -40,11 +47,13 @@ class EditProduct extends React.Component {
   }
 }
 
-
 const mapStateToProps = state => ({
   products: state.app.user.products,
   categories: state.app.categories,
   editProductSuccess: state.product.editProductSuccess,
 });
 
-export default connect(mapStateToProps, { updateProduct })(EditProduct);
+export default connect(
+  mapStateToProps,
+  { updateProduct }
+)(EditProduct);

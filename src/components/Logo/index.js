@@ -5,6 +5,10 @@ import LogoPNG from './logo.png';
 
 import './logo.css';
 
-const Logo = () => <Link to="/" className="logo"><img src={LogoPNG} alt=""/></Link>;
+const Logo = () => (
+  <Link to="/" className="logo">
+    <img src={LogoPNG} alt="" />
+  </Link>
+);
 
 export default Logo;

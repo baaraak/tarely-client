@@ -19,14 +19,13 @@ export default function callApi(url, method = 'GET', data) {
   return fetch(API_URI + url, { method, headers, body: JSON.stringify(data) })
     .then(response => response.json())
     .then(json => json)
-    .catch((error) => {
+    .catch(error => {
       const response = error.response;
       if (response === undefined) {
-
       } else {
         error.status = response.status;
         error.statusText = response.statusText;
-        response.text().then((text) => {
+        response.text().then(text => {
           try {
             const json = JSON.parse(text);
             error.message = json.message;

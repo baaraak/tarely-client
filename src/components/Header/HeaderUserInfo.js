@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Avatar, Popover, Button } from 'antd';
 
 import AvatarMenuComponent from './AvatarMenuComponent';
-import {IMAGE_SRC} from "../../services/constans";
+import { BASE_URL } from '../../services/constans';
 
 class HeaderUserInfo extends React.PureComponent {
   constructor(props) {
@@ -23,21 +23,21 @@ class HeaderUserInfo extends React.PureComponent {
     return (
       <div className="header__userInfo">
         <Link to="/upload" state={{ modal: true }}>
-          <Button type="secondary">
-            ADD PRODUCT
-          </Button>
+          <Button type="secondary">ADD PRODUCT</Button>
         </Link>
         <Popover
-          content={<AvatarMenuComponent
-            userFullName={this.props.user.fullName}
-            newMessages={this.props.user.newMessage}
-          />}
+          content={
+            <AvatarMenuComponent
+              userFullName={this.props.user.fullName}
+              newMessages={this.props.user.newMessage}
+            />
+          }
           trigger="click"
           placement="bottomRight"
           visible={this.state.avatarMenuVisible}
           onVisibleChange={this.handleAvatarMenuClicked}
         >
-          <Avatar src={IMAGE_SRC + this.props.user.avatar || 'avatar.png'} />
+          <Avatar src={BASE_URL + this.props.user.avatar || 'avatar.png'} />
         </Popover>
       </div>
     );

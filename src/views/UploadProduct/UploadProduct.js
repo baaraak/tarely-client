@@ -25,7 +25,6 @@ class UploadProduct extends React.Component {
     }
   }
 
-
   render() {
     return (
       <div className="upload page">
@@ -46,4 +45,7 @@ const mapStateToProps = state => ({
   errorMessage: state.product.errorMessage,
 });
 
-export default connect(mapStateToProps, { uploadProduct })(UploadProduct);
+export default connect(
+  mapStateToProps,
+  { uploadProduct }
+)(UploadProduct);

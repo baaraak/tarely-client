@@ -53,7 +53,7 @@
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "react-scripts build",
-    "build": "npm-run-all build-css build-js",
+    "build": "BASE_URL=https://tarely-server.herokuapp.com/ npm-run-all build-css build-js",
     "lint": "eslint --ext=js --ext=jsx src/*",
     "lint:fix": "eslint --ext=js --ext=jsx src/* --fix",
     "test": "react-scripts test --env=jsdom",

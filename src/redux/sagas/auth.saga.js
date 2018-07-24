@@ -1,12 +1,19 @@
 import { put, call, takeLatest } from 'redux-saga/effects';
 
-import { LOGIN, loginFailed, SIGNUP, signupFailed } from '../actions/auth.actions';
+import {
+  LOGIN,
+  loginFailed,
+  SIGNUP,
+  signupFailed,
+} from '../actions/auth.actions';
 import callApi from '../../services/api';
 
 function* submitLogin(action) {
-  const response = yield call(callApi, '/auth/login', 'POST', { ...action.values });
+  const response = yield call(callApi, '/auth/login', 'POST', {
+    ...action.values,
+  });
   if (response.token) {
-    console.log(response.token)
+    console.log(response.token);
     yield localStorage.setItem('tarelyJWTToken', response.token);
     yield window.location.reload();
   } else {
@@ -24,11 +31,9 @@ function* submitSignup(action) {
   }
 }
 
-
 function* authSaga() {
   yield takeLatest(LOGIN, submitLogin);
   yield takeLatest(SIGNUP, submitSignup);
 }
 
 export default authSaga;
-

@@ -49,11 +49,16 @@ class DraggableCard extends Component {
     const margin = 300;
     const getDirection = () => {
       switch (true) {
-        case (this.state.x < -margin): return 'Left';
-        case (this.state.x + (card.offsetWidth - margin) > screen.x): return 'Right';
-        case (this.state.y < -margin): return 'Top';
-        case (this.state.y + (card.offsetHeight - margin) > screen.y): return 'Bottom';
-        default: return false;
+        case this.state.x < -margin:
+          return 'Left';
+        case this.state.x + (card.offsetWidth - margin) > screen.x:
+          return 'Right';
+        case this.state.y < -margin:
+          return 'Top';
+        case this.state.y + (card.offsetHeight - margin) > screen.y:
+          return 'Bottom';
+        default:
+          return false;
       }
     };
     const direction = getDirection();
@@ -84,10 +89,12 @@ class DraggableCard extends Component {
   }
 
   calculatePosition(deltaX, deltaY) {
-    const { initialPosition: { x, y } } = this.state;
+    const {
+      initialPosition: { x, y },
+    } = this.state;
     return {
-      x: (x + deltaX),
-      y: (y + deltaY),
+      x: x + deltaX,
+      y: y + deltaY,
     };
   }
   componentDidMount() {
@@ -95,7 +102,10 @@ class DraggableCard extends Component {
     this.hammer.add(new Hammer.Pan({ threshold: 2 }));
 
     this.hammer.on('panstart panend pancancel panmove', this.handlePan);
-    this.hammer.on('swipestart swipeend swipecancel swipemove', this.handleSwipe);
+    this.hammer.on(
+      'swipestart swipeend swipecancel swipemove',
+      this.handleSwipe
+    );
 
     this.resetPosition();
     window.addEventListener('resize', this.resetPosition);
@@ -109,11 +119,15 @@ class DraggableCard extends Component {
     window.removeEventListener('resize', this.resetPosition);
   }
   render() {
-    const {
-      x, y, animation, pristine,
-    } = this.state;
+    const { x, y, animation, pristine } = this.state;
     const style = translate3d(x, y);
-    return <SimpleCard {...this.props} style={style} className={animation ? 'animate' : pristine ? 'inactive' : ''} />;
+    return (
+      <SimpleCard
+        {...this.props}
+        style={style}
+        className={animation ? 'animate' : pristine ? 'inactive' : ''}
+      />
+    );
   }
 }
 

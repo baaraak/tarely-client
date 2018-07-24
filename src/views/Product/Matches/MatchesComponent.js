@@ -8,7 +8,12 @@ import MatchesList from './MatchesList';
 import MatchRoom from './MatchRoom';
 import ProductView from '../../../components/ProductView';
 
-import { getProductMatches, handleSwipe, getMatchMessages, sendMessage } from '../../../redux/actions/product.actions';
+import {
+  getProductMatches,
+  handleSwipe,
+  getMatchMessages,
+  sendMessage,
+} from '../../../redux/actions/product.actions';
 
 const socketUrl = 'http://localhost:9000';
 
@@ -32,10 +37,16 @@ class MatchesComponent extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.state.isLoading && this.props.matches !== nextProps.matches) {
-      const currentRoomID = this.props.match.params.roomId ?
-        this.props.match.params.roomId :
-        nextProps.matches.length ? nextProps.matches[0].roomId : null;
+    if (
+      this.state.isLoading &&
+      this.props.matches !== nextProps.matches &&
+      Array.isArray(nextProps.matches)
+    ) {
+      const currentRoomID = this.props.match.params.roomId
+        ? this.props.match.params.roomId
+        : nextProps.matches.length
+          ? nextProps.matches[0].roomId
+          : null;
       this.setState({
         matches: nextProps.matches,
         currentRoomID,
@@ -47,7 +58,9 @@ class MatchesComponent extends React.Component {
   }
 
   redirectToRoom(roomID) {
-    this.props.history.push({ pathname: `/product/${this.props.productId}/matches/${roomID}` });
+    this.props.history.push({
+      pathname: `/product/${this.props.productId}/matches/${roomID}`,
+    });
   }
 
   initSocket() {
@@ -76,7 +89,9 @@ class MatchesComponent extends React.Component {
   }
 
   getCurrentProduct() {
-    return this.state.matches.filter(m => m.roomId === this.state.currentRoomID)[0].product;
+    return this.state.matches.filter(
+      m => m.roomId === this.state.currentRoomID
+    )[0].product;
   }
 
   setContentRef(ref) {
@@ -96,7 +111,12 @@ class MatchesComponent extends React.Component {
 
   render() {
     const { matches, currentRoomID, isLoading } = this.state;
-    if (isLoading) return <div className="productPage__matches"><Spin size="large" /></div>;
+    if (isLoading)
+      return (
+        <div className="productPage__matches">
+          <Spin size="large" />
+        </div>
+      );
     if (matches.length === 0) return this.renderNoMatches();
     const product = this.getCurrentProduct();
     return (
@@ -114,9 +134,7 @@ class MatchesComponent extends React.Component {
           title={product.title}
           setContentRef={this.setContentRef}
         />
-        <ProductView
-          product={product}
-        />
+        <ProductView product={product} />
       </div>
     );
   }
@@ -127,6 +145,12 @@ const mapStateToProps = state => ({
   messages: state.product.messages,
 });
 
-export default connect(mapStateToProps, {
-  getProductMatches, handleSwipe, getMatchMessages, sendMessage,
-})(MatchesComponent);
+export default connect(
+  mapStateToProps,
+  {
+    getProductMatches,
+    handleSwipe,
+    getMatchMessages,
+    sendMessage,
+  }
+)(MatchesComponent);

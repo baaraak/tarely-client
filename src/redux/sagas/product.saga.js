@@ -78,7 +78,11 @@ function* getProductMatches(action) {
 }
 
 function* getMatchMessages(action) {
-  const response = yield call(callApi, `/products/${action.roomId}/messages`, 'GET');
+  const response = yield call(
+    callApi,
+    `/products/${action.roomId}/messages`,
+    'GET'
+  );
   if (response.messages) {
     yield put(getMatchMessagesSuccess(response.messages));
   } else {
@@ -87,7 +91,12 @@ function* getMatchMessages(action) {
 }
 
 function* sendMessage(action) {
-  const response = yield call(callApi, '/products/messages', 'POST', action.message);
+  const response = yield call(
+    callApi,
+    '/products/messages',
+    'POST',
+    action.message
+  );
   if (response.success) {
     yield put(sendMessageSuccess());
   } else {
@@ -96,14 +105,17 @@ function* sendMessage(action) {
 }
 
 function* getProductBrowse(action) {
-  const response = yield call(callApi, `/products/${action.productId}/browse?${action.query || ''}`, 'GET');
+  const response = yield call(
+    callApi,
+    `/products/${action.productId}/browse?${action.query || ''}`,
+    'GET'
+  );
   if (response.products) {
     yield put(getProductBrowseSucccess(response.products));
   } else {
     // yield put(editProductFail(response.message));
   }
 }
-
 
 function* productSaga() {
   yield takeLatest(UPLOAD_PRODUCT, uploadProduct);
@@ -117,4 +129,3 @@ function* productSaga() {
 }
 
 export default productSaga;
-

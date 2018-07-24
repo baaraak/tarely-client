@@ -4,11 +4,15 @@ import { Carousel, Icon, Spin } from 'antd';
 import { getDistance } from 'geolib';
 
 import MatchSuccessModal from './MatchSuccessModal';
-import { IMAGE_SRC } from '../../../services/constans';
+import { BASE_URL } from '../../../services/constans';
 import Cards from '../../../components/SwipeableView/Cards';
 import Card from '../../../components/SwipeableView/CardSwitcher';
 
-import { getProductSwipingList, handleSwipe, closeMatchModal } from '../../../redux/actions/product.actions';
+import {
+  getProductSwipingList,
+  handleSwipe,
+  closeMatchModal,
+} from '../../../redux/actions/product.actions';
 
 class SwipingComponent extends React.Component {
   constructor(props) {
@@ -30,10 +34,12 @@ class SwipingComponent extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.state.isLoading && this.props.products !== nextProps.products) {
-      this.setState({ products: Array.isArray(nextProps.products) ? nextProps.products : [], isLoading: false });
+      this.setState({
+        products: Array.isArray(nextProps.products) ? nextProps.products : [],
+        isLoading: false,
+      });
     }
     if (nextProps.isMatch && this.props.isMatch !== nextProps.isMatch) {
-
     }
   }
 
@@ -58,7 +64,9 @@ class SwipingComponent extends React.Component {
         onSwipeRight={() => this.handleSwiping('right', product._id)}
       >
         <Carousel autoplay>
-          {product.images.map(image => <img src={IMAGE_SRC + image} key={image} alt="" />)}
+          {product.images.map(image => (
+            <img src={BASE_URL + image} key={image} alt="" />
+          ))}
         </Carousel>
         {product.title}
       </Card>
@@ -70,14 +78,15 @@ class SwipingComponent extends React.Component {
   }
 
   onClick(side) {
-    this.handleSwiping(side.toLowerCase(), this.state.products[this.state.index]._id);
+    this.handleSwiping(
+      side.toLowerCase(),
+      this.state.products[this.state.index]._id
+    );
     this.child.removeCard(side, this.state.index);
   }
 
   renderNoProductsToSwipe() {
-    return (
-      <div>Sorry, no products available to swipe</div>
-    );
+    return <div>Sorry, no products available to swipe</div>;
   }
 
   closeMatchModal() {
@@ -85,18 +94,30 @@ class SwipingComponent extends React.Component {
   }
 
   redirectToMatchRoom(roomID) {
-    this.props.history.push({ pathname: `/product/${this.props.productId}/matches/${roomID}` })
+    this.props.history.push({
+      pathname: `/product/${this.props.productId}/matches/${roomID}`,
+    });
   }
 
   render() {
-    if (this.state.isLoading) return <div className="productPage__swiping productPage__swiping--loading"><Spin size="large" /></div>;
+    if (this.state.isLoading)
+      return (
+        <div className="productPage__swiping productPage__swiping--loading">
+          <Spin size="large" />
+        </div>
+      );
     if (!this.state.products.length) return this.renderNoProductsToSwipe();
     const product = this.state.products[this.state.index];
-    const locationDistance = getDistance(product.location, this.props.userLocation);
+    const locationDistance = getDistance(
+      product.location,
+      this.props.userLocation
+    );
     return (
       <div className="productPage__swiping">
         <div className="swiping-cards-productTitle">{product.title}</div>
-        <div className="swiping-cards-productDistance">{`${product.location.address}, ${locationDistance} meters`}</div>
+        <div className="swiping-cards-productDistance">{`${
+          product.location.address
+        }, ${locationDistance} meters`}</div>
         <Cards
           onRef={ref => (this.child = ref)}
           onEnd={this.onEnd}
@@ -106,8 +127,18 @@ class SwipingComponent extends React.Component {
           {this.renderCards()}
         </Cards>
         <div className="swiping-cards-actionButtons">
-          <div className="buttonDislike button" onClick={() => this.onClick('Left')}><Icon type="dislike" /></div>
-          <div className="buttonLike button" onClick={() => this.onClick('Right')}><Icon type="like" /></div>
+          <div
+            className="buttonDislike button"
+            onClick={() => this.onClick('Left')}
+          >
+            <Icon type="dislike" />
+          </div>
+          <div
+            className="buttonLike button"
+            onClick={() => this.onClick('Right')}
+          >
+            <Icon type="like" />
+          </div>
         </div>
         <div className="swiping-cards-footer">
           <div className="field footer-description">
@@ -123,7 +154,13 @@ class SwipingComponent extends React.Component {
             {product.location.address}
           </div>
         </div>
-        {this.props.isMatch && <MatchSuccessModal redirectToMatchRoom={this.redirectToMatchRoom} onClose={this.closeMatchModal} match={this.props.isMatch} />}
+        {this.props.isMatch && (
+          <MatchSuccessModal
+            redirectToMatchRoom={this.redirectToMatchRoom}
+            onClose={this.closeMatchModal}
+            match={this.props.isMatch}
+          />
+        )}
       </div>
     );
   }
@@ -135,4 +172,7 @@ const mapStateToProps = state => ({
   isMatch: state.product.isMatch,
 });
 
-export default connect(mapStateToProps, { getProductSwipingList, closeMatchModal, handleSwipe })(SwipingComponent);
+export default connect(
+  mapStateToProps,
+  { getProductSwipingList, closeMatchModal, handleSwipe }
+)(SwipingComponent);

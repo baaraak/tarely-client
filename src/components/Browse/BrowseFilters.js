@@ -2,7 +2,13 @@ import React from 'react';
 import PlacesAutocomplete from 'react-places-autocomplete';
 import { Input, Checkbox, InputNumber, Button } from 'antd';
 
-const BrowseFilters = ({ categories, onChange, values, updateSearch, resetSearch }) => (
+const BrowseFilters = ({
+  categories,
+  onChange,
+  values,
+  updateSearch,
+  resetSearch,
+}) => (
   <div className="browse__filters">
     <div className="filters__cell">
       <div className="filter__label">Search:</div>
@@ -26,8 +32,8 @@ const BrowseFilters = ({ categories, onChange, values, updateSearch, resetSearch
               checked={
                 values.category
                   ? values.category
-                    .split(',')
-                    .indexOf(category.id.toString()) !== -1
+                      .split(',')
+                      .indexOf(category.id.toString()) !== -1
                   : false
               }
               onChange={v => onChange('category', v.target.id)}
@@ -98,10 +104,12 @@ const BrowseFilters = ({ categories, onChange, values, updateSearch, resetSearch
       </div>
     </div>
     <div className="filters__cell--actions">
-      <Button size="small" type="primary" onClick={updateSearch} >
+      <Button size="small" type="primary" onClick={updateSearch}>
         Search
       </Button>
-      <Button size="small" onClick={resetSearch}>Reset</Button>
+      <Button size="small" onClick={resetSearch}>
+        Reset
+      </Button>
     </div>
   </div>
 );

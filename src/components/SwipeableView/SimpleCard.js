@@ -27,7 +27,9 @@ class Card extends Component {
   }
 
   render() {
-    const { initialPosition: { x, y } } = this.state;
+    const {
+      initialPosition: { x, y },
+    } = this.state;
     const { className = 'inactive' } = this.props;
     const style = {
       ...translate3d(x, y),

@@ -10,7 +10,7 @@ const menuTitle = (userFullName, newMessages) => (
 );
 
 const AvatarMenuComponent = ({ userFullName, newMessages }) => (
-  <Menu selectable={false} style={{ width: '200px' }} className="avatarMenu" >
+  <Menu selectable={false} style={{ width: '200px' }} className="avatarMenu">
     <Menu.Item key="1" className="avatarMenu__item">
       {menuTitle(userFullName, newMessages)}
     </Menu.Item>
@@ -18,29 +18,28 @@ const AvatarMenuComponent = ({ userFullName, newMessages }) => (
     <Menu.Item key="2">
       <Link to="/user/profile">
         <Icon type="profile" />
-            Profile
+        Profile
       </Link>
     </Menu.Item>
     <Menu.Item key="3">
       <Link to="/user/settings">
         <Icon type="setting" />
-            Settings
+        Settings
       </Link>
     </Menu.Item>
     <Menu.Item key="4">
       <Link to="/help">
         <Icon type="question-circle-o" />
-            Help
+        Help
       </Link>
     </Menu.Item>
     <Menu.Item key="5">
       <Link to="/logout">
         <Icon type="logout" />
-            Log out
+        Log out
       </Link>
     </Menu.Item>
   </Menu>
-
 );
 
 export default AvatarMenuComponent;

@@ -1,4 +1,9 @@
-import { LOGIN, LOGIN_FAILED, SIGNUP, SIGNUP_FAILED } from '../actions/auth.actions';
+import {
+  LOGIN,
+  LOGIN_FAILED,
+  SIGNUP,
+  SIGNUP_FAILED,
+} from '../actions/auth.actions';
 
 const initialState = {
   loginError: null,

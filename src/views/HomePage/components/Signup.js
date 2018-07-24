@@ -32,39 +32,81 @@ class Signup extends React.Component {
         <FormItem label="Email">
           {getFieldDecorator('email', {
             rules: [{ required: true, message: 'Please input your email!' }],
-          })(<Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} type="email" placeholder="Email" />)}
+          })(
+            <Input
+              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              type="email"
+              placeholder="Email"
+            />
+          )}
         </FormItem>
         <FormItem label="First name">
           {getFieldDecorator('firstName', {
-            rules: [{ required: true, message: 'Please input your first name!' }],
-          })(<Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="First name" />)}
+            rules: [
+              { required: true, message: 'Please input your first name!' },
+            ],
+          })(
+            <Input
+              prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              placeholder="First name"
+            />
+          )}
         </FormItem>
         <FormItem label="Last name">
           {getFieldDecorator('lastName', {
-            rules: [{ required: true, message: 'Please input your last name!' }],
-          })(<Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="text" placeholder="Last name" />)}
+            rules: [
+              { required: true, message: 'Please input your last name!' },
+            ],
+          })(
+            <Input
+              prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              type="text"
+              placeholder="Last name"
+            />
+          )}
         </FormItem>
         <FormItem label="Password">
           {getFieldDecorator('password', {
-            rules: [{ required: true, message: 'Please input your Password!' },
-              { min: 6 }, { max: 20 }],
-          })(<Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />)}
+            rules: [
+              { required: true, message: 'Please input your Password!' },
+              { min: 6 },
+              { max: 20 },
+            ],
+          })(
+            <Input
+              prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              type="password"
+              placeholder="Password"
+            />
+          )}
         </FormItem>
         <FormItem label="Country">
           {getFieldDecorator('country', {
             rules: [{ required: true, message: 'Please input your country!' }],
-          })(<Select
-            showSearch
-            filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-            placeholder="Choose country"
-          >
-            {countries.map(c => (
-              <Option key={c.value} value={c.value}>{c.label}</Option>
+          })(
+            <Select
+              showSearch
+              filterOption={(input, option) =>
+                option.props.children
+                  .toLowerCase()
+                  .indexOf(input.toLowerCase()) >= 0
+              }
+              placeholder="Choose country"
+            >
+              {countries.map(c => (
+                <Option key={c.value} value={c.value}>
+                  {c.label}
+                </Option>
               ))}
-          </Select>)}
+            </Select>
+          )}
         </FormItem>
         <FormItem>
-          <Button type="primary" htmlType="submit" className="login-form-button">
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="login-form-button"
+          >
             Signup
           </Button>
         </FormItem>

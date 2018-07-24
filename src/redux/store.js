@@ -29,14 +29,17 @@ const configureStore = () => {
       initialState,
       compose(
         applyMiddleware(sagaMiddleware),
-        window.devToolsExtension ? window.devToolsExtension() : f => f,
-      ),
+        window.devToolsExtension ? window.devToolsExtension() : f => f
+      )
     );
   } else {
     store = createStore(
       rootReducer,
       initialState,
-      compose(applyMiddleware(sagaMiddleware), f => f),
+      compose(
+        applyMiddleware(sagaMiddleware),
+        f => f
+      )
     );
   }
 

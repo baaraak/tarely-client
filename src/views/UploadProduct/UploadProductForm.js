@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  Form,
-  Button,
-  Icon,
-  Alert,
-} from 'antd';
+import { Form, Button, Icon, Alert } from 'antd';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 
 import ProductDetailsCard from './Cards/ProductDetailsCard';
@@ -27,7 +22,10 @@ class UploadProductForm extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.errorMessage && this.props.errorMessage !== nextProps.errorMessage) {
+    if (
+      nextProps.errorMessage &&
+      this.props.errorMessage !== nextProps.errorMessage
+    ) {
       window.scroll({ top: 0, left: 0, behavior: 'smooth' });
     }
   }
@@ -35,7 +33,8 @@ class UploadProductForm extends React.PureComponent {
   validateFields() {
     const errors = {};
     if (this.state.images.length === 0) errors.fileList = true;
-    if (Object.keys(this.state.locationCords).length === 0) errors.location = true;
+    if (Object.keys(this.state.locationCords).length === 0)
+      errors.location = true;
     return errors;
   }
 
@@ -83,10 +82,9 @@ class UploadProductForm extends React.PureComponent {
     const { getFieldDecorator } = this.props.form;
     return (
       <Form className="upload__form" onSubmit={this.handleSubmit}>
-        {this.props.errorMessage && <Alert
-          message={this.props.errorMessage}
-          type="error"
-        />}
+        {this.props.errorMessage && (
+          <Alert message={this.props.errorMessage} type="error" />
+        )}
         <ProductDetailsCard
           categories={this.props.categories}
           getFieldDecorator={getFieldDecorator}
@@ -115,7 +113,6 @@ class UploadProductForm extends React.PureComponent {
     );
   }
 }
-
 
 const WrappedUploadProductForm = Form.create()(UploadProductForm);
 

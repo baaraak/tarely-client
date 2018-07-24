@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 
 import ProductMenu from './ProductMenu';
 import SwipingComponent from './Swipe/SwipingComponent';
-import BrowseComponent from './Browse/BrowseComponent';
+import BrowseComponent from '../../components/Browse/BrowseComponent';
 import MatchesComponent from './Matches/MatchesComponent';
 
 import './productPage.css';
@@ -42,12 +42,20 @@ class Product extends React.Component {
         <Route
           path="/product/:id/swipe"
           exact
-          render={() => <SwipingComponent history={this.props.history} productId={id} />}
+          render={() => (
+            <SwipingComponent history={this.props.history} productId={id} />
+          )}
         />
         <Route
           path="/product/:id/matches/:roomId?"
           exact
-          render={() => <MatchesComponent match={this.props.match} history={this.props.history} productId={id} />}
+          render={() => (
+            <MatchesComponent
+              match={this.props.match}
+              history={this.props.history}
+              productId={id}
+            />
+          )}
         />
         <Route
           path="/product/:id/browse"

@@ -6,11 +6,13 @@ export class UserProductAuth extends React.Component {
     return (
       <Route
         {...props}
-        render={props => (
-          this.state.authenticated ?
-            <Component {...props} /> :
+        render={props =>
+          this.state.authenticated ? (
+            <Component {...props} />
+          ) : (
             <Redirect to="/login" />
-        )}
+          )
+        }
       />
     );
   }

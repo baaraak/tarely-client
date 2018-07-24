@@ -11,7 +11,7 @@ export function login(values) {
 export function loginFailed(message) {
   return {
     type: LOGIN_FAILED,
-    message
+    message,
   };
 }
 export const SIGNUP = 'SIGNUP';

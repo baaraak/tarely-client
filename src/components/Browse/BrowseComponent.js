@@ -5,8 +5,8 @@ import isEqual from 'lodash/isEqual';
 
 import BrowseFilters from './BrowseFilters';
 import BrowseProductsList from './BrowseProductsList';
-import { getProductBrowse } from '../../../redux/actions/product.actions';
-import ProductView from '../../../components/ProductView';
+import { getProductBrowse } from '../../redux/actions/product.actions';
+import ProductView from '../ProductView';
 
 function getParamValueByName(name, query) {
   name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]');
@@ -25,7 +25,6 @@ class BrowseComponent extends React.Component {
     this.state = {
       isLoading: true,
       values: {},
-
     };
     this.onChange = this.onChange.bind(this);
     this.updateSearch = this.updateSearch.bind(this);
@@ -41,7 +40,10 @@ class BrowseComponent extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.state.isLoading && !isEqual(this.props.products, nextProps.products)) {
+    if (
+      this.state.isLoading &&
+      !isEqual(this.props.products, nextProps.products)
+    ) {
       this.setState({ isLoading: false });
     }
   }
@@ -96,9 +98,10 @@ class BrowseComponent extends React.Component {
         return `?${v}=${values[v]}`;
       }
       return q + `&${v}=${values[v]}`;
-    }, "");
+    }, '');
 
-    if (query === decodeURIComponent(this.props.history.location.search)) return;
+    if (query === decodeURIComponent(this.props.history.location.search))
+      return;
 
     this.setState({ isLoading: true });
     this.props.history.push({ search: query });
@@ -114,12 +117,14 @@ class BrowseComponent extends React.Component {
   }
 
   onClickProduct(productId) {
-    const currentProduct = this.props.products.filter((p => p._id === productId))[0];
-    this.setState({ currentProduct })
+    const currentProduct = this.props.products.filter(
+      p => p._id === productId
+    )[0];
+    this.setState({ currentProduct });
   }
 
   onCloseProductView() {
-    this.setState({ currentProduct: null })
+    this.setState({ currentProduct: null });
   }
 
   render() {
@@ -134,11 +139,19 @@ class BrowseComponent extends React.Component {
           resetSearch={this.resetSearch}
           handleKeyPress={this.handleKeyPress}
         />
-        <BrowseProductsList isLoading={isLoading} product={this.props.product} onClick={this.onClickProduct} products={this.props.products} />
-        {currentProduct && <ProductView
-          product={currentProduct}
-          onClose={this.onCloseProductView}
-        />}
+        <BrowseProductsList
+          isLoading={isLoading}
+          product={this.props.product}
+          onClick={this.onClickProduct}
+          products={this.props.products}
+        />
+        {currentProduct && (
+          <ProductView
+            product={currentProduct}
+            categories={this.props.categories}
+            onClose={this.onCloseProductView}
+          />
+        )}
       </div>
     );
   }

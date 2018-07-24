@@ -27,9 +27,9 @@ class Home extends Component {
   renderNoProductsMessage() {
     return (
       <div className="noProducts">
-        Hello {this.props.user.firstName},
-        We noticed that you don't have any products yet.
-        You <Link to="/upload">Click here</Link>, and start by uploading a product.
+        Hello {this.props.user.firstName}, We noticed that you don't have any
+        products yet. You <Link to="/upload">Click here</Link>, and start by
+        uploading a product.
       </div>
     );
   }
@@ -37,7 +37,8 @@ class Home extends Component {
   onDeleteProduct(productId) {
     this.Modal = Modal.confirm({
       title: 'Confirm',
-      content: 'Are u sure you want to delete this product?, this action is irreversible',
+      content:
+        'Are u sure you want to delete this product?, this action is irreversible',
       okText: 'Delete',
       cancelText: 'Cancel',
       onOk: () => this.handleDelete(productId),
@@ -54,12 +55,14 @@ class Home extends Component {
     return (
       <div className="home">
         <PageTitle label="My Products" icon="home" />
-        {this.props.user.products.length > 0
-          ? <ProductsListComponent
+        {this.props.user.products.length > 0 ? (
+          <ProductsListComponent
             products={products}
             onDeleteProduct={this.onDeleteProduct}
           />
-          : this.renderNoProductsMessage()}
+        ) : (
+          this.renderNoProductsMessage()
+        )}
       </div>
     );
   }
@@ -69,4 +72,7 @@ const mapStateToProps = state => ({
   user: state.app.user,
 });
 
-export default connect(mapStateToProps, { deleteProduct })(Home);
+export default connect(
+  mapStateToProps,
+  { deleteProduct }
+)(Home);

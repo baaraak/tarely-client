@@ -22,7 +22,7 @@ function renderApp(data) {
     <Provider store={store}>
       <App />
     </Provider>,
-    document.getElementById('root'),
+    document.getElementById('root')
   );
 }
 
@@ -31,27 +31,27 @@ function renderHomePage() {
     <Provider store={store}>
       <HomePage />
     </Provider>,
-    document.getElementById('root'),
+    document.getElementById('root')
   );
 }
 
 let location = '';
 
 navigator.geolocation.getCurrentPosition(
-  (position) => {
+  position => {
     location = position.coords;
     initApp(location);
   },
-  (err) => {
+  err => {
     initApp({});
   },
   {
     enableHighAccuracy: true,
     timeout: 10000,
-  },
+  }
 );
 function initApp(location) {
-  getAppData(location).then((data) => {
+  getAppData(location).then(data => {
     store.runSaga(rootSaga);
     if (data.user) {
       renderApp(data);
@@ -61,11 +61,6 @@ function initApp(location) {
   });
 }
 
-const NoLocation = () => (
-  <div>
-    please enable coords
-  </div>
-);
-
+const NoLocation = () => <div>please enable coords</div>;
 
 registerServiceWorker();

@@ -16,7 +16,8 @@ class Sidebar extends React.Component {
 
   onChange(e) {
     this.setState({ search: e.target.value });
-    if (typeof this.props.onSearchChange === 'function') this.props.onSearchChange(e.target.value);
+    if (typeof this.props.onSearchChange === 'function')
+      this.props.onSearchChange(e.target.value);
   }
 
   render() {

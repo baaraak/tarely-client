@@ -12,7 +12,11 @@ import './homePage.css';
 class HomePage extends React.Component {
   componentWillMount() {
     // clean url
-    window.history.replaceState({}, document.title, `${window.location.protocol}//${window.location.host}`);
+    window.history.replaceState(
+      {},
+      document.title,
+      `${window.location.protocol}//${window.location.host}`
+    );
   }
 
   render() {
@@ -29,7 +33,10 @@ class HomePage extends React.Component {
   }
 }
 
-export default connect(store => ({
-  loginError: store.auth.loginError,
-  signupError: store.auth.signupError,
-}), { login, signup })(HomePage);
+export default connect(
+  store => ({
+    loginError: store.auth.loginError,
+    signupError: store.auth.signupError,
+  }),
+  { login, signup }
+)(HomePage);

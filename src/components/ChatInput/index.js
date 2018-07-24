@@ -31,7 +31,6 @@ class ChatInput extends React.Component {
     }
   }
 
-
   onSelectEmoji(code) {
     const test = code.native;
     this.setState({ value: this.state.value + test });
@@ -53,7 +52,9 @@ class ChatInput extends React.Component {
         <div className="chatInput__actions">
           <div className="icon icon-emoji">
             <Icon onClick={this.togglePickerVisibility} type="smile-o" />
-            {isPickerVisible && <Picker showPreview={false} onSelect={this.onSelectEmoji} />}
+            {isPickerVisible && (
+              <Picker showPreview={false} onSelect={this.onSelectEmoji} />
+            )}
           </div>
         </div>
         <Textarea

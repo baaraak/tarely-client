@@ -10,9 +10,12 @@ import {
   Card,
   Upload,
 } from 'antd';
-import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from 'react-places-autocomplete';
 
-import { API_URI, IMAGE_SRC } from '../../services/constans';
+import { API_URI, BASE_URL } from '../../services/constans';
 
 const FormItem = Form.Item;
 
@@ -50,7 +53,9 @@ class EditProductForm extends React.PureComponent {
       newState.errors = { ...this.state.errors };
       delete newState.errors.fileList;
     } else if (file.status === 'removed') {
-      newState.images = this.state.images.filter(i => i.indexOf(file.name) === -1);
+      newState.images = this.state.images.filter(
+        i => i.indexOf(file.name) === -1
+      );
     }
     this.setState({ ...newState, fileList });
   }
@@ -101,8 +106,8 @@ class EditProductForm extends React.PureComponent {
         uid: i,
         name: image.replace('uploads/', ''),
         status: 'done',
-        url: IMAGE_SRC + image,
-        thumbUrl: IMAGE_SRC + image,
+        url: BASE_URL + image,
+        thumbUrl: BASE_URL + image,
       });
       images.push(image);
       return image;
@@ -122,134 +127,177 @@ class EditProductForm extends React.PureComponent {
       <Form className="upload__form" onSubmit={this.handleSubmit}>
         <Card title="Product Details">
           <FormItem
-            label={(
+            label={
               <span>
-              Title&nbsp;
-                <Tooltip placement="right" title="Describe your product in a few words">
+                Title&nbsp;
+                <Tooltip
+                  placement="right"
+                  title="Describe your product in a few words"
+                >
                   <Icon type="question-circle-o" />
                 </Tooltip>
               </span>
-            )}
+            }
             required
           >
             {getFieldDecorator('title', {
               initialValue: product.title,
-              rules: [{
-                min: 5,
-                message: 'Must be at least 5 characters',
-              }, {
-                required: true, message: 'Please enter title',
-              }],
-            })(<Input
-              maxLength={20}
-              placeholder="Type title"
-            />)}
+              rules: [
+                {
+                  min: 5,
+                  message: 'Must be at least 5 characters',
+                },
+                {
+                  required: true,
+                  message: 'Please enter title',
+                },
+              ],
+            })(<Input maxLength={20} placeholder="Type title" />)}
           </FormItem>
           <FormItem
-            label={(
+            label={
               <span>
-              Category&nbsp;
-                <Tooltip placement="right" title="Choose the category of the product you have">
+                Category&nbsp;
+                <Tooltip
+                  placement="right"
+                  title="Choose the category of the product you have"
+                >
                   <Icon type="question-circle-o" />
                 </Tooltip>
               </span>
-            )}
+            }
             required
           >
             {getFieldDecorator('category', {
               initialValue: product.category,
-              rules: [{
-                required: true, message: 'Please select the product category',
-              }],
-            })(<Select
-              placeholder="Choose category"
-            >
-              {this.props.categories.map(category =>
-                (category.id !== 0 ? <Select.Option key={category.id}>{category.displayName}</Select.Option> : null))}
-            </Select>)}
-
+              rules: [
+                {
+                  required: true,
+                  message: 'Please select the product category',
+                },
+              ],
+            })(
+              <Select placeholder="Choose category">
+                {this.props.categories.map(
+                  category =>
+                    category.id !== 0 ? (
+                      <Select.Option key={category.id}>
+                        {category.displayName}
+                      </Select.Option>
+                    ) : null
+                )}
+              </Select>
+            )}
           </FormItem>
           <FormItem
-            label={(
+            label={
               <span>
-              Description&nbsp;
-                <Tooltip placement="right" title="Add some information about the product. his condition, warranty and specs">
+                Description&nbsp;
+                <Tooltip
+                  placement="right"
+                  title="Add some information about the product. his condition, warranty and specs"
+                >
                   <Icon type="question-circle-o" />
                 </Tooltip>
               </span>
-            )}
+            }
             required
           >
             {getFieldDecorator('description', {
               initialValue: product.description,
-              rules: [{ min: 10, message: 'Must be at least 10 characters' }, {
-                required: true, message: 'Please enter description',
-              }],
-            })(<Input.TextArea
-              maxLength={255}
-              placeholder="Add description"
-            />)}
-
+              rules: [
+                { min: 10, message: 'Must be at least 10 characters' },
+                {
+                  required: true,
+                  message: 'Please enter description',
+                },
+              ],
+            })(
+              <Input.TextArea maxLength={255} placeholder="Add description" />
+            )}
           </FormItem>
           <FormItem
-            label={(
+            label={
               <span>
-              Price&nbsp;
-                <Tooltip placement="right" title="Your product price estimation">
+                Price&nbsp;
+                <Tooltip
+                  placement="right"
+                  title="Your product price estimation"
+                >
                   <Icon type="question-circle-o" />
                 </Tooltip>
               </span>
-            )}
+            }
             required
           >
-            {getFieldDecorator('price.min', { initialValue: Number(product.price.min) })(<InputNumber
-              min={1}
-              formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-              parser={value => value.replace(/\$\s?|(,*)/g, '')}
-            />)} <div className="priceSeparate">~</div>
-            {getFieldDecorator('price.max', { initialValue: Number(product.price.max) })(<InputNumber
-              max={100000}
-              formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-              parser={value => value.replace(/\$\s?|(,*)/g, '')}
-            />)}
+            {getFieldDecorator('price.min', {
+              initialValue: Number(product.price.min),
+            })(
+              <InputNumber
+                min={1}
+                formatter={value =>
+                  `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                }
+                parser={value => value.replace(/\$\s?|(,*)/g, '')}
+              />
+            )}{' '}
+            <div className="priceSeparate">~</div>
+            {getFieldDecorator('price.max', {
+              initialValue: Number(product.price.max),
+            })(
+              <InputNumber
+                max={100000}
+                formatter={value =>
+                  `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                }
+                parser={value => value.replace(/\$\s?|(,*)/g, '')}
+              />
+            )}
           </FormItem>
           <FormItem
-            label={(
+            label={
               <span>
-              Images&nbsp;
+                Images&nbsp;
                 <Tooltip placement="right" title="Allow PNG, JPG, JPEG, ">
                   <Icon type="question-circle-o" />
                 </Tooltip>
               </span>
-            )}
+            }
             extra="PNG, JPG, JPEG. Max file size 10mb"
             required
           >
-            {getFieldDecorator('images', {})(<Upload
-              listType="picture"
-              accept="image/png,image/jpeg,image/jpg"
-              action={`${API_URI}/products/image`}
-              headers={{ authorization: this.props.token }}
-              fileList={fileList}
-              multiple
-              onChange={this.onUploadImage}
-            >
-              <Button>
-                <Icon type="upload" /> upload
-              </Button>
-              {errors.fileList && <div className="error">Please upload at least one image</div>}
-            </Upload>)}
+            {getFieldDecorator('images', {})(
+              <Upload
+                listType="picture"
+                accept="image/png,image/jpeg,image/jpg"
+                action={`${API_URI}/products/image`}
+                headers={{ authorization: this.props.token }}
+                fileList={fileList}
+                multiple
+                onChange={this.onUploadImage}
+              >
+                <Button>
+                  <Icon type="upload" /> upload
+                </Button>
+                {errors.fileList && (
+                  <div className="error">Please upload at least one image</div>
+                )}
+              </Upload>
+            )}
           </FormItem>
           <FormItem
             className={errors.location && 'has-error'}
-            label={(
+            label={
               <span>
-              Location&nbsp;
-                <Tooltip placement="right" title="Choose the region of the exchange">
+                Location&nbsp;
+                <Tooltip
+                  placement="right"
+                  title="Choose the region of the exchange"
+                >
                   <Icon type="question-circle-o" />
                 </Tooltip>
               </span>
-            )}
+            }
             required
           >
             <PlacesAutocomplete
@@ -281,31 +329,41 @@ class EditProductForm extends React.PureComponent {
                 </div>
               )}
             </PlacesAutocomplete>
-            {errors.location && <div className="error">Please choose the product location</div>}
+            {errors.location && (
+              <div className="error">Please choose the product location</div>
+            )}
           </FormItem>
           <FormItem
-            label={(
+            label={
               <span>
-              Want in return&nbsp;
-                <Tooltip placement="right" title="Choose the categories that you would like to trade in return">
+                Want in return&nbsp;
+                <Tooltip
+                  placement="right"
+                  title="Choose the categories that you would like to trade in return"
+                >
                   <Icon type="question-circle-o" />
                 </Tooltip>
               </span>
-            )}
+            }
             required
           >
             {getFieldDecorator('wanted', {
               initialValue: product.wanted,
-              rules: [{
-                required: true, message: 'Please select what you want in return',
-              }],
-            })(<Select
-              mode="tags"
-              placeholder="Choose categories"
-            >
-              {this.props.categories.map(category =>
-                <Select.Option key={category.id}>{category.displayName}</Select.Option>)}
-            </Select>)}
+              rules: [
+                {
+                  required: true,
+                  message: 'Please select what you want in return',
+                },
+              ],
+            })(
+              <Select mode="tags" placeholder="Choose categories">
+                {this.props.categories.map(category => (
+                  <Select.Option key={category.id}>
+                    {category.displayName}
+                  </Select.Option>
+                ))}
+              </Select>
+            )}
           </FormItem>
         </Card>
         <Button
@@ -320,7 +378,6 @@ class EditProductForm extends React.PureComponent {
     );
   }
 }
-
 
 const WrappedEditProductForm = Form.create()(EditProductForm);
 

@@ -1,16 +1,8 @@
 import React from 'react';
-import {
-  Form,
-  Button,
-  Upload,
-  Icon,
-  Select,
-  Input,
-  Card,
-} from 'antd';
+import { Form, Button, Upload, Icon, Select, Input, Card } from 'antd';
 
 import countries from '../../services/countries.json';
-import { API_URI, IMAGE_SRC } from '../../services/constans';
+import { API_URI, BASE_URL } from '../../services/constans';
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -30,7 +22,10 @@ class EditUserProfileForm extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.errorMessage && this.props.errorMessage !== nextProps.errorMessage) {
+    if (
+      nextProps.errorMessage &&
+      this.props.errorMessage !== nextProps.errorMessage
+    ) {
       window.scroll({ top: 0, left: 0, behavior: 'smooth' });
     }
   }
@@ -49,13 +44,15 @@ class EditUserProfileForm extends React.PureComponent {
   prepareFileList() {
     const avatar = this.props.user.avatar || 'uploads/avatar.png';
     this.setState({
-      fileList: [{
-        uid: 0,
-        name: avatar.replace('uploads/', ''),
-        status: 'done',
-        url: IMAGE_SRC + avatar,
-        thumbUrl: IMAGE_SRC + avatar,
-      }],
+      fileList: [
+        {
+          uid: 0,
+          name: avatar.replace('uploads/', ''),
+          status: 'done',
+          url: BASE_URL + avatar,
+          thumbUrl: BASE_URL + avatar,
+        },
+      ],
     });
   }
 
@@ -70,72 +67,86 @@ class EditUserProfileForm extends React.PureComponent {
     return (
       <Form className="upload__form" onSubmit={this.handleSubmit}>
         <Card title="Product Details">
-          <FormItem
-            label="Avatar"
-          >
-            {getFieldDecorator('avatar', {})(<Upload
-              listType="picture"
-              accept="image/png,image/jpeg,image/jpg"
-              action={`${API_URI}/products/image`}
-              headers={{ authorization: token }}
-              fileList={this.state.fileList}
-              multiple={false}
-              onChange={this.onUploadImage}
-            >
-              <Button>
-                <Icon type="upload" />Change
-              </Button>
-            </Upload>)}
+          <FormItem label="Avatar">
+            {getFieldDecorator('avatar', {})(
+              <Upload
+                listType="picture"
+                accept="image/png,image/jpeg,image/jpg"
+                action={`${API_URI}/products/image`}
+                headers={{ authorization: token }}
+                fileList={this.state.fileList}
+                multiple={false}
+                onChange={this.onUploadImage}
+              >
+                <Button>
+                  <Icon type="upload" />Change
+                </Button>
+              </Upload>
+            )}
           </FormItem>
-          <FormItem
-            label="Email"
-          >
+          <FormItem label="Email">
             {getFieldDecorator('email', {
               initialValue: user.email,
-              rules: [{
-                type: 'email', message: 'The input is not valid E-mail!',
-              }, {
-                required: true, message: 'Please input your E-mail!',
-              }],
+              rules: [
+                {
+                  type: 'email',
+                  message: 'The input is not valid E-mail!',
+                },
+                {
+                  required: true,
+                  message: 'Please input your E-mail!',
+                },
+              ],
             })(<Input />)}
           </FormItem>
-          <FormItem
-            label="First Name"
-          >
+          <FormItem label="First Name">
             {getFieldDecorator('firstName', {
               initialValue: user.firstName,
-              rules: [{
-                required: true, message: 'Please input your first name!',
-              }],
+              rules: [
+                {
+                  required: true,
+                  message: 'Please input your first name!',
+                },
+              ],
             })(<Input />)}
           </FormItem>
-          <FormItem
-            label="Last Name"
-          >
+          <FormItem label="Last Name">
             {getFieldDecorator('lastName', {
               initialValue: user.lastName,
-              rules: [{
-                required: true, message: 'Please input your last name',
-              }],
+              rules: [
+                {
+                  required: true,
+                  message: 'Please input your last name',
+                },
+              ],
             })(<Input />)}
           </FormItem>
-          <FormItem
-            label="Country"
-          >
+          <FormItem label="Country">
             {getFieldDecorator('country', {
               initialValue: user.country,
-              rules: [{
-                required: true, message: 'Please input your country',
-              }],
-            })(<Select
-              showSearch
-              filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-              placeholder="Choose country"
-            >
-              {countries.map(c => (
-                <Option key={c.value} value={c.value}>{c.label}</Option>
+              rules: [
+                {
+                  required: true,
+                  message: 'Please input your country',
+                },
+              ],
+            })(
+              <Select
+                showSearch
+                filterOption={(input, option) =>
+                  option.props.children
+                    .toLowerCase()
+                    .indexOf(input.toLowerCase()) >= 0
+                }
+                placeholder="Choose country"
+              >
+                {countries.map(c => (
+                  <Option key={c.value} value={c.value}>
+                    {c.label}
+                  </Option>
                 ))}
-               </Select>)}
+              </Select>
+            )}
           </FormItem>
         </Card>
         <Button
@@ -150,7 +161,6 @@ class EditUserProfileForm extends React.PureComponent {
     );
   }
 }
-
 
 const WrappedEditUserProfileForm = Form.create()(EditUserProfileForm);
 

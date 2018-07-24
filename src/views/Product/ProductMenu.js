@@ -3,11 +3,7 @@ import { Menu } from 'antd';
 import { Link } from 'react-router-dom';
 
 const ProductMenu = ({ handleClick, currentView, id }) => (
-  <Menu
-    onClick={handleClick}
-    selectedKeys={[currentView]}
-    mode="horizontal"
-  >
+  <Menu onClick={handleClick} selectedKeys={[currentView]} mode="horizontal">
     <Menu.Item key="swipe">
       <Link to={`/product/${id}/swipe`}>Swipe</Link>
     </Menu.Item>
