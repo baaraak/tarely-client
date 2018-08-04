@@ -47,7 +47,7 @@ navigator.geolocation.getCurrentPosition(
   },
   {
     enableHighAccuracy: true,
-    timeout: 10000,
+    timeout: 5000,
   }
 );
 function initApp(location) {

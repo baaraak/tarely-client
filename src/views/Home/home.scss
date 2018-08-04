@@ -13,8 +13,9 @@
         display: flex;
         flex-wrap: wrap;
         padding: 0 50px;
+        justify-content: center;
         &__product {
-            width: 285px;
+            width: 20%;
             height: 350px;
             background: #fff;
             box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
@@ -43,6 +44,10 @@
             background-size: cover;
             background-repeat: no-repeat;
             padding: 10px;
+            font-size: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .product__footer {
             display: flex;

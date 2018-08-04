@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Spin } from 'antd';
 import io from 'socket.io-client';
-import { Route } from 'react-router-dom';
 
 import MatchesList from './MatchesList';
 import MatchRoom from './MatchRoom';
@@ -134,7 +133,7 @@ class MatchesComponent extends React.Component {
           title={product.title}
           setContentRef={this.setContentRef}
         />
-        <ProductView product={product} />
+        <ProductView categories={this.props.categories} product={product} />
       </div>
     );
   }
@@ -142,6 +141,7 @@ class MatchesComponent extends React.Component {
 
 const mapStateToProps = state => ({
   matches: state.product.matches,
+  categories: state.app.categories,
   messages: state.product.messages,
 });
 

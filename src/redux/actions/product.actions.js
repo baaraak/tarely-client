@@ -126,8 +126,8 @@ export function sendMessageSuccess() {
 export function getProductBrowse(productId, query) {
   return {
     type: GET_PRODUCT_BROWSE,
-    productId,
     query,
+    productId,
   };
 }
 

@@ -1,12 +1,14 @@
 @import "../../styles/vars.scss";
 .productView {
     width: 300px;
+    min-width: 300px;
     height: 100%;
     border-left: 1px solid $bright_gray;
     overflow: hidden;
     overflow-y: scroll;
     padding-bottom: 20px;
     position: relative;
+    background: #fff;
     animation: slidein 0.3s forwards;
     .product__close {
         cursor: pointer;
@@ -29,5 +31,21 @@
         &:hover {
             opacity: 1;
         }
+    }
+    .product__images {
+        height: 300px;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+    .product__title {
+        margin: 20px 15px;
+        font-size: 15px;
+    }
+    .product__spec {
+        padding: 5px 15px;
+    }
+    .product__spec--content {
+        font-weight: 300;
+        margin-top: 3px;
     }
 }

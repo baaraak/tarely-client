@@ -4,9 +4,11 @@ import { connect } from 'react-redux';
 import isEqual from 'lodash/isEqual';
 
 import BrowseFilters from './BrowseFilters';
-import BrowseProductsList from './BrowseProductsList';
+import BrowseList from './BrowseList';
 import { getProductBrowse } from '../../redux/actions/product.actions';
 import ProductView from '../ProductView';
+
+import './browse.css';
 
 function getParamValueByName(name, query) {
   name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]');
@@ -25,6 +27,7 @@ class BrowseComponent extends React.Component {
     this.state = {
       isLoading: true,
       values: {},
+      currentProduct: null,
     };
     this.onChange = this.onChange.bind(this);
     this.updateSearch = this.updateSearch.bind(this);
@@ -35,7 +38,7 @@ class BrowseComponent extends React.Component {
 
   componentWillMount() {
     const { search } = this.props.history.location;
-    this.props.getProductBrowse(this.props.product._id, search.slice(1));
+    this.getProducts()
     if (search) this.parseQueryFilters(search);
   }
 
@@ -46,6 +49,13 @@ class BrowseComponent extends React.Component {
     ) {
       this.setState({ isLoading: false });
     }
+  }
+
+  getProducts() {
+    const { search } = this.props.history.location;
+    const path = this.props.asProduct ? 'all' : this.props.product._id;
+    let args = [path, search.slice(1)];
+    this.props.getProductBrowse(...args);
   }
 
   parseQueryFilters(query) {
@@ -93,6 +103,7 @@ class BrowseComponent extends React.Component {
   }
 
   createQuery(values = this.state.values) {
+    const { search } = this.props.history.location;
     const query = Object.keys(values).reduce((q, v) => {
       if (!q) {
         return `?${v}=${values[v]}`;
@@ -100,12 +111,11 @@ class BrowseComponent extends React.Component {
       return q + `&${v}=${values[v]}`;
     }, '');
 
-    if (query === decodeURIComponent(this.props.history.location.search))
+    if (query === decodeURIComponent(search))
       return;
-
-    this.setState({ isLoading: true });
+    this.setState({ isLoading: true, currentProduct: null });
     this.props.history.push({ search: query });
-    this.props.getProductBrowse(this.props.product._id, query.slice(1));
+    this.getProducts();
   }
 
   updateSearch() {
@@ -113,7 +123,8 @@ class BrowseComponent extends React.Component {
   }
 
   resetSearch() {
-    this.setState({ values: {} });
+    this.setState({ values: {} })
+    this.createQuery({})
   }
 
   onClickProduct(productId) {
@@ -130,7 +141,7 @@ class BrowseComponent extends React.Component {
   render() {
     const { isLoading, values, currentProduct } = this.state;
     return (
-      <div className="productPage__browse">
+      <div className="browse">
         <BrowseFilters
           categories={this.props.categories}
           onChange={this.onChange}
@@ -139,17 +150,19 @@ class BrowseComponent extends React.Component {
           resetSearch={this.resetSearch}
           handleKeyPress={this.handleKeyPress}
         />
-        <BrowseProductsList
+        <BrowseList
           isLoading={isLoading}
           product={this.props.product}
           onClick={this.onClickProduct}
           products={this.props.products}
+          asProduct={this.props.asProduct}
         />
         {currentProduct && (
           <ProductView
             product={currentProduct}
             categories={this.props.categories}
             onClose={this.onCloseProductView}
+            asProduct={this.props.asProduct}
           />
         )}
       </div>

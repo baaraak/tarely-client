@@ -76,6 +76,14 @@ class UploadProductForm extends React.PureComponent {
     this.setState({ ...newState, fileList });
   }
 
+  submitImage(one, two, three) {
+    console.log('***********************');
+    console.log(one);
+    console.log(two);
+    console.log(three);
+    console.log('***********************');
+  }
+
   render() {
     const token = localStorage.getItem('tarelyJWTToken');
     const { fileList, errors, location } = this.state;
@@ -90,6 +98,7 @@ class UploadProductForm extends React.PureComponent {
           getFieldDecorator={getFieldDecorator}
           fileListError={errors.fileList}
           fileList={fileList}
+          submitImage={this.submitImage}
           onUploadImage={this.onUploadImage}
           token={token}
         />

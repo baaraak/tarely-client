@@ -3,7 +3,7 @@ import { Spin } from 'antd';
 
 import { BASE_URL } from '../../services/constans';
 
-const BrowseProductsList = ({ products, onClick, product, isLoading }) => {
+const BrowseProductsList = ({ products, onClick, product, isLoading, asProduct }) => {
   if (isLoading || !Array.isArray(products))
     return (
       <div className="browse__products browse__products--loading">
@@ -17,10 +17,12 @@ const BrowseProductsList = ({ products, onClick, product, isLoading }) => {
       ) : (
           products.map(p => {
             let className = ['productsList__product'];
-            if (product.likes.indexOf(p._id) !== -1)
-              className.push('productsList__product--liked');
-            if (product.dislikes.indexOf(p._id) !== -1)
-              className.push('productsList__product--disliked');
+            if (!asProduct) {
+              if (product.likes.indexOf(p._id) !== -1)
+                className.push('productsList__product--liked');
+              if (product.dislikes.indexOf(p._id) !== -1)
+                className.push('productsList__product--disliked');
+            }
             return (
               <div
                 key={p._id}

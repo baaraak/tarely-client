@@ -10,9 +10,10 @@
   .home .productsList {
     display: flex;
     flex-wrap: wrap;
-    padding: 0 50px; }
+    padding: 0 50px;
+    justify-content: center; }
     .home .productsList__product {
-      width: 285px;
+      width: 20%;
       height: 350px;
       background: #fff;
       box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
@@ -36,7 +37,11 @@
       height: 200px;
       background-size: cover;
       background-repeat: no-repeat;
-      padding: 10px; }
+      padding: 10px;
+      font-size: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center; }
     .home .productsList .product__footer {
       display: flex;
       justify-content: space-around;
