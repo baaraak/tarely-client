@@ -10,6 +10,10 @@ import { login, signup } from '../../redux/actions/auth.actions';
 import './homePage.css';
 
 class HomePage extends React.Component {
+  componentDidMount() {
+    document.querySelectorAll('body')[0].classList.add('loaded');
+  }
+
   componentWillMount() {
     // clean url
     window.history.replaceState(

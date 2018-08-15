@@ -19,6 +19,8 @@ import {
   handleSwipeResponseMatch,
   getMatchMessagesSuccess,
   sendMessageSuccess,
+  SUBMIT_BID,
+  submitBidResult,
 } from '../actions/product.actions';
 import { editUserProduct, addUserProduct } from '../actions/app.actions';
 import callApi from '../../services/api';
@@ -44,7 +46,7 @@ function* updateProduct(action) {
 }
 
 function* getUserSwipingList(action) {
-  const response = yield call(callApi, `/products/${action.id}/swipe`, 'GET');
+  const response = yield call(callApi, `/products/${action.id}/swipe`);
   if (response.products) {
     yield put(getProductSwipingListSuccess(response.products));
   } else {
@@ -69,7 +71,7 @@ function* handleSwipeSubmit(action) {
 }
 
 function* getProductMatches(action) {
-  const response = yield call(callApi, `/products/${action.id}/matches`, 'GET');
+  const response = yield call(callApi, `/products/${action.id}/matches`);
   if (response) {
     yield put(getProductMatchesListSuccess(response));
   } else {
@@ -81,7 +83,6 @@ function* getMatchMessages(action) {
   const response = yield call(
     callApi,
     `/products/${action.roomId}/messages`,
-    'GET'
   );
   if (response.messages) {
     yield put(getMatchMessagesSuccess(response.messages));
@@ -108,13 +109,24 @@ function* getProductBrowse(action) {
   const response = yield call(
     callApi,
     `/products/${action.productId}/browse?${action.query || ''}`,
-    'GET'
+
   );
   if (response.products) {
     yield put(getProductBrowseSucccess(response.products));
   } else {
     // yield put(editProductFail(response.message));
   }
+}
+
+function* submitBid(action) {
+  const response = yield call(
+    callApi,
+    `/products/bid`,
+    'POST',
+    action.bid,
+
+  );
+  yield put(submitBidResult(response.success));
 }
 
 function* productSaga() {
@@ -126,6 +138,7 @@ function* productSaga() {
   yield takeLatest(GET_MATCH_MESSAGES, getMatchMessages);
   yield takeLatest(SEND_MESSAGE, sendMessage);
   yield takeLatest(GET_PRODUCT_BROWSE, getProductBrowse);
+  yield takeLatest(SUBMIT_BID, submitBid);
 }
 
 export default productSaga;

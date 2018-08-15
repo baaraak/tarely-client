@@ -48,4 +48,20 @@
         font-weight: 300;
         margin-top: 3px;
     }
+    .product__spec--buttons {
+        display: flex;
+        flex-direction: column;
+        .ant-btn {
+            margin-top: 15px;
+            width: 100%;
+        }
+    }
+    .btn_like {
+        color: #fff;
+        background: $coral_gradient;
+    }
+    .btn_dislike {
+        color: #fff;
+        background: $gray_gradient;
+    }
 }

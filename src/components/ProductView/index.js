@@ -1,10 +1,23 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Carousel, Button } from 'antd';
 import { BASE_URL } from '../../services/constans';
 
 import './productView.css';
 
-const ProductViewComponent = ({ product, onClose, categories, asProduct }) => {
+const ProductViewComponent = ({ product, onClose, categories, asProduct, onBid, withActions, onLike, onDislike }) => {
+
+  const renderActions = () => {
+    if (asProduct) {
+      return <React.Fragment>
+        <Button className="btn_like" onClick={() => onLike(product._id)} >Like</Button>
+        <Button className="btn_dislike" onClick={() => onDislike(product._id)} >Dislike</Button>
+      </React.Fragment>
+    } else {
+      return <Button ghost type="primary" onClick={() => onBid(product._id)}>Send bid</Button>
+    }
+  }
+
   const wantedCategories = categories.filter(c => product.wanted.some(pId => c.id === Number(pId))).map(cat => cat.displayName);
   return (
     <div className="productView">
@@ -47,16 +60,8 @@ const ProductViewComponent = ({ product, onClose, categories, asProduct }) => {
           {`${`$${product.price.min}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} - ${`$${product.price.max}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}
         </div>
       </div>
-      <div className="product__spec">
-        {asProduct ?
-          <React.Fragment>
-            <Button>One</Button>
-            <Button>Two</Button>
-          </React.Fragment>
-          : <React.Fragment>
-            <Button>One</Button>
-            <Button>Two</Button>
-          </React.Fragment>}
+      <div className="product__spec product__spec--buttons">
+        {withActions && renderActions()}
       </div>
     </div>
   )

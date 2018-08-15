@@ -133,7 +133,7 @@ class MatchesComponent extends React.Component {
           title={product.title}
           setContentRef={this.setContentRef}
         />
-        <ProductView categories={this.props.categories} product={product} />
+        <ProductView withActions={false} categories={this.props.categories} product={product} />
       </div>
     );
   }

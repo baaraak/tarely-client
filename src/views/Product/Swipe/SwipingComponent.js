@@ -108,11 +108,6 @@ class SwipingComponent extends React.Component {
       );
     if (!this.state.products.length) return this.renderNoProductsToSwipe();
     const product = this.state.products[this.state.index];
-    console.log('***********************');
-    console.log(this.props.isMatch);
-    console.log(product);
-    console.log(this.props.userLocation);
-    console.log('***********************');
     const locationDistance = getDistance(
       product.location,
       this.props.userLocation

@@ -11,6 +11,7 @@
     display: flex;
     flex-wrap: wrap;
     padding: 0 50px;
+    margin-top: 20px;
     justify-content: center; }
     .home .productsList__product {
       width: 20%;

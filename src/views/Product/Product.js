@@ -61,7 +61,7 @@ class Product extends React.Component {
           path="/product/:id/browse"
           exact
           render={() => (
-            <BrowseComponent product={product} history={this.props.history} />
+            <BrowseComponent asProduct product={product} history={this.props.history} />
           )}
         />
       </div>

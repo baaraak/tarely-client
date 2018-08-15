@@ -88,7 +88,7 @@
     }
     .productsList__product {
         width: 230px;
-        height: 230px;
+        height: 250px;
         background: #fff;
         box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
         margin: 40px 0 0 40px;
@@ -117,13 +117,10 @@
             background-repeat: no-repeat;
             padding: 10px;
         }
-        &--liked,
-        &--liked:hover {
-            box-shadow: 0 0 20px 0 rgba(2, 204, 2, 0.2);
-        }
-        &--disliked,
-        &--disliked:hover {
-            box-shadow: 0 0 20px 0 rgba(255, 14, 14, 0.2);
-        }
+    }
+    .product__price {
+        font-size: 12px;
+        font-weight: 300;
+        padding: 15px;
     }
 }

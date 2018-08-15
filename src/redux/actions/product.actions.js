@@ -19,6 +19,8 @@ export const GET_PRODUCT_BROWSE = 'GET_PRODUCT_BROWSE';
 export const GET_PRODUCT_BROWSE_SUCCESS = 'GET_PRODUCT_BROWSE_SUCCESS';
 export const SWIPE_RESPONSE_MATCH = 'SWIPE_RESPONSE_MATCH';
 export const CLOSE_MATCH_MODAL = 'CLOSE_MATCH_MODAL';
+export const SUBMIT_BID = 'SUBMIT_BID';
+export const SUBMIT_BID_RESULT = 'SUBMIT_BID_RESULT';
 
 export function uploadProduct(product) {
   return {
@@ -148,5 +150,20 @@ export function handleSwipeResponseMatch(match) {
 export function closeMatchModal() {
   return {
     type: CLOSE_MATCH_MODAL,
+  };
+}
+
+
+export function submitBid(bid) {
+  return {
+    type: SUBMIT_BID,
+    bid
+  };
+}
+
+export function submitBidResult(result) {
+  return {
+    type: SUBMIT_BID_RESULT,
+    result
   };
 }

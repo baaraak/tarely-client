@@ -5,7 +5,7 @@ import isEqual from 'lodash/isEqual';
 
 import BrowseFilters from './BrowseFilters';
 import BrowseList from './BrowseList';
-import { getProductBrowse } from '../../redux/actions/product.actions';
+import { getProductBrowse, handleSwipe } from '../../redux/actions/product.actions';
 import ProductView from '../ProductView';
 
 import './browse.css';
@@ -34,6 +34,8 @@ class BrowseComponent extends React.Component {
     this.resetSearch = this.resetSearch.bind(this);
     this.onClickProduct = this.onClickProduct.bind(this);
     this.onCloseProductView = this.onCloseProductView.bind(this);
+    this.onLike = this.onLike.bind(this);
+    this.onDislike = this.onDislike.bind(this);
   }
 
   componentWillMount() {
@@ -53,7 +55,7 @@ class BrowseComponent extends React.Component {
 
   getProducts() {
     const { search } = this.props.history.location;
-    const path = this.props.asProduct ? 'all' : this.props.product._id;
+    const path = !this.props.asProduct ? 'all' : this.props.product._id;
     let args = [path, search.slice(1)];
     this.props.getProductBrowse(...args);
   }
@@ -138,6 +140,24 @@ class BrowseComponent extends React.Component {
     this.setState({ currentProduct: null });
   }
 
+  onLike(productId) {
+    const data = {
+      direction: 'right',
+      from: this.props.product._id,
+      to: productId,
+    };
+    this.props.handleSwipe(data);
+  }
+
+  onDislike(productId) {
+    const data = {
+      direction: 'right',
+      from: this.props.product._id,
+      to: productId,
+    };
+    this.props.handleSwipe(data);
+  }
+
   render() {
     const { isLoading, values, currentProduct } = this.state;
     return (
@@ -152,17 +172,20 @@ class BrowseComponent extends React.Component {
         />
         <BrowseList
           isLoading={isLoading}
-          product={this.props.product}
           onClick={this.onClickProduct}
           products={this.props.products}
-          asProduct={this.props.asProduct}
+          asProduct={this.props.product}
         />
         {currentProduct && (
           <ProductView
+            withActions
+            onLike={this.onLike}
+            onDislike={this.onDislike}
             product={currentProduct}
+            onBid={this.props.onBid}
             categories={this.props.categories}
             onClose={this.onCloseProductView}
-            asProduct={this.props.asProduct}
+            asProduct={this.props.product}
           />
         )}
       </div>
@@ -179,5 +202,6 @@ export default connect(
   mapStateToProps,
   {
     getProductBrowse,
+    handleSwipe,
   }
 )(BrowseComponent);

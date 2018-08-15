@@ -1,9 +1,9 @@
 // Font
-$font: 'Rubik', sans-serif;
+$font: 'Rubik',
+sans-serif;
 $font-light: 300;
 $font-regular: 400;
 $font-bold: 500;
-
 // Colors
 $bright_gray: #f1f4f6;
 $blue_gray: #bfc1c9;
@@ -17,11 +17,10 @@ $red: #f24343;
 $yellow: #fcb515;
 $pink: #cc3a82;
 $coral: #ffa088;
-$coral_gradient: linear-gradient(90deg, #cc3a82 0%, #ff886f 100%);
-$sidebar_gradient: linear-gradient(90deg, #f2f4f6 0%, #ffffff 100%);
+$coral_gradient: linear-gradient(180deg, $blue 0%, #3bb7ff 100%);
+$gray_gradient: linear-gradient(180deg, $dark_gray 0%, $blue_gray 100%);
+$sidebar_gradient: linear-gradient(180deg, #f2f4f6 0%, #ffffff 100%);
 $focus: #5cb3fd;
-
 // Sizes
 $headerHeight: 45px;
-
 $sideBarWidth: 300px;
