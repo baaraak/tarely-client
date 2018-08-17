@@ -61,6 +61,4 @@ function initApp(location) {
   });
 }
 
-const NoLocation = () => <div>please enable coords</div>;
-
 registerServiceWorker();

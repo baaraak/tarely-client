@@ -22,7 +22,7 @@ class MatchesComponent extends React.Component {
     this.state = {
       isLoading: true,
       matches: props.matches,
-      currentRoomID: null,
+      currentMatchID: null,
       socket: null,
     };
     this.changeCurrentMatch = this.changeCurrentMatch.bind(this);
@@ -32,7 +32,7 @@ class MatchesComponent extends React.Component {
 
   componentWillMount() {
     this.props.getProductMatches(this.props.productId);
-    this.initSocket();
+    // this.initSocket();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -41,24 +41,24 @@ class MatchesComponent extends React.Component {
       this.props.matches !== nextProps.matches &&
       Array.isArray(nextProps.matches)
     ) {
-      const currentRoomID = this.props.match.params.roomId
-        ? this.props.match.params.roomId
+      const currentMatchID = this.props.match.params.matchId
+        ? this.props.match.params.matchId
         : nextProps.matches.length
-          ? nextProps.matches[0].roomId
+          ? nextProps.matches[0].matchId
           : null;
       this.setState({
         matches: nextProps.matches,
-        currentRoomID,
+        currentMatchID,
         isLoading: false,
       });
-      this.redirectToRoom(currentRoomID);
-      if (currentRoomID) this.props.getMatchMessages(currentRoomID);
+      this.redirectToRoom(currentMatchID);
+      if (currentMatchID) this.props.getMatchMessages(currentMatchID);
     }
   }
 
-  redirectToRoom(roomID) {
+  redirectToRoom(matchId) {
     this.props.history.push({
-      pathname: `/product/${this.props.productId}/matches/${roomID}`,
+      pathname: `/product/${this.props.productId}/matches/${matchId}`,
     });
   }
 
@@ -72,11 +72,11 @@ class MatchesComponent extends React.Component {
     this.setState({ socket });
   }
 
-  changeCurrentMatch(currentRoomID) {
-    if (this.state.currentRoomID === currentRoomID) return;
-    this.redirectToRoom(currentRoomID);
-    this.setState({ currentRoomID });
-    this.props.getMatchMessages(currentRoomID);
+  changeCurrentMatch(currentMatchID) {
+    if (this.state.currentMatchID === currentMatchID) return;
+    this.redirectToRoom(currentMatchID);
+    this.setState({ currentMatchID });
+    this.props.getMatchMessages(currentMatchID);
   }
 
   renderNoMatches() {
@@ -89,7 +89,7 @@ class MatchesComponent extends React.Component {
 
   getCurrentProduct() {
     return this.state.matches.filter(
-      m => m.roomId === this.state.currentRoomID
+      m => m.matchId === this.state.currentMatchID
     )[0].product;
   }
 
@@ -102,14 +102,14 @@ class MatchesComponent extends React.Component {
       body,
       from: this.props.productId,
       to: this.getCurrentProduct()._id,
-      roomId: this.state.currentRoomID,
+      match: this.state.currentMatchID,
     };
     // this.state.socket.emit('CHAT MESSAGE', message);
     this.props.sendMessage(message);
   }
 
   render() {
-    const { matches, currentRoomID, isLoading } = this.state;
+    const { matches, currentMatchID, isLoading } = this.state;
     if (isLoading)
       return (
         <div className="productPage__matches">
@@ -123,7 +123,7 @@ class MatchesComponent extends React.Component {
         <MatchesList
           productId={this.props.productId}
           matches={matches}
-          currentRoomID={currentRoomID}
+          currentMatchID={currentMatchID}
           onClick={this.changeCurrentMatch}
         />
         <MatchRoom

@@ -39,8 +39,6 @@ class SwipingComponent extends React.Component {
         isLoading: false,
       });
     }
-    if (nextProps.isMatch && this.props.isMatch !== nextProps.isMatch) {
-    }
   }
 
   handleChangeIndex(index) {

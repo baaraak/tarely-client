@@ -7,9 +7,9 @@ const ProductMenu = ({ handleClick, currentView, id }) => (
     <Menu.Item key="swipe">
       <Link to={`/product/${id}/swipe`}>Swipe</Link>
     </Menu.Item>
-    <Menu.Item key="browse">
+    {/* <Menu.Item key="browse">
       <Link to={`/product/${id}/browse`}>Browse</Link>
-    </Menu.Item>
+    </Menu.Item> */}
     <Menu.Item key="matches">
       <Link to={`/product/${id}/matches`}>Matches</Link>
     </Menu.Item>

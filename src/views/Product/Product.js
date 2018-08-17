@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 
 import ProductMenu from './ProductMenu';
 import SwipingComponent from './Swipe/SwipingComponent';
-import BrowseComponent from '../../components/Browse/BrowseComponent';
+// import BrowseComponent from '../../components/Browse/BrowseComponent';
 import MatchesComponent from './Matches/MatchesComponent';
 
 import './productPage.css';
@@ -31,7 +31,6 @@ class Product extends React.Component {
 
   render() {
     const { id } = this.props.match.params;
-    const product = this.props.products.filter(p => p._id === id)[0];
     return (
       <div className="page productPage">
         <ProductMenu
@@ -57,13 +56,13 @@ class Product extends React.Component {
             />
           )}
         />
-        <Route
+        {/* <Route
           path="/product/:id/browse"
           exact
           render={() => (
             <BrowseComponent asProduct product={product} history={this.props.history} />
           )}
-        />
+        /> */}
       </div>
     );
   }

@@ -36,7 +36,7 @@ class ChatInput extends React.Component {
     this.setState({ value: this.state.value + test });
   }
 
-  togglePickerVisibility() {
+  togglePickerVisibility(e) {
     this.setState({ isPickerVisible: !this.state.isPickerVisible });
   }
 

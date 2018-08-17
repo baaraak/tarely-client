@@ -9,15 +9,15 @@ const MatchSuccessModal = ({ match, onClose, redirectToMatchRoom }) => (
       <div className="matchSuccess__title">It's a Match!</div>
       <div className="matchSuccess__products">
         <div className="matchSuccess__product">
-          <div className="product__title">{match.fromProduct.title}</div>
+          <div className="product__title">{match.from.title}</div>
           <div className="product__image">
-            <img src={BASE_URL + match.fromProduct.images[0]} alt="" />
+            <img src={BASE_URL + match.from.images[0]} alt="" />
           </div>
         </div>
         <div className="matchSuccess__product">
-          <div className="product__title">{match.toProduct.title}</div>
+          <div className="product__title">{match.to.title}</div>
           <div className="product__image">
-            <img src={BASE_URL + match.toProduct.images[0]} alt="" />
+            <img src={BASE_URL + match.to.images[0]} alt="" />
           </div>
         </div>
       </div>
@@ -27,7 +27,7 @@ const MatchSuccessModal = ({ match, onClose, redirectToMatchRoom }) => (
         </Button>
         <Button
           type="primary"
-          onClick={() => redirectToMatchRoom(match.roomID)}
+          onClick={() => redirectToMatchRoom(match.matchId)}
           ghost
         >
           Send a message

@@ -16,7 +16,7 @@ const ProductsListComponent = ({ products, onDeleteProduct }) => {
   }
   return (
     <div className="productsList">
-      <div className="productsList__product">
+      {/* <div className="productsList__product">
         <div className="product__image">
           <Icon type="search" />
         </div>
@@ -25,13 +25,13 @@ const ProductsListComponent = ({ products, onDeleteProduct }) => {
           Browse between products and bid on them
         </div>
         <div className="product__footer">
-          <div className="product__icon">
+        <div className="product__icon">
             <Link to="/search">
               <Icon type="global" />
             </Link>
           </div>
         </div>
-      </div>
+      </div> */}
       {products.map(product => (
         <div key={product._id} className="productsList__product">
           <div

@@ -62,7 +62,7 @@ function* handleSwipeSubmit(action) {
   } else if (direction === 'left') {
     response = yield call(callApi, '/products/dislike', 'POST', { from, to });
   }
-  if (response.isMatch && response.isMatch.roomID) {
+  if (response.isMatch) {
     yield put(handleSwipeResponseMatch(response.isMatch));
   }
   if (response.error) {

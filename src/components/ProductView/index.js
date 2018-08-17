@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Carousel, Button } from 'antd';
 import { BASE_URL } from '../../services/constans';
 

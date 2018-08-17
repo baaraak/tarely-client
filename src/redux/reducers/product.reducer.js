@@ -96,11 +96,6 @@ export default function product(state = initialState, action = {}) {
         ...state,
         isMatch: false,
       };
-    case HANDLE_SWIPE:
-      return {
-        ...state,
-        isMatch: false,
-      };
     case SUBMIT_BID:
       return {
         ...state,

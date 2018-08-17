@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Modal, Collapse } from 'antd';
+import { Modal } from 'antd';
 
 import PageTitle from '../../components/PageTitle';
 import ProductsListComponent from '../../components/ProductsListComponent';
-import BidsListComponent from '../../components/BidsListComponent';
 import { deleteProduct } from '../../redux/actions/home.actions';
 
 import './home.css';

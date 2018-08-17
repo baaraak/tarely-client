@@ -1,5 +1,4 @@
 import React from 'react';
-import { Divider } from 'antd';
 
 const BidsListComponent = ({ bids }) => {
     if (bids.length === 0) {

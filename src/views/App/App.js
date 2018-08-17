@@ -10,8 +10,6 @@ import Product from '../Product/Product';
 import UploadProduct from '../UploadProduct/UploadProduct';
 import EditProduct from '../EditProduct/EditProduct';
 import UserProfile from '../UserProfile/UserProfile';
-import Search from '../Search/Search';
-import Bids from '../Bids/Bids';
 import NotFound from '../misc/NotFound';
 
 class App extends React.PureComponent {
@@ -48,8 +46,8 @@ class App extends React.PureComponent {
                   component={Product}
                 />
                 <Route path="/user/profile/" component={UserProfile} />
-                <Route path="/search" component={Search} />
-                <Route path="/bids" component={Bids} />
+                {/* <Route path="/search" component={Search} /> */}
+                {/* <Route path="/bids" component={Bids} /> */}
                 <Route path="/logout" render={this.logOut} />
                 <Route component={NotFound} />
               </AnimatedSwitch>
