@@ -63,7 +63,7 @@ class UploadProductForm extends React.PureComponent {
   handleLocationSelect(address) {
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
-      .then(latLng => this.setState({ locationCords: { ...latLng, address } }))
+      .then(latLng => this.setState({ locationCords: { ...latLng, address }, location: address }))
       .catch(() => this.setState({ location: '' }));
   }
 
@@ -74,14 +74,6 @@ class UploadProductForm extends React.PureComponent {
       newState.fileListError = false;
     }
     this.setState({ ...newState, fileList });
-  }
-
-  submitImage(one, two, three) {
-    console.log('***********************');
-    console.log(one);
-    console.log(two);
-    console.log(three);
-    console.log('***********************');
   }
 
   render() {

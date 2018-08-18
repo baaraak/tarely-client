@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 // import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import isEqual from 'lodash/isEqual';
+import { Modal } from 'antd';
 
 import BrowseFilters from './BrowseFilters';
 import BrowseList from './BrowseList';
@@ -158,8 +159,26 @@ class BrowseComponent extends React.Component {
     this.props.handleSwipe(data);
   }
 
+  onDismatch() {
+    console.log('on');
+    this.Modal = Modal.confirm({
+      title: 'Confirm',
+      content:
+        'Are u sure you want to delete this product?, this action is irreversible',
+      okText: 'Delete',
+      cancelText: 'Cancel',
+      onOk: () => this.handleDelete(productId),
+    });
+  }
+
+  handleDelete(productId) {
+    if (this.Modal) this.Modal.destroy();
+  }
+
+
   render() {
     const { isLoading, values, currentProduct } = this.state;
+    console.log('dakmd');
     return (
       <div className="browse">
         <BrowseFilters
@@ -178,14 +197,10 @@ class BrowseComponent extends React.Component {
         />
         {currentProduct && (
           <ProductView
-            withActions
-            onLike={this.onLike}
-            onDislike={this.onDislike}
             product={currentProduct}
-            onBid={this.props.onBid}
+            onDismatch={this.onDismatch}
             categories={this.props.categories}
             onClose={this.onCloseProductView}
-            asProduct={this.props.product}
           />
         )}
       </div>
