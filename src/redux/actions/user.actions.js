@@ -2,6 +2,7 @@ export const UPDATE_USER_PROFILE = 'UPDATE_USER_PROFILE';
 export const UPDATE_USER_PROFILE_SUCCESS = 'UPDATE_USER_PROFILE_SUCCESS';
 export const CHANGE_PASSWORD_RESULT = 'CHANGE_PASSWORD_RESULT';
 export const CHANGE_PASSWORD = 'CHANGE_PASSWORD';
+export const TOGGLE_SUBSCRIBE = 'TOGGLE_SUBSCRIBE';
 
 export function updateUserProfile(user) {
   return {
@@ -31,3 +32,11 @@ export function changePasswordResult(response) {
     response,
   }
 }
+
+export function toggleSubscribe(subscribeType) {
+  return {
+    type: TOGGLE_SUBSCRIBE,
+    subscribeType,
+  }
+}
+

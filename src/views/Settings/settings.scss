@@ -2,5 +2,17 @@
     .ant-card {
         max-width: 80%;
         margin: 0 auto;
+        margin-bottom: 30px;
+    }
+
+    .settings__notifications {
+        .ant-form-item {
+            display: flex;
+        }
+
+        .ant-form-item-label {
+            width: 130px;
+            text-align-last: left;
+        }
     }
 }

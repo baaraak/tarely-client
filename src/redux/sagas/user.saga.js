@@ -4,7 +4,8 @@ import {
   UPDATE_USER_PROFILE,
   updateUserProfileSuccess,
   CHANGE_PASSWORD,
-  changePasswordResult
+  changePasswordResult,
+  TOGGLE_SUBSCRIBE,
 } from '../actions/user.actions';
 import callApi from '../../services/api';
 
@@ -18,16 +19,19 @@ function* updateUserProfile(action) {
 }
 
 function* changePassword(action) {
-  const response = yield call(callApi, '/users/changePassword', 'POST', action.data);
-  console.log('***********************');
-  console.log(response);
-  console.log('***********************');
+  const response = yield call(callApi, '/users/changePassword', 'PUT', action.data);
   yield put(changePasswordResult(response));
+}
+
+function* toggleSubscribe(action) {
+  const response = yield call(callApi, '/users/subscribe', 'PUT', { type: action.subscribeType });
+  // yield put(changeUserSubscribeResult(response));
 }
 
 function* userSaga() {
   yield takeLatest(UPDATE_USER_PROFILE, updateUserProfile);
   yield takeLatest(CHANGE_PASSWORD, changePassword);
+  yield takeLatest(TOGGLE_SUBSCRIBE, toggleSubscribe);
 }
 
 export default userSaga;
