@@ -7,6 +7,7 @@ import { AnimatedSwitch } from 'react-router-transition';
 import Header from '../../components/Header';
 import Home from '../Home/Home';
 import Product from '../Product/Product';
+import Settings from '../Settings/Settings';
 import UploadProduct from '../UploadProduct/UploadProduct';
 import EditProduct from '../EditProduct/EditProduct';
 import UserProfile from '../UserProfile/UserProfile';
@@ -46,6 +47,7 @@ class App extends React.PureComponent {
                   component={Product}
                 />
                 <Route path="/user/profile/" component={UserProfile} />
+                <Route path="/user/settings/" component={Settings} />
                 {/* <Route path="/search" component={Search} /> */}
                 {/* <Route path="/bids" component={Bids} /> */}
                 <Route path="/logout" render={this.logOut} />
