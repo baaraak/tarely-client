@@ -159,26 +159,8 @@ class BrowseComponent extends React.Component {
     this.props.handleSwipe(data);
   }
 
-  onDismatch() {
-    console.log('on');
-    this.Modal = Modal.confirm({
-      title: 'Confirm',
-      content:
-        'Are u sure you want to delete this product?, this action is irreversible',
-      okText: 'Delete',
-      cancelText: 'Cancel',
-      onOk: () => this.handleDelete(productId),
-    });
-  }
-
-  handleDelete(productId) {
-    if (this.Modal) this.Modal.destroy();
-  }
-
-
   render() {
     const { isLoading, values, currentProduct } = this.state;
-    console.log('dakmd');
     return (
       <div className="browse">
         <BrowseFilters

@@ -21,6 +21,8 @@ import {
   sendMessageSuccess,
   SUBMIT_BID,
   submitBidResult,
+  ON_UNMATCH,
+  submitUnmatchSuccess
 } from '../actions/product.actions';
 import { editUserProduct, addUserProduct } from '../actions/app.actions';
 import callApi from '../../services/api';
@@ -129,6 +131,17 @@ function* submitBid(action) {
   yield put(submitBidResult(response.success));
 }
 
+function* submitUnmatch(action) {
+  const response = yield call(
+    callApi,
+    `/products/unmatch/${action.matchId}`,
+
+  );
+  if (response.success) {
+    yield put(submitUnmatchSuccess(action.matchId));
+  }
+}
+
 function* productSaga() {
   yield takeLatest(UPLOAD_PRODUCT, uploadProduct);
   yield takeLatest(UPDATE_PRODUCT, updateProduct);
@@ -139,6 +152,7 @@ function* productSaga() {
   yield takeLatest(SEND_MESSAGE, sendMessage);
   yield takeLatest(GET_PRODUCT_BROWSE, getProductBrowse);
   yield takeLatest(SUBMIT_BID, submitBid);
+  yield takeLatest(ON_UNMATCH, submitUnmatch);
 }
 
 export default productSaga;

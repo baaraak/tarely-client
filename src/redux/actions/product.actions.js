@@ -21,6 +21,8 @@ export const SWIPE_RESPONSE_MATCH = 'SWIPE_RESPONSE_MATCH';
 export const CLOSE_MATCH_MODAL = 'CLOSE_MATCH_MODAL';
 export const SUBMIT_BID = 'SUBMIT_BID';
 export const SUBMIT_BID_RESULT = 'SUBMIT_BID_RESULT';
+export const ON_UNMATCH = 'ON_UNMATCH';
+export const ON_UNMATCH_SUCCESS = 'ON_UNMATCH_SUCCESS';
 
 export function uploadProduct(product) {
   return {
@@ -165,5 +167,19 @@ export function submitBidResult(result) {
   return {
     type: SUBMIT_BID_RESULT,
     result
+  };
+}
+
+export function onUnmatch(matchId) {
+  return {
+    type: ON_UNMATCH,
+    matchId
+  };
+}
+
+export function submitUnmatchSuccess(matchId) {
+  return {
+    type: ON_UNMATCH_SUCCESS,
+    matchId
   };
 }

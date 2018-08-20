@@ -15,6 +15,7 @@ import {
   SUBMIT_BID,
   SUBMIT_BID_RESULT,
   HANDLE_SWIPE,
+  ON_UNMATCH_SUCCESS,
 } from '../actions/product.actions';
 
 const initialState = {
@@ -105,6 +106,11 @@ export default function product(state = initialState, action = {}) {
       return {
         ...state,
         isBidSuccess: action.result,
+      };
+    case ON_UNMATCH_SUCCESS:
+      return {
+        ...state,
+        matches: state.matches.filter(m => m.matchId !== action.matchId),
       };
     default:
       return state;

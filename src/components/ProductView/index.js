@@ -16,9 +16,6 @@ const ProductViewComponent = ({ product, onClose, categories, onDismatch }) => {
   //     return <Button ghost type="primary" onClick={() => onBid(product._id)}>Send bid</Button>
   //   }
   // }
-  console.log('***********************');
-  console.log(onDismatch);
-  console.log('***********************');
   const wantedCategories = categories.filter(c => product.wanted.some(pId => c.id === Number(pId))).map(cat => cat.displayName);
   return (
     <div className="productView">
