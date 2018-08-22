@@ -28,6 +28,7 @@ class HomePage extends React.Component {
       <div className="homePage">
         <Card title="Login">
           <Login submit={this.props.login} error={this.props.loginError} />
+          
         </Card>
         <Card title="Sign up">
           <Signup submit={this.props.signup} error={this.props.signupError} />

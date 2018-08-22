@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { message } from 'antd';
 
 import PageTitle from '../../components/PageTitle';
-import EditUserProfileForm from './EditUserProfileForm';
+import EditUserProfileDetails from './EditUserProfileDetails';
+import EditUserSocial from './EditUserSocial';
 
 import { updateUserProfile } from '../../redux/actions/user.actions';
 
@@ -22,9 +23,12 @@ class UserProfile extends React.Component {
     return (
       <div className="userProfile page">
         <PageTitle label="User Profile" icon="user" />
-        <EditUserProfileForm
+        <EditUserProfileDetails
           user={this.props.user}
           onSubmit={this.props.updateUserProfile}
+        />
+        <EditUserSocial
+          user={this.props.user}
         />
       </div>
     );

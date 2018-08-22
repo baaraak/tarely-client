@@ -1,14 +1,23 @@
 .userProfile {
-  span.ant-form-item-children > span {
-    display: flex;
-    flex-direction: column-reverse;
-  }
-
-  .ant-upload.ant-upload-select.ant-upload-select-picture {
-    margin-top: 15px;
-  }
-
-  .ant-upload-list-picture .ant-upload-list-item, .ant-upload-list-picture-card .ant-upload-list-item {
-    border: none;
-  }
+    span.ant-form-item-children>span {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .ant-upload.ant-upload-select.ant-upload-select-picture {
+        margin-top: 15px;
+    }
+    .ant-upload-list-picture .ant-upload-list-item,
+    .ant-upload-list-picture-card .ant-upload-list-item {
+        border: none;
+    }
+    .userProfile__social {
+        .ant-form-item-children {
+            display: flex;
+            align-items: center;
+        }
+        .anticon {
+            font-size: 24px;
+            margin-right: 20px;
+        }
+    }
 }

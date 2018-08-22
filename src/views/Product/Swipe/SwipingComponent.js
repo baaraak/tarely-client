@@ -106,16 +106,10 @@ class SwipingComponent extends React.Component {
       );
     if (!this.state.products.length) return this.renderNoProductsToSwipe();
     const product = this.state.products[this.state.index];
-    const locationDistance = getDistance(
-      product.location,
-      this.props.userLocation
-    );
     return (
       <div className="productPage__swiping">
         <div className="swiping-cards-productTitle">{product.title}</div>
-        <div className="swiping-cards-productDistance">{`${
-          product.location.address
-          }, ${locationDistance} meters`}</div>
+        <div className="swiping-cards-productDistance">{product.location.address}</div>
         <Cards
           onRef={ref => (this.child = ref)}
           onEnd={this.onEnd}

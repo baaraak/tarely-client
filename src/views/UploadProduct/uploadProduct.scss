@@ -1,12 +1,8 @@
 @import "../../styles/vars.scss";
 .upload {
     &__form {
-        max-width: 80%;
-        margin: 0 auto;
         &--button {
-            display: flex;
-            margin: 30px 0 30px auto;
-            align-items: center;
+            margin: 15px 0;
         }
     }
     .ant-select-dropdown-menu-item:not(:empty) {

@@ -7,7 +7,7 @@ import { API_URI, BASE_URL } from '../../services/constans';
 const FormItem = Form.Item;
 const { Option } = Select;
 
-class EditUserProfileForm extends React.PureComponent {
+class EditUserProfileDetails extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -148,20 +148,20 @@ class EditUserProfileForm extends React.PureComponent {
               </Select>
             )}
           </FormItem>
-        </Card>
-        <Button
-          type="primary"
-          size="large"
-          htmlType="submit"
-          className="upload__form--button"
-        >
-          Update
+          <Button
+            type="primary"
+            size="large"
+            htmlType="submit"
+            className="upload__form--button"
+          >
+            Update
         </Button>
+        </Card>
       </Form>
     );
   }
 }
 
-const WrappedEditUserProfileForm = Form.create()(EditUserProfileForm);
+const WrappedEditUserProfileDetails = Form.create()(EditUserProfileDetails);
 
-export default WrappedEditUserProfileForm;
+export default WrappedEditUserProfileDetails;

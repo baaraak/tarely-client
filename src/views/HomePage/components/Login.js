@@ -1,9 +1,15 @@
 import React from 'react';
+import FacebookLogin from 'react-facebook-login';
 import { Form, Icon, Input, Button, Alert } from 'antd';
 
 const FormItem = Form.Item;
 
 class Login extends React.PureComponent {
+  responseFacebook = (response) => {
+    console.log('***********************');
+    console.log(response);
+    console.log('***********************');
+  }
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
@@ -51,6 +57,15 @@ class Login extends React.PureComponent {
             Log in
           </Button>
         </FormItem>
+
+        <FormItem>
+          <FacebookLogin
+            appId="2232059320356745"
+            autoLoad={true}
+            fields="name,email,picture"
+            callback={this.responseFacebook} />
+        </FormItem>
+
       </Form>
     );
   }
