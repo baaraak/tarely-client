@@ -6,9 +6,9 @@ const FormItem = Form.Item;
 
 class Login extends React.PureComponent {
   responseFacebook = (response) => {
-    console.log('***********************');
-    console.log(response);
-    console.log('***********************');
+    if (response && response.accessToken) {
+      this.props.submit(response);
+    }
   }
   handleSubmit = e => {
     e.preventDefault();

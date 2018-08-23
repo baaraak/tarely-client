@@ -9,9 +9,16 @@ import {
 import callApi from '../../services/api';
 
 function* submitLogin(action) {
-  const response = yield call(callApi, '/auth/login', 'POST', {
-    ...action.values,
-  });
+  let response;
+  if (action.values.accessToken) {
+    response = yield call(callApi, '/auth/facebook', 'POST', {
+      access_token: action.values.accessToken,
+    });
+  } else {
+    response = yield call(callApi, '/auth/login', 'POST', {
+      ...action.values,
+    });
+  }
   if (response.token) {
     console.log(response.token);
     yield localStorage.setItem('tarelyJWTToken', response.token);
