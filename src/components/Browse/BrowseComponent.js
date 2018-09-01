@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 // import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import isEqual from 'lodash/isEqual';
-import { Modal } from 'antd';
 
 import BrowseFilters from './BrowseFilters';
 import BrowseList from './BrowseList';

@@ -1,4 +1,4 @@
-@import "reset.css";
+@import "reset.scss";
 @import "vars.scss";
 body {
     width: 100%;
@@ -8,7 +8,9 @@ body {
     margin: 0;
     padding: 0;
     color: $black;
-    background-color: $bright_gray;
+    background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 a {

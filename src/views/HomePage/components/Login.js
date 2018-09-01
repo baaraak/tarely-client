@@ -61,7 +61,6 @@ class Login extends React.PureComponent {
         <FormItem>
           <FacebookLogin
             appId="2232059320356745"
-            autoLoad={true}
             fields="name,email,picture"
             callback={this.responseFacebook} />
         </FormItem>
