@@ -7,7 +7,7 @@ import './logo.css';
 
 const Logo = () => (
   <Link to="/" className="logo">
-    <img src={LogoPNG} alt="" />
+    tarely
   </Link>
 );
 

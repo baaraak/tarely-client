@@ -14,7 +14,6 @@ import {
   CLOSE_MATCH_MODAL,
   SUBMIT_BID,
   SUBMIT_BID_RESULT,
-  HANDLE_SWIPE,
   ON_UNMATCH_SUCCESS,
 } from '../actions/product.actions';
 

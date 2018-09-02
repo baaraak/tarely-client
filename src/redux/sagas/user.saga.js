@@ -24,8 +24,7 @@ function* changePassword(action) {
 }
 
 function* toggleSubscribe(action) {
-  const response = yield call(callApi, '/users/subscribe', 'PUT', { type: action.subscribeType });
-  // yield put(changeUserSubscribeResult(response));
+  yield call(callApi, '/users/subscribe', 'PUT', { type: action.subscribeType });
 }
 
 function* userSaga() {

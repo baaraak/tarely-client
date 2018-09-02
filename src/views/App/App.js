@@ -26,7 +26,7 @@ class App extends React.PureComponent {
   render() {
     return (
       <Router>
-        <div className="container">
+        <div className="appContainer">
           <Header />
           <div className="appContent">
             <Switch>

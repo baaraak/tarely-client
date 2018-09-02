@@ -23,13 +23,15 @@ class UserProfile extends React.Component {
     return (
       <div className="userProfile page">
         <PageTitle label="User Profile" icon="user" />
-        <EditUserProfileDetails
-          user={this.props.user}
-          onSubmit={this.props.updateUserProfile}
-        />
-        <EditUserSocial
-          user={this.props.user}
-        />
+        <div className="container">
+          <EditUserProfileDetails
+            user={this.props.user}
+            onSubmit={this.props.updateUserProfile}
+          />
+          <EditUserSocial
+            user={this.props.user}
+          />
+        </div>
       </div>
     );
   }

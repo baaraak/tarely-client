@@ -34,23 +34,25 @@ class Settings extends React.Component {
         return (
             <div className="page settings">
                 <PageTitle label="User Settings" icon="edit" />
-                <Card title="Change Password">
-                    <ChangePasswordForm
-                        errorMessage={errorMessage}
-                        onSubmit={this.props.changePassword}
-                    />
-                </Card>
-                <Card title="Notifications" className="settings__notifications" >
-                    <Form.Item label="New Matches">
-                        <Switch defaultChecked={subscription.matches} onChange={() => this.onChange('matches')} />
-                    </Form.Item>
-                    <Form.Item label="New Messages">
-                        <Switch defaultChecked={subscription.messages} onChange={() => this.onChange('messages')} />
-                    </Form.Item>
-                    <Form.Item label="Promotions">
-                        <Switch defaultChecked={subscription.promotions} onChange={() => this.onChange('promotions')} />
-                    </Form.Item>
-                </Card>
+                <div className="container">
+                    <Card title="Change Password">
+                        <ChangePasswordForm
+                            errorMessage={errorMessage}
+                            onSubmit={this.props.changePassword}
+                        />
+                    </Card>
+                    <Card title="Notifications" className="settings__notifications" >
+                        <Form.Item label="New Matches">
+                            <Switch defaultChecked={subscription.matches} onChange={() => this.onChange('matches')} />
+                        </Form.Item>
+                        <Form.Item label="New Messages">
+                            <Switch defaultChecked={subscription.messages} onChange={() => this.onChange('messages')} />
+                        </Form.Item>
+                        <Form.Item label="Promotions">
+                            <Switch defaultChecked={subscription.promotions} onChange={() => this.onChange('promotions')} />
+                        </Form.Item>
+                    </Card>
+                </div>
             </div>
         )
     }

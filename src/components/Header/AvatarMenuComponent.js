@@ -34,6 +34,12 @@ const AvatarMenuComponent = ({ userFullName, newMessages }) => (
       </Link>
     </Menu.Item>
     <Menu.Item key="5">
+      <Link to="/contact">
+        <Icon type="form" />
+        Contact
+      </Link>
+    </Menu.Item>
+    <Menu.Item key="6">
       <Link to="/logout">
         <Icon type="logout" />
         Log out

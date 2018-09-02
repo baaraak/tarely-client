@@ -1,96 +1,105 @@
 @import "../../styles/vars.scss";
-
 .header {
-  display: flex;
-  align-items: center;
-  padding: 0 20px;
-  background: #fff;
-  border-bottom: 1px solid $bright_gray;
-  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.3);
-  height: $headerHeight;
-  animation: slideHeaderIn 0.8s forwards;
-
-  &__userInfo {
-    margin-left: auto;
-    margin-right: 20px;
     display: flex;
     align-items: center;
-
-    .icon {
-      cursor: pointer;
-      font-size: 20px;
+    padding: 0 20px;
+    background: #fff;
+    border-bottom: 1px solid $bright_gray;
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.3);
+    height: $headerHeight;
+    animation: slideHeaderIn 0.8s forwards;
+    &__userInfo {
+        margin-left: auto;
+        margin-right: 20px;
+        display: flex;
+        align-items: center;
+        .icon {
+            cursor: pointer;
+            font-size: 20px;
+        }
+        .ant-btn {
+            font-size: 11px;
+        }
     }
-
+    /* reset-antd header badges icons */
+    .ant-badge {
+        margin-right: 25px;
+    }
+    .ant-avatar {
+        box-shadow: 0 0 6px 0px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+    }
     .ant-btn {
-      font-size: 11px;
+        margin-right: 25px;
     }
-  }
-
-  /* reset-antd header badges icons */
-  .ant-badge {
-    margin-right: 25px;
-  }
-  .ant-avatar {
-    cursor: pointer;
-  }
-  .ant-btn {
-    margin-right: 15px;
-  }
 }
 
 /* Header left navigation */
+
 .header__navigation {
-  display: flex;
-  align-items: center;
-
-  .navigation__menu > a {
-    margin-left: 20px;
-    font-size: 13px;
-    color: $dark_gray;
-    font-weight: 300;
-
-    &:hover {
-      color: $black;
+    display: flex;
+    align-items: center;
+    .navigation__menu>a {
+        margin-left: 20px;
+        font-size: 13px;
+        color: $dark_gray;
+        font-weight: 300;
+        &:hover {
+            color: $black;
+        }
+        &:focus {
+            text-decoration: none;
+            color: $blue;
+        }
     }
-
-    &:focus {
-      text-decoration: none;
-      color: $blue;
-    }
-  }
 }
 
 /* reset-antd dropdown avatar */
+
 .avatarMenu {
     border-right: none !important;
+    .avatarMenu__item--profile {
+        display: flex;
+        flex-direction: column;
+    }
+    li.ant-menu-item.avatarMenu__item {
+        height: auto;
+        line-height: 20px;
+    }
+    .avatarMenu__item--profile span:first-child {
+        font-size: 16px;
+        color: #5f5f5f;
+        font-weight: 500;
+    }
+    .avatarMenu__item--profile span {
+        font-size: 12px;
+        color: #ccc;
+    }
+    .ant-popover-inner-content {
+        padding: 7px 7px 4px;
+    }
+}
 
-  .avatarMenu__item--profile {
-    display: flex;
-    flex-direction: column;
-  }
-  li.ant-menu-item.avatarMenu__item {
-    height: auto;
-    line-height: 20px;
-  }
-  .avatarMenu__item--profile span:first-child {
-    font-size: 16px;
-    color: #5f5f5f;
-    font-weight: 500;
-  }
-  .avatarMenu__item--profile span {
-    font-size: 12px;
-    color: #ccc;
-  }
-  .ant-popover-inner-content {
-    padding: 7px 7px 4px;
-  }
+.ant-popover-inner-content {
+    padding: 10px 5px;
+    li.ant-menu-item:hover {
+        background: #f1f3f6;
+        border-radius: 5px;
+    }
+    li.ant-menu-item {
+        line-height: 30px;
+        height: 30px;
+        a {
+            font-size: 13px;
+        }
+    }
 }
 
 @keyframes slideHeaderIn {
- from {
-    transform: translateY(-$headerHeight)
-  }
-  to {
-    transform: translateY(0)
-  }
+    from {
+        transform: translateY(-$headerHeight)
+    }
+    to {
+        transform: translateY(0)
+    }
 }

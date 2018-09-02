@@ -1,10 +1,10 @@
 @import "../../styles/vars.scss";
-
 .logo {
-  width: 99px;
-  height: 31px;
-
-  > img {
-    width: 100%;
-  }
+    font-size: 29px;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -1px; // color: #ffffff;
+    >img {
+        width: 100%;
+    }
 }

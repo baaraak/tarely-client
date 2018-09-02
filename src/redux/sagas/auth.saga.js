@@ -10,8 +10,12 @@ import callApi from '../../services/api';
 
 function* submitLogin(action) {
   let response;
-  if (action.values.accessToken) {
+  if (action.values.type === 'facebook') {
     response = yield call(callApi, '/auth/facebook', 'POST', {
+      access_token: action.values.accessToken,
+    });
+  } else if (action.values.type === 'google') {
+    response = yield call(callApi, '/auth/google', 'POST', {
       access_token: action.values.accessToken,
     });
   } else {

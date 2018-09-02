@@ -1,6 +1,5 @@
 @import '../../styles/vars.scss';
 .productPage {
-    background: #fff;
     .ant-menu-horizontal {
         height: 48px;
     }
@@ -288,7 +287,7 @@
     top: 0;
     bottom: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0.0);
+    background: rgba(0, 0, 0, 0.8);
     z-index: 100;
     display: flex;
     align-items: center;

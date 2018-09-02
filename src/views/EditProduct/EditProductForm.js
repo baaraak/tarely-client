@@ -124,7 +124,7 @@ class EditProductForm extends React.PureComponent {
     const { getFieldDecorator } = this.props.form;
     if (this.state.isLoading) return null;
     return (
-      <Form className="upload__form" onSubmit={this.handleSubmit}>
+      <Form className="container upload__form" onSubmit={this.handleSubmit}>
         <Card title="Product Details">
           <FormItem
             label={

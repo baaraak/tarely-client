@@ -20,6 +20,7 @@ class HeaderUserInfo extends React.PureComponent {
   }
 
   render() {
+    const avatarUrl = this.props.user.avatar.indexOf('https') !== -1 ? this.props.user.avatar : BASE_URL + this.props.user.avatar;
     return (
       <div className="header__userInfo">
         <Link to="/upload" state={{ modal: true }}>
@@ -37,7 +38,7 @@ class HeaderUserInfo extends React.PureComponent {
           visible={this.state.avatarMenuVisible}
           onVisibleChange={this.handleAvatarMenuClicked}
         >
-          <Avatar src={BASE_URL + this.props.user.avatar || 'avatar.png'} />
+          <Avatar src={avatarUrl} />
         </Popover>
       </div>
     );

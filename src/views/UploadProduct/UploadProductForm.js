@@ -81,7 +81,7 @@ class UploadProductForm extends React.PureComponent {
     const { fileList, errors, location } = this.state;
     const { getFieldDecorator } = this.props.form;
     return (
-      <Form className="upload__form" onSubmit={this.handleSubmit}>
+      <Form className="upload__form container" onSubmit={this.handleSubmit}>
         {this.props.errorMessage && (
           <Alert message={this.props.errorMessage} type="error" />
         )}

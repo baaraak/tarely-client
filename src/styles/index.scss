@@ -8,7 +8,7 @@ body {
     margin: 0;
     padding: 0;
     color: $black;
-    background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background-image: linear-gradient(135deg, #fff 0%, #eff1f5 100%);
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
@@ -23,12 +23,37 @@ a {
 }
 
 .ant-btn {
-    border-radius: 20px;
+    min-width: 100px;
+    min-height: 35px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+    color: #fff;
+    box-shadow: 2px 2px 3px 1px rgba(0, 0, 0, 0.1), inset 0px 0px 7px 0px rgba(255, 255, 255, 0.4);
+    border: none;
+    background-size: 1px 200px;
+    transition: all 0.2s ease-in;
+    padding: 0 20px;
+    &:hover {
+        background: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+        color: #fff;
+        background-position: 100%;
+    }
+    &:focus {
+        color: #fff;
+        background: #1093b1;
+    }
 }
 
 #root,
+.appContainer {
+    height: 100%;
+}
+
 .container {
     height: 100%;
+    width: 980px;
+    max-width: 90%;
+    margin: 0 auto;
 }
 
 .appContent {
@@ -64,9 +89,45 @@ a {
 }
 
 .ant-card {
-    width: 80%;
-    margin: 0 auto 40px;
+    margin-bottom: 40px;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.ant-alert {
+    color: rgba(255, 255, 255, 1);
+    font-weight: 100;
+    font-size: 13px;
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s linear;
+}
+
+.ant-alert-error {
+    border: 1px solid #ffa39e;
+    background: linear-gradient(#e07c78 0%, #e06b66 100%);
+    border-color: #d43f3a;
+}
+
+.ant-form-item {
+    margin-bottom: 15px;
+    font-weight: 100;
+}
+
+.ant-form label {
+    font-size: 13px;
+}
+
+.ant-form-item-label {
+    line-height: 26px;
+}
+
+.ant-switch {
+    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+    border: 1px solid #e8e7e7;
+}
+
+.ant-switch-checked {
+    border: 1px solid #e6bdc6;
+    background-image: linear-gradient(to top, #fad0c4 0%, #ffd1ff 100%);
 }

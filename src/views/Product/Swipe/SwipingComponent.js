@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Carousel, Icon, Spin } from 'antd';
-import { getDistance } from 'geolib';
 
 import MatchSuccessModal from './MatchSuccessModal';
 import { BASE_URL } from '../../../services/constans';

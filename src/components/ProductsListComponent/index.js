@@ -7,7 +7,7 @@ import { BASE_URL } from '../../services/constans';
 const ProductsListComponent = ({ products, onDeleteProduct }) => {
   if (products.length === 0) {
     return (
-      <div className="noProducts">
+      <div className="noProducts container">
         Hey there, We noticed that you don't have any
         products yet. You <Link to="/upload">Click here</Link>, and start by
         uploading a product.
@@ -15,7 +15,7 @@ const ProductsListComponent = ({ products, onDeleteProduct }) => {
     )
   }
   return (
-    <div className="productsList">
+    <div className="productsList container">
       {/* <div className="productsList__product">
         <div className="product__image">
           <Icon type="search" />

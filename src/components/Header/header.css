@@ -5,7 +5,7 @@
   background: #fff;
   border-bottom: 1px solid #f1f4f6;
   box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.3);
-  height: 45px;
+  height: 55px;
   animation: slideHeaderIn 0.8s forwards;
   /* reset-antd header badges icons */ }
   .header__userInfo {
@@ -21,9 +21,10 @@
   .header .ant-badge {
     margin-right: 25px; }
   .header .ant-avatar {
+    box-shadow: 0 0 6px 0px rgba(0, 0, 0, 0.2);
     cursor: pointer; }
   .header .ant-btn {
-    margin-right: 15px; }
+    margin-right: 25px; }
 
 /* Header left navigation */
 .header__navigation {
@@ -59,8 +60,19 @@
   .avatarMenu .ant-popover-inner-content {
     padding: 7px 7px 4px; }
 
+.ant-popover-inner-content {
+  padding: 10px 5px; }
+  .ant-popover-inner-content li.ant-menu-item:hover {
+    background: #f1f3f6;
+    border-radius: 5px; }
+  .ant-popover-inner-content li.ant-menu-item {
+    line-height: 30px;
+    height: 30px; }
+    .ant-popover-inner-content li.ant-menu-item a {
+      font-size: 13px; }
+
 @keyframes slideHeaderIn {
   from {
-    transform: translateY(-45px); }
+    transform: translateY(-55px); }
   to {
     transform: translateY(0); } }
