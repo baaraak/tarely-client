@@ -88,9 +88,15 @@ a {
     font-size: 12px;
 }
 
+.ant-input,
+.ant-select-selection,
+.ant-input-number-input {
+    border-width: 2px;
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
 .ant-card {
     margin-bottom: 40px;
-    border-radius: 15px;
     overflow: hidden;
     box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
 }

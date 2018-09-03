@@ -65,6 +65,10 @@
     li.ant-menu-item.avatarMenu__item {
         height: auto;
         line-height: 20px;
+        cursor: default;
+        &:hover {
+            background: transparent;
+        }
     }
     .avatarMenu__item--profile span:first-child {
         font-size: 16px;

@@ -5,7 +5,6 @@ import { Menu, Icon } from 'antd';
 const menuTitle = (userFullName, newMessages) => (
   <div className="avatarMenu__item--profile">
     <span>{userFullName}</span>
-    <span>{newMessages || 0} new messages</span>
   </div>
 );
 

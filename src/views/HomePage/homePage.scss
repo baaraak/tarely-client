@@ -5,7 +5,8 @@
         justify-content: space-between;
         width: 980px;
         max-width: 90%;
-        margin: 10vh auto 0;
+        margin: 0 auto;
+        padding-top: 10vh;
     }
     .logo {
         font-size: 36px;
@@ -14,13 +15,12 @@
     }
     .bars {
         position: absolute;
-        bottom: 0;
+        bottom: 10vh;
         display: flex;
         align-items: center;
         justify-content: center;
         left: 0;
         right: 0;
-        padding: 0 0 10vh;
     }
     .bar {
         margin: 0 30px;
