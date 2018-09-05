@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Carousel, Icon, Spin } from 'antd';
+import { Carousel, Spin, Icon } from 'antd';
 
 import MatchSuccessModal from './MatchSuccessModal';
 import { BASE_URL } from '../../../services/constans';
@@ -60,12 +60,13 @@ class SwipingComponent extends React.Component {
         onSwipeLeft={() => this.handleSwiping('left', product._id)}
         onSwipeRight={() => this.handleSwiping('right', product._id)}
       >
-        <Carousel autoplay>
-          {product.images.map(image => (
-            <img src={BASE_URL + image} key={image} alt="" />
-          ))}
-        </Carousel>
-        {product.title}
+        <div className="card--container" ref={ref => this.card = ref}>
+          <Carousel slidesToShow={product.images.length}>
+            {product.images.map(image => (
+              <img src={BASE_URL + image} key={image} alt="" />
+            ))}
+          </Carousel>
+        </div>
       </Card>
     ));
   }
@@ -79,7 +80,19 @@ class SwipingComponent extends React.Component {
       side.toLowerCase(),
       this.state.products[this.state.index]._id
     );
-    this.child.removeCard(side, this.state.index);
+
+    const moveOutWidth = document.body.clientWidth;
+
+    if (side === 'right') {
+      this.card.parentElement.style.transition = 'all 0.4s ease-in';
+      this.card.parentElement.style.transform = 'translate(' + moveOutWidth + 'px, -100px) rotate(-50deg)';
+    } else {
+      this.card.parentElement.style.transition = 'all 0.4s ease-in';
+      this.card.parentElement.style.transform = 'translate(-' + moveOutWidth + 'px, -100px) rotate(50deg)';
+    }
+    setTimeout(() => {
+      this.child.removeCard(side, this.state.index)
+    }, 350);
   }
 
   renderNoProductsToSwipe() {
@@ -94,9 +107,11 @@ class SwipingComponent extends React.Component {
     this.props.history.push({
       pathname: `/product/${this.props.productId}/matches/${roomID}`,
     });
+    this.props.closeMatchModal();
   }
 
   render() {
+    const { categories } = this.props;
     if (this.state.isLoading)
       return (
         <div className="productPage__swiping productPage__swiping--loading">
@@ -105,6 +120,7 @@ class SwipingComponent extends React.Component {
       );
     if (!this.state.products.length) return this.renderNoProductsToSwipe();
     const product = this.state.products[this.state.index];
+    const wantedCategories = categories.filter(c => product.wanted.some(pId => c.id === Number(pId))).map(cat => cat.displayName);
     return (
       <div className="productPage__swiping">
         <div className="swiping-cards-productTitle">{product.title}</div>
@@ -120,39 +136,49 @@ class SwipingComponent extends React.Component {
         <div className="swiping-cards-actionButtons">
           <div
             className="buttonDislike button"
-            onClick={() => this.onClick('Left')}
+            onClick={() => this.onClick('left')}
           >
-            <Icon type="dislike" />
+            <Icon type="dislike" theme="twoTone" />
           </div>
           <div
             className="buttonLike button"
-            onClick={() => this.onClick('Right')}
+            onClick={() => this.onClick('right')}
           >
-            <Icon type="like" />
+            <Icon type="like" theme="twoTone" />
           </div>
         </div>
         <div className="swiping-cards-footer">
           <div className="field footer-description">
-            <div className="footer-fieldLabel">Description:</div>
-            {product.description}
+            <div className="footer-fieldLabel"><Icon type="info-circle" theme="outlined" />Description:</div>
+            <div className="footer-fieldContent">{product.description}</div>
           </div>
           <div className="field footer-price">
-            <div className="footer-fieldLabel">Price:</div>
-            ${product.price.min} - ${product.price.max}
+            <div className="footer-fieldLabel"><Icon type="logout" theme="outlined" />Price:</div>
+            <div className="footer-fieldContent">${product.price.min} - ${product.price.max}</div>
+          </div>
+          <div className="field footer-category">
+            <div className="footer-fieldLabel"><Icon type="bars" theme="outlined" />Category:</div>
+            <div className="footer-fieldContent">{categories.filter(c => c.id === Number(product.category))[0].displayName}</div>
+          </div>
+          <div className="field footer-category">
+            <div className="footer-fieldLabel"><Icon type="bars" theme="check-circle" />Want in return:</div>
+            <div className="footer-fieldContent">{wantedCategories.toString()}</div>
           </div>
           <div className="field footer-location">
-            <div className="footer-fieldLabel">Location:</div>
-            {product.location.address}
+            <div className="footer-fieldLabel"><Icon type="compass" theme="outlined" />Location:</div>
+            <div className="footer-fieldContent">{product.location.address}</div>
           </div>
         </div>
-        {this.props.isMatch && (
-          <MatchSuccessModal
-            redirectToMatchRoom={this.redirectToMatchRoom}
-            onClose={this.closeMatchModal}
-            match={this.props.isMatch}
-          />
-        )}
-      </div>
+        {
+          this.props.isMatch && (
+            <MatchSuccessModal
+              redirectToMatchRoom={this.redirectToMatchRoom}
+              onClose={this.closeMatchModal}
+              match={this.props.isMatch}
+            />
+          )
+        }
+      </div >
     );
   }
 }
@@ -160,6 +186,7 @@ class SwipingComponent extends React.Component {
 const mapStateToProps = state => ({
   products: state.product.swipingList,
   userLocation: state.app.user.location,
+  categories: state.app.categories,
   isMatch: state.product.isMatch,
 });
 

@@ -4,8 +4,10 @@ import { Modal, Button, Tabs } from 'antd';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import { GoogleLogin } from 'react-google-login';
 
-import Login from './components/Login';
-import Signup from './components/Signup';
+import Login from './components/auth/Login';
+import Signup from './components/auth/Signup';
+import ForgotPassword from './components/auth/ForgotPassword';
+
 import Swipe from './components/Swipe';
 import Exchange from './components/Exchange';
 import Match from './components/Match';
@@ -28,6 +30,7 @@ class HomePage extends React.Component {
     super(props);
     this.state = {
       loginModalOpen: false,
+      isForgot: false,
       instructionStep: INSTRUCTION_STEP.UPLOAD,
     };
     this.setStepRef = this.setStepRef.bind(this);
@@ -53,6 +56,10 @@ class HomePage extends React.Component {
     if (this.state.instructionStep === step) return;
     this.currentStepRef.classList.add('instructionStep--hide');
     setTimeout(() => this.setState({ instructionStep: step }), 1000);
+  }
+
+  onForgotPassword = () => {
+    this.setState({ isForgot: !this.state.isForgot })
   }
 
   setStepRef(ref) {
@@ -86,6 +93,7 @@ class HomePage extends React.Component {
 
   render() {
     const bars = Object.values(INSTRUCTION_STEP);
+    const { instructionStep, isForgot } = this.state;
     return (
       <div className="homePage">
         <div className="topNav">
@@ -98,7 +106,7 @@ class HomePage extends React.Component {
             <div
               key={v}
               tabIndex={i}
-              className={`bar ${this.state.instructionStep === v && 'bar--active'}`}
+              className={`bar ${instructionStep === v && 'bar--active'}`}
               onClick={() => this.onStepClick(v)}
             >
               <h3>{v}</h3>
@@ -114,7 +122,17 @@ class HomePage extends React.Component {
         >
           <Tabs defaultActiveKey="1">
             <Tabs.TabPane tab="Login" key="1">
-              <Login submit={this.props.login} error={this.props.loginError} />
+              {isForgot ?
+                <React.Fragment>
+                  <ForgotPassword submit={this.props.forgotPassword} />
+                  <div className="forgot" onClick={this.onForgotPassword}>Click here to login</div>
+                </React.Fragment>
+                :
+                <React.Fragment>
+                  <Login submit={this.props.login} error={this.props.loginError} />
+                  <div className="forgot" onClick={this.onForgotPassword}>Forgot your password?</div>
+                </React.Fragment>
+              }
             </Tabs.TabPane>
             <Tabs.TabPane tab="Sign up" key="2">
               <Signup submit={this.props.signup} error={this.props.signupError} />

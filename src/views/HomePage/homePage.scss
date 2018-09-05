@@ -99,7 +99,7 @@
         font-weight: bold;
     }
     .ant-form {
-        padding: 10px 25px 15px;
+        padding: 10px 25px 0;
     }
     .authButton {
         display: flex;
@@ -156,6 +156,20 @@
         &:focus {
             background: #E74B37;
         }
+    }
+    .forgot {
+        padding-left: 25px;
+        margin-bottom: 20px;
+        margin-top: -5px;
+        display: inline-block;
+        font-size: 13px;
+        opacity: 0.8;
+        cursor: pointer;
+        transition: all 0.2s ease-in;
+    }
+    .forgot:hover {
+        opacity: 1;
+        text-decoration: underline;
     }
 }
 

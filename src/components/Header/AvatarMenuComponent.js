@@ -10,10 +10,6 @@ const menuTitle = (userFullName, newMessages) => (
 
 const AvatarMenuComponent = ({ userFullName, newMessages }) => (
   <Menu selectable={false} style={{ width: '200px' }} className="avatarMenu">
-    <Menu.Item key="1" className="avatarMenu__item">
-      {menuTitle(userFullName, newMessages)}
-    </Menu.Item>
-    <Menu.Divider />
     <Menu.Item key="2">
       <Link to="/user/profile">
         <Icon type="profile" />

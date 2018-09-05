@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Icon, Input, Button, Select, Alert } from 'antd';
 
-import countries from '../../../services/countries.json';
+import countries from '../../../../services/countries.json';
 
 const FormItem = Form.Item;
 const Option = Select.Option;

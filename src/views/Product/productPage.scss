@@ -24,8 +24,11 @@
         align-items: center;
         justify-content: center;
     }
+    .swiping-cards-productDistance {
+        margin-bottom: 15px;
+    }
     .swiping-cards-productTitle {
-        font-size: 16px;
+        font-size: 20px;
         color: $black;
         margin: 20px 0;
         padding: 0 0 15px 0;
@@ -34,9 +37,9 @@
     }
     .swiping-cards {
         position: relative;
-        height: 300px;
-        overflow: hidden;
-        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+        height: 280px;
+        border-radius: 15px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, .1), 0 1px 0 rgba(0, 0, 0, .14);
     }
     #cards {
         width: 100%;
@@ -47,14 +50,19 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        >div {
+            width: 100%;
+            height: 100%;
+        }
     }
     .ant-carousel .slick-slide img {
         display: block;
         user-select: none;
-        height: 300px;
-        width: auto !important;
+        height: 100%;
     }
     .card {
+        border-radius: 15px;
+        overflow: hidden;
         position: absolute;
         transition: box-shadow 0.3s;
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
@@ -66,6 +74,10 @@
         margin: unset;
         width: 100%;
         height: 100%;
+        .inactive,
+        .animate {
+            transition: all 0.4s ease-in;
+        }
     }
     .animate {
         transition: transform 0.3s;
@@ -107,10 +119,9 @@
         width: 300px;
         align-items: center;
         justify-content: center;
-        margin: 0 auto;
+        margin: 20px auto 0;
         position: relative;
         z-index: 10;
-        transform: translateY(-20px);
         .button {
             cursor: pointer;
             width: 55px;
@@ -123,11 +134,23 @@
             margin: 0 5px;
             border: 1px solid $blue_gray;
             border-radius: 50%;
-            box-shadow: 0 3px 5px 2px rgba(0, 0, 0, 0.1);
-            background: linear-gradient(#fff, #ddd);
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1), 0 1px 0 rgba(0, 0, 0, 0.14);
             transition: all 0.2s ease-in;
+            &.buttonLike {
+                background: #79eccf;
+                border: 1px solid #63dabc;
+                color: rgba(255, 255, 255, 0.7);
+                text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+            }
+            &.buttonDislike {
+                background: #ff8383;
+                border: 1px solid #fd7979;
+                color: rgba(255, 255, 255, 0.6);
+                text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+            }
             &:hover {
-                color: $black;
+                color: #fff;
+                transform: scale(1.05);
             }
         }
     }
@@ -135,16 +158,62 @@
         display: flex;
         margin: 10px 0;
         font-size: 15px;
+        flex-direction: column;
+    }
+    .swiping-cards-footer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: 40px 0 30px;
+        >div {
+            flex: 1;
+            margin-right: 20px;
+            min-width: 190px;
+            min-height: 100px;
+        }
     }
     .footer-fieldLabel {
-        margin-right: 10px;
-        width: 100px;
-        font-weight: bold;
-        text-align: right;
+        text-align: left;
+        display: flex;
+        font-size: 20px;
+        align-items: center;
+        .anticon {
+            font-size: 14px;
+            margin-right: 10px;
+        }
+    }
+    .footer-fieldContent {
+        margin-top: 10px;
+        font-size: 14px;
+        font-weight: 100;
     }
     &__swiping--loading {
         width: 100%;
         height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .slick-slide {
+        margin: 0 5px;
+        width: 25% !important;
+        height: 95% !important;
+        overflow: hidden;
+    }
+    .card--container {
+        background: #fff;
+        height: 100%;
+    }
+    .ant-carousel {
+        height: 100%;
+    }
+    .slick-slider,
+    .slick-list,
+    .slick-track {
+        height: 100%;
+    }
+    .slick-track {
+        background: #fff;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -333,6 +402,7 @@
         padding: 10px 20px;
         height: auto;
         font-size: 13px;
+        border: 1px solid #ffeded;
     }
 }
 

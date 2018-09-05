@@ -1,5 +1,7 @@
 import React, { Component, cloneElement } from 'react';
 import ReactDOM from 'react-dom';
+import { Icon } from 'antd';
+
 import { DIRECTIONS } from './utils';
 
 class SwipeCards extends Component {
@@ -69,21 +71,22 @@ class SwipeCards extends Component {
       };
       return [cloneElement(c, props), ...memo];
     }, []);
-
     return (
-      <div className={className}>
-        {DIRECTIONS.map(d => (
-          <div
-            key={d}
-            className={`${
-              this.state[`alert${d}`] ? 'alert-visible' : ''
-            } alert-${d.toLowerCase()} alert`}
-          >
-            {this.props[`alert${d}`]}
-          </div>
-        ))}
-        <div id="cards">{_cards}</div>
-      </div>
+      <React.Fragment>
+        <div className={className}>
+          {DIRECTIONS.map(d => (
+            <div
+              key={d}
+              className={`${
+                this.state[`alert${d}`] ? 'alert-visible' : ''
+                } alert-${d.toLowerCase()} alert`}
+            >
+              {this.props[`alert${d}`]}
+            </div>
+          ))}
+          <div id="cards">{_cards.slice(Math.max(_cards.length - 3, 0))}</div>
+        </div>
+      </React.Fragment>
     );
   }
 }
