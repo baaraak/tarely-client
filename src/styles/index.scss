@@ -11,6 +11,11 @@ body {
     background-image: linear-gradient(135deg, #fff 0%, #eff1f5 100%);
     background-repeat: no-repeat;
     background-attachment: fixed;
+    &.loaded {
+        .loaderWrapper {
+            animation: hideLoader 0.8s forwards;
+        }
+    }
 }
 
 a {
@@ -151,4 +156,26 @@ a {
 .ant-switch-checked {
     border: 1px solid #e6bdc6;
     background-image: linear-gradient(to top, #fad0c4 0%, #ffd1ff 100%);
+}
+
+.ant-confirm .ant-confirm-btns button+button {
+    background: linear-gradient(-20deg, #ff2121 0%, #ff9e9e 100%);
+    margin-left: 8px;
+    margin-bottom: 0;
+    background-size: 1px 200px;
+    &:hover {
+        background-position: 100%;
+    }
+}
+
+@keyframes hideLoader {
+    0% {}
+    95% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+        z-index: -2;
+        display: none;
+    }
 }

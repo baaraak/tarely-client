@@ -8,6 +8,7 @@ import Header from '../../components/Header';
 import Home from '../Home/Home';
 import Product from '../Product/Product';
 import Settings from '../Settings/Settings';
+import Contact from '../Contact/Contact';
 import UploadProduct from '../UploadProduct/UploadProduct';
 import EditProduct from '../EditProduct/EditProduct';
 import UserProfile from '../UserProfile/UserProfile';
@@ -50,6 +51,7 @@ class App extends React.PureComponent {
                 <Route path="/user/settings/" component={Settings} />
                 {/* <Route path="/search" component={Search} /> */}
                 {/* <Route path="/bids" component={Bids} /> */}
+                <Route path="/contact" component={Contact} />
                 <Route path="/logout" render={this.logOut} />
                 <Route component={NotFound} />
               </AnimatedSwitch>

@@ -20,6 +20,8 @@ cp -rf ./composer.json ../buildClient/
 echo 'COPY FOLDER!!!';
 
 cd ../buildClient
+find . -name "*.js.map" -exec rm {} \;
+find . -name "*.css.map" -exec rm {} \;
 
 echo 'CONTECTED TO BUILD DIRECTORY!!!';
 

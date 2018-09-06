@@ -60,23 +60,8 @@ function renderHomePage() {
   );
 }
 
-let location = '';
-
-navigator.geolocation.getCurrentPosition(
-  position => {
-    location = position.coords;
-    initApp(location);
-  },
-  err => {
-    initApp({});
-  },
-  {
-    enableHighAccuracy: true,
-    timeout: 5000,
-  }
-);
-function initApp(location) {
-  getAppData(location).then(data => {
+function initApp() {
+  getAppData().then(data => {
     store.runSaga(rootSaga);
     if (data.user) {
       renderApp(data);
@@ -85,5 +70,7 @@ function initApp(location) {
     }
   });
 }
+
+initApp();
 
 registerServiceWorker();

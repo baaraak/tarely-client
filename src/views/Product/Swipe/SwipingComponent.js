@@ -54,6 +54,39 @@ class SwipingComponent extends React.Component {
   }
 
   renderCards() {
+    const settings = {
+      dots: true,
+      infinite: false,
+      slidesToShow: 4,
+      slidesToScroll: 4,
+      initialSlide: 0,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            infinite: true,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            initialSlide: 2
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
+    };
     return this.state.products.map(product => (
       <Card
         key={product._id}
@@ -61,7 +94,7 @@ class SwipingComponent extends React.Component {
         onSwipeRight={() => this.handleSwiping('right', product._id)}
       >
         <div className="card--container" ref={ref => this.card = ref}>
-          <Carousel slidesToShow={product.images.length}>
+          <Carousel {...settings}>
             {product.images.map(image => (
               <img src={BASE_URL + image} key={image} alt="" />
             ))}
