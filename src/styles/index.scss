@@ -168,6 +168,12 @@ a {
     }
 }
 
+.ant-alert-success {
+    border: 1px solid #b7eb8f;
+    background-color: #f6ffed;
+    color: #292929 !important;
+}
+
 @keyframes hideLoader {
     0% {}
     95% {

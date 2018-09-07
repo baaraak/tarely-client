@@ -3,11 +3,15 @@ import {
   LOGIN_FAILED,
   SIGNUP,
   SIGNUP_FAILED,
+  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_FAILED,
+  FORGOT_PASSWORD,
 } from '../actions/auth.actions';
 
 const initialState = {
   loginError: null,
   signupError: null,
+  forgotPasswordError: null,
 };
 
 export default function app(state = initialState, action = {}) {
@@ -31,6 +35,21 @@ export default function app(state = initialState, action = {}) {
       return {
         ...state,
         signupError: null,
+      };
+    case FORGOT_PASSWORD:
+      return {
+        ...state,
+        forgotPasswordError: null,
+      };
+    case FORGOT_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        forgotPasswordError: false,
+      };
+    case FORGOT_PASSWORD_FAILED:
+      return {
+        ...state,
+        forgotPasswordError: action.error,
       };
     default:
       return state;

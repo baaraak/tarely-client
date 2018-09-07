@@ -5,6 +5,9 @@ import {
   loginFailed,
   SIGNUP,
   signupFailed,
+  FORGOT_PASSWORD,
+  forgotPasswordSuccess,
+  forgotPasswordFailed,
 } from '../actions/auth.actions';
 import callApi from '../../services/api';
 
@@ -24,7 +27,6 @@ function* submitLogin(action) {
     });
   }
   if (response.token) {
-    console.log(response.token);
     yield localStorage.setItem('tarelyJWTToken', response.token);
     yield window.location.reload();
   } else {
@@ -42,9 +44,19 @@ function* submitSignup(action) {
   }
 }
 
+function* submitForgotPassword(action) {
+  const response = yield call(callApi, '/users/reset_password_request', 'POST', { email: action.email });
+  if (response.error) {
+    yield put(forgotPasswordFailed(response.error));
+  } else if (response.success) {
+    yield put(forgotPasswordSuccess());
+  }
+}
+
 function* authSaga() {
   yield takeLatest(LOGIN, submitLogin);
   yield takeLatest(SIGNUP, submitSignup);
+  yield takeLatest(FORGOT_PASSWORD, submitForgotPassword);
 }
 
 export default authSaga;

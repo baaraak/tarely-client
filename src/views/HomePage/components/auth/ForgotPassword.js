@@ -8,15 +8,21 @@ class ForgotPassword extends React.PureComponent {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                this.props.submit({ email: values.email });
+                this.props.submit(values.email);
             }
         });
     };
+
+    renderMessage = () => {
+        if (this.props.error === null) return null;
+        if (typeof this.props.error === 'string') return <Alert message={this.props.error} type="error" />
+        if (this.props.error === false) return <Alert message="An email has been sent to you with password reset instructions" type="success" />
+    }
     render() {
         const { getFieldDecorator } = this.props.form;
         return (
             <Form onSubmit={this.handleSubmit} className="login-form">
-                {this.props.error && <Alert message={this.props.error} type="error" />}
+                {this.renderMessage()}
                 <FormItem label="Email">
                     {getFieldDecorator('email', {
                         rules: [{ required: true, message: 'Please input your email!' }],

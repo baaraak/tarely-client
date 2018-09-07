@@ -18,26 +18,19 @@ class Settings extends React.Component {
         };
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (this.props.changePasswordResult !== nextProps.changePasswordResult && nextProps.changePasswordResult === true) {
-            message.success('Password changed successfully!')
-        }
-    }
-
     onChange(type) {
         this.props.toggleSubscribe(type);
     }
 
     render() {
-        const errorMessage = typeof this.props.changePasswordResult === 'string' ? this.props.changePasswordResult : null;
-        const { subscription } = this.props;
+        const { subscription, changePasswordResult } = this.props;
         return (
             <div className="page settings">
                 <PageTitle label="User Settings" icon="edit" />
                 <div className="container">
                     <Card title="Change Password">
                         <ChangePasswordForm
-                            errorMessage={errorMessage}
+                            changePasswordResult={changePasswordResult}
                             onSubmit={this.props.changePassword}
                         />
                     </Card>
@@ -60,6 +53,7 @@ class Settings extends React.Component {
 
 const mapStateToProps = (state) => ({
     subscription: state.app.user.subscription,
+    changePasswordResult: state.user.changePasswordResult,
 });
 
 export default connect(mapStateToProps, { changePassword, toggleSubscribe })(Settings);

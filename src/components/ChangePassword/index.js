@@ -18,19 +18,31 @@ class ChangePasswordForm extends React.PureComponent {
         });
     }
 
+    compareToFirstPassword = (rule, value, callback) => {
+        const { form } = this.props;
+        if (value && value !== form.getFieldValue('newPassword')) {
+            callback('Two passwords that you enter is inconsistent!');
+        } else {
+            callback();
+        }
+    }
+
+    renderResponseMessage() {
+        if (this.props.changePasswordResult === null) return null;
+        if (typeof this.props.changePasswordResult === 'string') return <Alert message={this.props.changePasswordResult} type="error" />
+        if (this.props.changePasswordResult === true) return <Alert
+            message="Password changed succeffuly!" type="success" closable
+        />
+    }
     render() {
         const { getFieldDecorator } = this.props.form;
         return (
             <Form className="change_password" onSubmit={this.handleSubmit}>
-                {this.props.errorMessage && (
-                    <Alert message={this.props.errorMessage} type="error" />
-                )}
+                {this.renderResponseMessage()}
                 <FormItem label="Old Password">
                     {getFieldDecorator('oldPassword', {
                         rules: [
                             { required: true, message: 'Please input your old password!' },
-                            { min: 6 },
-                            { max: 20 },
                         ],
                     })(
                         <Input
@@ -62,7 +74,7 @@ class ChangePasswordForm extends React.PureComponent {
                     {getFieldDecorator('confirm', {
                         rules: [{
                             required: true, message: 'Please confirm your password!',
-                        }],
+                        }, { validator: this.compareToFirstPassword }],
                     })(
                         <Input type="password" placeholder="Confirm Password" />
                     )}

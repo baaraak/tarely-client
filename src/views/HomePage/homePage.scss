@@ -173,6 +173,15 @@
     }
 }
 
+.container.resetPassword {
+    padding-top: 50px;
+    .explain {
+        margin-bottom: 8px;
+        font-weight: 500;
+        opacity: 0.8;
+    }
+}
+
 @keyframes fadeIn {
     0% {
         opacity: 0;

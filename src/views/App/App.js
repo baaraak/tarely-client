@@ -63,12 +63,6 @@ class App extends React.PureComponent {
   }
 }
 
-App.propTypes = {};
-
-App.contextTypes = {
-  store: PropTypes.object.isRequired,
-};
-
 const mapStateToProps = state => ({
   globalError: state.app.globalError,
 });
