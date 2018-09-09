@@ -1,14 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-import LogoPNG from './logo.png';
+import { FormattedMessage, injectIntl } from 'react-intl';
 
 import './logo.css';
 
-const Logo = () => (
+const Logo = ({ intl }) => (
   <Link to="/" className="logo">
-    tarely
+    <FormattedMessage id="app.name" />
   </Link>
 );
 
-export default Logo;
+export default injectIntl(Logo);

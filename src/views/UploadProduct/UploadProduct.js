@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { injectIntl, FormattedMessage } from 'react-intl';
 
 import PageTitle from '../../components/PageTitle';
 import UploadProductForm from './UploadProductForm';
@@ -28,7 +29,7 @@ class UploadProduct extends React.Component {
   render() {
     return (
       <div className="upload page">
-        <PageTitle label="Upload Product" icon="upload" />
+        <PageTitle label={<FormattedMessage id="uploadProduct.title" />} icon="upload" />
         <UploadProductForm
           errorMessage={this.state.errorMessage}
           categories={this.props.categories}
@@ -48,4 +49,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { uploadProduct }
-)(UploadProduct);
+)(injectIntl(UploadProduct));

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, Button, Icon, Alert } from 'antd';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+import { injectIntl } from 'react-intl';
 
 import ProductDetailsCard from './Cards/ProductDetailsCard';
 import ProductPreferenceCard from './Cards/ProductPreferenceCard';
@@ -108,7 +109,7 @@ class UploadProductForm extends React.PureComponent {
           htmlType="submit"
           className="upload__form--button"
         >
-          Next<Icon type="right" />
+          {this.props.intl.messages["uploadProduct.button"]}<Icon type="right" />
         </Button>
       </Form>
     );
@@ -117,4 +118,4 @@ class UploadProductForm extends React.PureComponent {
 
 const WrappedUploadProductForm = Form.create()(UploadProductForm);
 
-export default WrappedUploadProductForm;
+export default injectIntl(WrappedUploadProductForm);

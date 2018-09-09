@@ -20,4 +20,17 @@
             margin-right: 20px;
         }
     }
+    i.anticon.anticon-close {
+        right: auto;
+        left: -10px;
+        top: 0px;
+        background: #32cefd;
+        border-radius: 50%;
+        color: #fff;
+        width: 14px;
+        height: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }

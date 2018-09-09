@@ -11,7 +11,7 @@ class EditUserProfileDetails extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      fileList: [],
+      avatar: {},
     };
     this.onUploadImage = this.onUploadImage.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -34,8 +34,9 @@ class EditUserProfileDetails extends React.PureComponent {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        const file = this.state.fileList[0];
+        const file = this.state.avatar;
         values.avatar = file.response ? file.response.path : null;
+        if (values.avatar) this.props.changeUserAvatar(values.avatar)
         this.props.onSubmit(values);
       }
     });
@@ -44,20 +45,33 @@ class EditUserProfileDetails extends React.PureComponent {
   prepareFileList() {
     const avatar = this.props.user.avatar || 'uploads/avatar.png';
     this.setState({
-      fileList: [
-        {
-          uid: 0,
-          name: avatar.replace('uploads/', ''),
-          status: 'done',
-          url: BASE_URL + avatar,
-          thumbUrl: BASE_URL + avatar,
-        },
-      ],
+      avatar: {
+        uid: 0,
+        name: avatar.replace('uploads/', ''),
+        status: 'done',
+        url: BASE_URL + avatar,
+        thumbUrl: BASE_URL + avatar,
+      },
     });
   }
 
+  onRemove = (file) => {
+    const avatar = 'uploads/avatar.png';
+    this.setState({
+      avatar: {
+        uid: 0,
+        name: avatar.replace('uploads/', ''),
+        status: 'done',
+        url: BASE_URL + avatar,
+        thumbUrl: BASE_URL + avatar,
+        response: { path: avatar }
+      }
+    });
+    return false;
+  };
+
   onUploadImage({ file }) {
-    this.setState({ fileList: [file] });
+    this.setState({ avatar: file });
   }
 
   render() {
@@ -66,25 +80,27 @@ class EditUserProfileDetails extends React.PureComponent {
     const token = localStorage.getItem('tarelyJWTToken');
     return (
       <Form className="upload__form" onSubmit={this.handleSubmit}>
-        <Card title="Product Details">
-          <FormItem label="Avatar">
+        <Card title={this.props.intl.messages["profile.details"]}>
+          <FormItem label={this.props.intl.messages["profile.details.avatar"]}>
             {getFieldDecorator('avatar', {})(
               <Upload
                 listType="picture"
                 accept="image/png,image/jpeg,image/jpg"
                 action={`${API_URI}/products/image`}
                 headers={{ authorization: token }}
-                fileList={this.state.fileList}
+                fileList={[this.state.avatar]}
+                onRemove={this.onRemove}
                 multiple={false}
+                showUploadList={{ showRemoveIcon: this.state.avatar.name !== 'avatar.png' }}
                 onChange={this.onUploadImage}
               >
                 <Button>
-                  <Icon type="upload" />Change
+                  <Icon type="upload" />{this.props.intl.messages["profile.details.avatar.button"]}
                 </Button>
               </Upload>
             )}
           </FormItem>
-          <FormItem label="Email">
+          <FormItem label={this.props.intl.messages["profile.details.email"]}>
             {getFieldDecorator('email', {
               initialValue: user.email,
               rules: [
@@ -97,9 +113,9 @@ class EditUserProfileDetails extends React.PureComponent {
                   message: 'Please input your E-mail!',
                 },
               ],
-            })(<Input />)}
+            })(<Input placeholder={this.props.intl.messages["profile.details.email.placeholder"]} />)}
           </FormItem>
-          <FormItem label="First Name">
+          <FormItem label={this.props.intl.messages["profile.details.firstName"]}>
             {getFieldDecorator('firstName', {
               initialValue: user.firstName,
               rules: [
@@ -108,9 +124,9 @@ class EditUserProfileDetails extends React.PureComponent {
                   message: 'Please input your first name!',
                 },
               ],
-            })(<Input />)}
+            })(<Input placeholder={this.props.intl.messages["profile.details.firstName.placeholder"]} />)}
           </FormItem>
-          <FormItem label="Last Name">
+          <FormItem label={this.props.intl.messages["profile.details.lastName"]}>
             {getFieldDecorator('lastName', {
               initialValue: user.lastName,
               rules: [
@@ -119,9 +135,9 @@ class EditUserProfileDetails extends React.PureComponent {
                   message: 'Please input your last name',
                 },
               ],
-            })(<Input />)}
+            })(<Input placeholder={this.props.intl.messages["profile.details.lastName.placeholder"]} />)}
           </FormItem>
-          <FormItem label="Country">
+          <FormItem label={this.props.intl.messages["profile.details.country"]}>
             {getFieldDecorator('country', {
               initialValue: user.country,
               rules: [
@@ -154,8 +170,8 @@ class EditUserProfileDetails extends React.PureComponent {
             htmlType="submit"
             className="upload__form--button"
           >
-            Update
-        </Button>
+            {this.props.intl.messages["profile.details.button"]}
+          </Button>
         </Card>
       </Form>
     );

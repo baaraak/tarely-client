@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Spin } from 'antd';
 import io from 'socket.io-client';
+import { injectIntl } from 'react-intl';
 
 import MatchesList from './MatchesList';
 import MatchRoom from './MatchRoom';
@@ -146,7 +147,7 @@ class MatchesComponent extends React.Component {
   renderNoMatches() {
     return (
       <div className="productPage__matches--noMessage">
-        There is no matches yet, keep swiping.
+        {this.props.intl.messages["matches.noMatches"]}
       </div>
     );
   }
@@ -186,11 +187,10 @@ class MatchesComponent extends React.Component {
 
   onDismatch() {
     this.Modal = Modal.confirm({
-      title: 'Confirm',
-      content:
-        'Are u sure you want to delete this match?, this action is irreversible',
-      okText: 'Continue',
-      cancelText: 'Cancel',
+      title: this.props.intl.messages["matches.noMatches"],
+      content: this.props.intl.messages["matches.unMatch.modal.message"],
+      okText: this.props.intl.messages["matches.unMatch.modal.ok"],
+      cancelText: this.props.intl.messages["matches.unMatch.modal.cancel"],
       onOk: () => this.handleDelete(),
     });
   }
@@ -218,16 +218,19 @@ class MatchesComponent extends React.Component {
           matches={matches}
           currentMatchID={currentMatchID}
           onClick={this.changeCurrentMatch}
+          intl={this.props.intl}
         />
         <MatchRoom
           productId={this.props.productId}
           onSubmit={this.onSubmitMessage}
           messages={messages}
+          intl={this.props.intl}
           title={product.title}
           setContentRef={this.setContentRefAndScroll}
         />
         <ProductView
           withActions={false}
+          intl={this.props.intl}
           categories={this.props.categories}
           product={product}
           onDismatch={this.onDismatch}
@@ -252,4 +255,4 @@ export default connect(
     onUnmatch,
     sendMessage,
   }
-)(MatchesComponent);
+)(injectIntl(MatchesComponent));

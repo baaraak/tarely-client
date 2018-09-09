@@ -3,7 +3,7 @@ import { Button } from 'antd';
 
 import { BASE_URL } from '../../../services/constans';
 
-const MatchSuccessModal = ({ match, onClose, redirectToMatchRoom }) => (
+const MatchSuccessModal = ({ match, onClose, redirectToMatchRoom, intl }) => (
   <div className="matchSuccess">
     <div className="matchSuccess__container">
       <div className="matchSuccess__title">It's a Match!</div>
@@ -23,14 +23,14 @@ const MatchSuccessModal = ({ match, onClose, redirectToMatchRoom }) => (
       </div>
       <div className="matchSuccess__actions">
         <Button ghost onClick={onClose}>
-          Continue swiping
+          {intl.messages["swipe.match.continueSwipe"]}
         </Button>
         <Button
           type="primary"
           onClick={() => redirectToMatchRoom(match.matchId)}
           ghost
         >
-          Send a message
+          {intl.messages["swipe.match.continueSwipe"]}
         </Button>
       </div>
     </div>

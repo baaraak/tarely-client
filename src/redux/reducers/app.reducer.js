@@ -5,6 +5,7 @@ import {
   SET_CATEGORIES,
   DELETE_USER_PRODUCT,
   ADD_USER_PRODUCT,
+  CHANGE_USER_AVATAR,
   EDIT_USER_PRODUCT,
 } from '../actions/app.actions';
 
@@ -60,6 +61,14 @@ export default function app(state = initialState, action = {}) {
           products: state.user.products.map(
             p => (p._id === action.product._id ? action.product : p)
           ),
+        },
+      };
+    case CHANGE_USER_AVATAR:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          avatar: action.avatar,
         },
       };
     default:

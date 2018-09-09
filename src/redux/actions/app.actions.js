@@ -6,6 +6,8 @@ export const SET_CATEGORIES = 'SET_CATEGORIES';
 export const DELETE_USER_PRODUCT = 'DELETE_USER_PRODUCT';
 export const ADD_USER_PRODUCT = 'ADD_USER_PRODUCT';
 export const EDIT_USER_PRODUCT = 'EDIT_USER_PRODUCT';
+export const SEND_CONTACT = 'SEND_CONTACT';
+export const CHANGE_USER_AVATAR = 'CHANGE_USER_AVATAR';
 
 export function showGlobalMessageError(message) {
   return {
@@ -54,3 +56,11 @@ export function editUserProduct(product) {
     product,
   };
 }
+
+export function changeUserAvatar(avatar) {
+  return {
+    type: CHANGE_USER_AVATAR,
+    avatar,
+  };
+}
+

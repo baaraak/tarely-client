@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { injectIntl, FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { Avatar, Popover, Button } from 'antd';
 
@@ -24,7 +25,9 @@ class HeaderUserInfo extends React.PureComponent {
     return (
       <div className="header__userInfo">
         <Link to="/upload" state={{ modal: true }}>
-          <Button type="secondary">ADD PRODUCT</Button>
+          <Button type="secondary">
+            <FormattedMessage id="product.add" />
+          </Button>
         </Link>
         <Popover
           content={
@@ -49,4 +52,4 @@ const mapStateToProps = state => ({
   user: state.app.user,
 });
 
-export default connect(mapStateToProps)(HeaderUserInfo);
+export default connect(mapStateToProps)(injectIntl(HeaderUserInfo));

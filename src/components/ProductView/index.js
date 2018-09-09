@@ -4,7 +4,7 @@ import { BASE_URL } from '../../services/constans';
 
 import './productView.css';
 
-const ProductViewComponent = ({ product, onClose, categories, onDismatch }) => {
+const ProductViewComponent = ({ product, onClose, categories, onDismatch, intl }) => {
 
   // const renderActions = () => {
   //   if (asProduct) {
@@ -60,7 +60,7 @@ const ProductViewComponent = ({ product, onClose, categories, onDismatch }) => {
       </div>
       <div className="product__spec product__spec--buttons">
         {/* {withActions && renderActions()} */}
-        <Button type="danger" onClick={onDismatch} >Disable Match</Button>
+        <Button type="danger" onClick={onDismatch} >{intl.messages["matches.unMatch.button"]}</Button>
       </div>
     </div>
   )

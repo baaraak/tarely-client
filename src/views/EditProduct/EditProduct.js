@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { message } from 'antd';
+import { injectIntl } from 'react-intl';
 
 import PageTitle from '../../components/PageTitle';
 import EditProductForm from './EditProductForm';
@@ -35,12 +36,13 @@ class EditProduct extends React.Component {
     const token = localStorage.getItem('tarelyJWTToken');
     return (
       <div className="editProduct page">
-        <PageTitle label="Edit Product" icon="edit" />
+        <PageTitle label={this.props.intl.messages[""]} icon="edit" />
         <EditProductForm
           onSubmit={this.props.updateProduct}
           categories={this.props.categories}
           token={token}
           product={product}
+          intl={this.props.intl}
         />
       </div>
     );
@@ -56,4 +58,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { updateProduct }
-)(EditProduct);
+)(injectIntl(EditProduct));

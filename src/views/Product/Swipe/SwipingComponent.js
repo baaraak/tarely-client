@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { injectIntl } from 'react-intl';
 import { Carousel, Spin, Icon } from 'antd';
+import Lightbox from 'react-image-lightbox';
+import 'react-image-lightbox/style.css';
 
 import MatchSuccessModal from './MatchSuccessModal';
 import { BASE_URL } from '../../../services/constans';
@@ -13,12 +16,47 @@ import {
   closeMatchModal,
 } from '../../../redux/actions/product.actions';
 
+const carouselSettings = {
+  dots: true,
+  infinite: false,
+  slidesToShow: 4,
+  slidesToScroll: 4,
+  initialSlide: 0,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: true,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2,
+        initialSlide: 2
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+  ]
+}
+
 class SwipingComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoading: true,
       index: 0,
+      lightboxView: null,
       products: props.products,
     };
     this.handleChangeIndex = this.handleChangeIndex.bind(this);
@@ -27,8 +65,10 @@ class SwipingComponent extends React.Component {
     this.closeMatchModal = this.closeMatchModal.bind(this);
     this.redirectToMatchRoom = this.redirectToMatchRoom.bind(this);
   }
+
   componentWillMount() {
     this.props.getProductSwipingList(this.props.productId);
+    document.addEventListener('keydown', this.handleKeyPress);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -37,6 +77,18 @@ class SwipingComponent extends React.Component {
         products: Array.isArray(nextProps.products) ? nextProps.products : [],
         isLoading: false,
       });
+    }
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyPress);
+  }
+
+  handleKeyPress = (e) => {
+    if (e.keyCode === 37) {
+      this.onClick('left');
+    } else if (e.keyCode === 39) {
+      this.onClick('right');
     }
   }
 
@@ -53,40 +105,14 @@ class SwipingComponent extends React.Component {
     this.props.handleSwipe(data);
   }
 
+  handleClickImage = (e, image) => {
+    this.setState({
+      lightboxView: image
+    })
+  }
+
   renderCards() {
-    const settings = {
-      dots: true,
-      infinite: false,
-      slidesToShow: 4,
-      slidesToScroll: 4,
-      initialSlide: 0,
-      responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 3,
-            infinite: true,
-            dots: true
-          }
-        },
-        {
-          breakpoint: 600,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2,
-            initialSlide: 2
-          }
-        },
-        {
-          breakpoint: 480,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1
-          }
-        }
-      ]
-    };
+    ;
     return this.state.products.map(product => (
       <Card
         key={product._id}
@@ -94,9 +120,9 @@ class SwipingComponent extends React.Component {
         onSwipeRight={() => this.handleSwiping('right', product._id)}
       >
         <div className="card--container" ref={ref => this.card = ref}>
-          <Carousel {...settings}>
+          <Carousel {...carouselSettings}>
             {product.images.map(image => (
-              <img src={BASE_URL + image} key={image} alt="" />
+              <img src={BASE_URL + image} key={image} alt="" onClick={e => this.handleClickImage(e, BASE_URL + image)} />
             ))}
           </Carousel>
         </div>
@@ -128,6 +154,12 @@ class SwipingComponent extends React.Component {
     }, 350);
   }
 
+  closeLightbox = (e) => {
+    this.setState({
+      lightboxView: null
+    })
+  }
+
   renderNoProductsToSwipe() {
     return <div>Sorry, no products available to swipe</div>;
   }
@@ -144,7 +176,7 @@ class SwipingComponent extends React.Component {
   }
 
   render() {
-    const { categories } = this.props;
+    const { categories, intl } = this.props;
     if (this.state.isLoading)
       return (
         <div className="productPage__swiping productPage__swiping--loading">
@@ -182,23 +214,23 @@ class SwipingComponent extends React.Component {
         </div>
         <div className="swiping-cards-footer">
           <div className="field footer-description">
-            <div className="footer-fieldLabel"><Icon type="info-circle" theme="outlined" />Description:</div>
+            <div className="footer-fieldLabel"><Icon type="info-circle" theme="outlined" />{intl.messages["swipe.description"]}</div>
             <div className="footer-fieldContent">{product.description}</div>
           </div>
           <div className="field footer-price">
-            <div className="footer-fieldLabel"><Icon type="logout" theme="outlined" />Price:</div>
+            <div className="footer-fieldLabel"><Icon type="logout" theme="outlined" />{intl.messages["swipe.price"]}</div>
             <div className="footer-fieldContent">${product.price.min} - ${product.price.max}</div>
           </div>
           <div className="field footer-category">
-            <div className="footer-fieldLabel"><Icon type="bars" theme="outlined" />Category:</div>
+            <div className="footer-fieldLabel"><Icon type="bars" theme="outlined" />{intl.messages["swipe.category"]}</div>
             <div className="footer-fieldContent">{categories.filter(c => c.id === Number(product.category))[0].displayName}</div>
           </div>
           <div className="field footer-category">
-            <div className="footer-fieldLabel"><Icon type="bars" theme="check-circle" />Want in return:</div>
+            <div className="footer-fieldLabel"><Icon type="bars" theme="outlined" />{intl.messages["swipe.wanted"]}</div>
             <div className="footer-fieldContent">{wantedCategories.toString()}</div>
           </div>
           <div className="field footer-location">
-            <div className="footer-fieldLabel"><Icon type="compass" theme="outlined" />Location:</div>
+            <div className="footer-fieldLabel"><Icon type="compass" theme="outlined" />{intl.messages["swipe.location"]}</div>
             <div className="footer-fieldContent">{product.location.address}</div>
           </div>
         </div>
@@ -207,9 +239,16 @@ class SwipingComponent extends React.Component {
             <MatchSuccessModal
               redirectToMatchRoom={this.redirectToMatchRoom}
               onClose={this.closeMatchModal}
+              intl={this.props.intl}
               match={this.props.isMatch}
             />
           )
+        }
+        {this.state.lightboxView &&
+          <Lightbox
+            mainSrc={this.state.lightboxView}
+            onCloseRequest={this.closeLightbox}
+          />
         }
       </div >
     );
@@ -226,4 +265,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getProductSwipingList, closeMatchModal, handleSwipe }
-)(SwipingComponent);
+)(injectIntl(SwipingComponent));

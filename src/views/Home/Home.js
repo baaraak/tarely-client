@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Modal } from 'antd';
+import { injectIntl, FormattedMessage } from 'react-intl';
 
 import PageTitle from '../../components/PageTitle';
 import ProductsListComponent from '../../components/ProductsListComponent';
@@ -24,12 +25,12 @@ class Home extends Component {
   }
 
   onDeleteProduct(productId) {
+    const { messages } = this.props.intl;
     this.Modal = Modal.confirm({
-      title: 'Confirm',
-      content:
-        'Are u sure you want to delete this product?, this action is irreversible',
-      okText: 'Delete',
-      cancelText: 'Cancel',
+      title: messages["home.deleteProduct.modal.confirm"],
+      content: messages["home.deleteProduct.modal.message"],
+      okText: messages["button.delete"],
+      cancelText: messages["button.cancel"],
       onOk: () => this.handleDelete(productId),
     });
   }
@@ -43,7 +44,7 @@ class Home extends Component {
     const { products } = this.props.user;
     return (
       <div className="home">
-        <PageTitle label="Home" icon="home" />
+        <PageTitle label={<FormattedMessage id="home.title" />} icon="home" />
         <ProductsListComponent
           products={products}
           onDeleteProduct={this.onDeleteProduct}
@@ -60,4 +61,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { deleteProduct }
-)(Home);
+)(injectIntl(Home));

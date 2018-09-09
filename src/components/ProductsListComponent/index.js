@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Icon } from 'antd';
+import { injectIntl, FormattedMessage } from 'react-intl';
 
 import { BASE_URL } from '../../services/constans';
 
@@ -8,9 +9,7 @@ const ProductsListComponent = ({ products, onDeleteProduct }) => {
   if (products.length === 0) {
     return (
       <div className="noProducts container">
-        Hey there, We noticed that you don't have any
-        products yet. You <Link to="/upload">Click here</Link>, and start by
-        uploading a product.
+        <FormattedMessage id="home.noProducts" values={{ link: <Link to="/upload">Click here</Link> }} />
       </div>
     )
   }
@@ -64,4 +63,4 @@ const ProductsListComponent = ({ products, onDeleteProduct }) => {
   )
 }
 
-export default ProductsListComponent;
+export default injectIntl(ProductsListComponent);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Card, message, Form, Switch } from 'antd';
-
+import { Card, Form, Switch } from 'antd';
+import { injectIntl } from 'react-intl';
 import PageTitle from '../../components/PageTitle';
 import ChangePasswordForm from '../../components/ChangePassword';
 
@@ -23,25 +23,26 @@ class Settings extends React.Component {
     }
 
     render() {
-        const { subscription, changePasswordResult } = this.props;
+        const { subscription, changePasswordResult, intl } = this.props;
         return (
             <div className="page settings">
-                <PageTitle label="User Settings" icon="edit" />
+                <PageTitle label={intl.messages["settings.title"]} icon="edit" />
                 <div className="container">
-                    <Card title="Change Password">
+                    <Card title={intl.messages["settings.changePassword"]}>
                         <ChangePasswordForm
                             changePasswordResult={changePasswordResult}
                             onSubmit={this.props.changePassword}
+                            intl={intl}
                         />
                     </Card>
-                    <Card title="Notifications" className="settings__notifications" >
-                        <Form.Item label="New Matches">
+                    <Card title={intl.messages["settings.notifications"]} className="settings__notifications" >
+                        <Form.Item label={intl.messages["settings.notifications.newMatches"]}>
                             <Switch defaultChecked={subscription.matches} onChange={() => this.onChange('matches')} />
                         </Form.Item>
-                        <Form.Item label="New Messages">
+                        <Form.Item label={intl.messages["settings.notifications.newMessages"]}>
                             <Switch defaultChecked={subscription.messages} onChange={() => this.onChange('messages')} />
                         </Form.Item>
-                        <Form.Item label="Promotions">
+                        <Form.Item label={intl.messages["settings.notifications.promotions"]}>
                             <Switch defaultChecked={subscription.promotions} onChange={() => this.onChange('promotions')} />
                         </Form.Item>
                     </Card>
@@ -56,4 +57,4 @@ const mapStateToProps = (state) => ({
     changePasswordResult: state.user.changePasswordResult,
 });
 
-export default connect(mapStateToProps, { changePassword, toggleSubscribe })(Settings);
+export default connect(mapStateToProps, { changePassword, toggleSubscribe })(injectIntl(Settings));

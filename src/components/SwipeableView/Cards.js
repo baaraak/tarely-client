@@ -1,6 +1,5 @@
 import React, { Component, cloneElement } from 'react';
 import ReactDOM from 'react-dom';
-import { Icon } from 'antd';
 
 import { DIRECTIONS } from './utils';
 

@@ -10,6 +10,7 @@ import {
   Form,
   Icon,
 } from 'antd';
+import { injectIntl } from 'react-intl';
 import { API_URI } from '../../../services/constans';
 
 const FormItem = Form.Item;
@@ -21,15 +22,16 @@ const ProductDetailsCard = ({
   fileList,
   onUploadImage,
   token,
+  intl,
 }) => (
-    <Card title="Product Details">
+    <Card title={intl.messages["uploadProduct.details"]}>
       <FormItem
         label={
           <span>
-            Title&nbsp;
+            {intl.messages["uploadProduct.details.title"]}&nbsp;
           <Tooltip
               placement="right"
-              title="Describe your product in a few words"
+              title={intl.messages["uploadProduct.details.title.info"]}
             >
               <Icon type="question-circle-o" />
             </Tooltip>
@@ -48,15 +50,15 @@ const ProductDetailsCard = ({
               message: 'Please enter title',
             },
           ],
-        })(<Input maxLength={20} placeholder="Type title" />)}
+        })(<Input maxLength={20} placeholder={intl.messages["uploadProduct.details.title.placeholder"]} />)}
       </FormItem>
       <FormItem
         label={
           <span>
-            Category&nbsp;
+            {intl.messages["uploadProduct.details.category"]}&nbsp;
           <Tooltip
               placement="right"
-              title="Choose the category of the product you have"
+              title={intl.messages["uploadProduct.details.category.info"]}
             >
               <Icon type="question-circle-o" />
             </Tooltip>
@@ -72,7 +74,7 @@ const ProductDetailsCard = ({
             },
           ],
         })(
-          <Select placeholder="Choose category">
+          <Select placeholder={intl.messages["uploadProduct.details.category.placeholder"]}>
             {categories.map(
               category =>
                 category.id !== 0 ? (
@@ -87,10 +89,10 @@ const ProductDetailsCard = ({
       <FormItem
         label={
           <span>
-            Description&nbsp;
+            {intl.messages["uploadProduct.details.description"]}&nbsp;
           <Tooltip
               placement="right"
-              title="Add some information about the product. his condition, warranty and specs"
+              title={intl.messages["uploadProduct.details.description.info"]}
             >
               <Icon type="question-circle-o" />
             </Tooltip>
@@ -106,13 +108,13 @@ const ProductDetailsCard = ({
               message: 'Please enter description',
             },
           ],
-        })(<Input.TextArea maxLength={255} placeholder="Add description" />)}
+        })(<Input.TextArea maxLength={255} placeholder={intl.messages["uploadProduct.details.description.placeholder"]} />)}
       </FormItem>
       <FormItem
         label={
           <span>
-            Price&nbsp;
-          <Tooltip placement="right" title="Your product price estimation">
+            {intl.messages["uploadProduct.details.price"]}&nbsp;
+          <Tooltip placement="right" title={intl.messages["uploadProduct.details.price.info"]}>
               <Icon type="question-circle-o" />
             </Tooltip>
           </span>
@@ -122,6 +124,7 @@ const ProductDetailsCard = ({
         {getFieldDecorator('price.min', { initialValue: 150 })(
           <InputNumber
             min={1}
+            placeholder={intl.messages["uploadProduct.details.price.min.placeholder"]}
             formatter={value =>
               `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
             }
@@ -132,6 +135,7 @@ const ProductDetailsCard = ({
         {getFieldDecorator('price.max', { initialValue: 300 })(
           <InputNumber
             max={100000}
+            placeholder={intl.messages["uploadProduct.details.price.max.placeholder"]}
             formatter={value =>
               `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
             }
@@ -142,13 +146,13 @@ const ProductDetailsCard = ({
       <FormItem
         label={
           <span>
-            Images&nbsp;
-          <Tooltip placement="right" title="Allow PNG, JPG, JPEG, ">
+            {intl.messages["uploadProduct.details.images"]}&nbsp;
+          <Tooltip placement="right" title={intl.messages["uploadProduct.details.images.info"]}>
               <Icon type="question-circle-o" />
             </Tooltip>
           </span>
         }
-        extra="PNG, JPG, JPEG. Max file size 10mb"
+        extra={intl.messages["uploadProduct.details.images.extra"]}
         required
       >
         {getFieldDecorator('images', {})(
@@ -162,8 +166,8 @@ const ProductDetailsCard = ({
             onChange={onUploadImage}
           >
             <Button>
-              <Icon type="upload" /> upload
-          </Button>
+              <Icon type="upload" /> {intl.messages["uploadProduct.details.images.button"]}
+            </Button>
             {fileListError && (
               <div className="error">Please upload at least one image</div>
             )}
@@ -173,4 +177,4 @@ const ProductDetailsCard = ({
     </Card>
   );
 
-export default ProductDetailsCard;
+export default injectIntl(ProductDetailsCard);

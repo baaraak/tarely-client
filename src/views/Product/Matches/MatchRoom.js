@@ -3,7 +3,7 @@ import { Spin } from 'antd';
 
 import ChatInput from '../../../components/ChatInput';
 
-const MatchRoom = ({ messages, title, onSubmit, productId, setContentRef }) => {
+const MatchRoom = ({ messages, title, onSubmit, productId, setContentRef, intl }) => {
   const renderMessages = () =>
     messages.map(message => {
       const className = productId === message.from ? 'message__self' : '';
@@ -26,10 +26,10 @@ const MatchRoom = ({ messages, title, onSubmit, productId, setContentRef }) => {
       <div className="matches__messages--title">{title}</div>
       <div className="matches__messages--content" ref={setContentRef}>
         {messages.length === 0 ? (
-          <div className="messages__empty">no messages yet</div>
+          <div className="messages__empty">{intl.messages["matches.match.noMessages"]}</div>
         ) : (
-          renderMessages()
-        )}
+            renderMessages()
+          )}
       </div>
       <div className="matches__messages--input">
         <ChatInput onSubmit={onSubmit} />

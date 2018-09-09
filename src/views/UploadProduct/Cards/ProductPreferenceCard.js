@@ -1,5 +1,6 @@
 import React from 'react';
 import { Tooltip, Card, Form, Icon, Select } from 'antd';
+import { injectIntl } from 'react-intl';
 import PlacesAutocomplete from 'react-places-autocomplete';
 
 const FormItem = Form.Item;
@@ -11,14 +12,15 @@ const ProductPreferenceCard = ({
   handleLocationSelect,
   errors,
   categories,
+  intl,
 }) => (
-    <Card title="Product Preferences">
+    <Card title={intl.messages["uploadProduct.preferences"]}>
       <FormItem
         className={errors.location && 'has-error'}
         label={
           <span>
-            Location&nbsp;
-          <Tooltip placement="right" title="Choose the region of the exchange">
+            {intl.messages["uploadProduct.preferences.location"]}&nbsp;
+          <Tooltip placement="right" title={intl.messages["uploadProduct.preferences.location.info"]}>
               <Icon type="question-circle-o" />
             </Tooltip>
           </span>
@@ -34,7 +36,7 @@ const ProductPreferenceCard = ({
             <div>
               <input
                 {...getInputProps({
-                  placeholder: 'Type location',
+                  placeholder: intl.messages["uploadProduct.preferences.location.placeholder"],
                   className: 'ant-input',
                 })}
               />
@@ -61,10 +63,10 @@ const ProductPreferenceCard = ({
       <FormItem
         label={
           <span>
-            Want in return&nbsp;
-          <Tooltip
+            {intl.messages["uploadProduct.preferences.wanted"]}&nbsp;
+            <Tooltip
               placement="right"
-              title="Choose the categories that you would like to trade in return"
+              title={intl.messages["uploadProduct.preferences.wanted.info"]}
             >
               <Icon type="question-circle-o" />
             </Tooltip>
@@ -92,4 +94,4 @@ const ProductPreferenceCard = ({
     </Card>
   );
 
-export default ProductPreferenceCard;
+export default injectIntl(ProductPreferenceCard);

@@ -1,8 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { AnimatedSwitch } from 'react-router-transition';
+import { injectIntl } from 'react-intl';
 
 import Header from '../../components/Header';
 import Home from '../Home/Home';
@@ -67,4 +67,4 @@ const mapStateToProps = state => ({
   globalError: state.app.globalError,
 });
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(injectIntl(App));

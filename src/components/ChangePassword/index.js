@@ -35,11 +35,12 @@ class ChangePasswordForm extends React.PureComponent {
         />
     }
     render() {
-        const { getFieldDecorator } = this.props.form;
+        // const { getFieldDecorator } = this.props.form;
+        const { form: { getFieldDecorator }, intl } = this.props;
         return (
             <Form className="change_password" onSubmit={this.handleSubmit}>
                 {this.renderResponseMessage()}
-                <FormItem label="Old Password">
+                <FormItem label={intl.messages["settings.oldPassword"]}>
                     {getFieldDecorator('oldPassword', {
                         rules: [
                             { required: true, message: 'Please input your old password!' },
@@ -48,13 +49,13 @@ class ChangePasswordForm extends React.PureComponent {
                         <Input
                             prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                             type="password"
-                            placeholder="Old Password"
+                            placeholder={intl.messages["settings.oldPassword.placeholder"]}
                         />
                     )}
                 </FormItem>
 
                 <FormItem
-                    label="New Password"
+                    label={intl.messages["settings.newPassword"]}
                 >
                     {getFieldDecorator('newPassword', {
                         rules: [{
@@ -64,26 +65,27 @@ class ChangePasswordForm extends React.PureComponent {
                         <Input
                             prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                             type="password"
-                            placeholder="New Password"
+                            placeholder={intl.messages["settings.newPassword.placeholder"]}
                         />
                     )}
                 </FormItem>
                 <FormItem
-                    label="Confirm Password"
+                    label={intl.messages["settings.confirmPassword"]}
                 >
                     {getFieldDecorator('confirm', {
                         rules: [{
                             required: true, message: 'Please confirm your password!',
                         }, { validator: this.compareToFirstPassword }],
                     })(
-                        <Input type="password" placeholder="Confirm Password" />
+                        <Input type="password" placeholder={intl.messages["settings.confirmPassword.placeholder"]} />
                     )}
                 </FormItem>
                 <Button
+                    prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                     type="primary"
                     htmlType="submit"
                 >
-                    Change Password
+                    {intl.messages["settings.changePassword.button"]}
                 </Button>
             </Form>
         );

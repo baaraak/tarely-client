@@ -1,10 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import 'antd/dist/antd.css';
-import { I18nextProvider } from 'react-i18next';
-import i18next from 'i18next';
 
+import { I18nLoader } from './components/I18nLoader';
 import store from './redux/store';
 import registerServiceWorker from './registerServiceWorker';
 import getAppData from './services/getAppData';
@@ -17,33 +15,14 @@ import HomePage from './views/HomePage/HomePage';
 import './icons/style.css';
 import './styles/index.css';
 
-i18next.init({
-  interpolation: { escapeValue: false },  // React already does escaping
-  lng: 'en',                              // language to use
-  resources: {
-    en: {
-      translation: {
-        age: { label: 'Age', },
-        home: { label: 'Home', },
-        name: { label: 'Name', },
-      },
-    },
-    es: {
-      translation: {
-        age: { label: 'Años', },
-        home: { label: 'Casa', },
-        name: { label: 'Nombre', },
-      },
-    },
-  },
-});
-
 function renderApp(data) {
   store.dispatch(setUserProfile(data.user));
   store.dispatch(setCategories(data.categories));
   ReactDOM.render(
     <Provider store={store}>
-      <App />
+      <I18nLoader locale="en">
+        <App />
+      </I18nLoader>
     </Provider>,
     document.getElementById('root')
   );
@@ -52,9 +31,7 @@ function renderApp(data) {
 function renderHomePage() {
   ReactDOM.render(
     <Provider store={store}>
-      <I18nextProvider i18n={i18next}>
-        <HomePage />
-      </I18nextProvider>
+      <HomePage />
     </Provider>,
     document.getElementById('root')
   );
