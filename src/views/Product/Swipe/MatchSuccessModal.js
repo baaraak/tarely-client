@@ -30,7 +30,7 @@ const MatchSuccessModal = ({ match, onClose, redirectToMatchRoom, intl }) => (
           onClick={() => redirectToMatchRoom(match.matchId)}
           ghost
         >
-          {intl.messages["swipe.match.continueSwipe"]}
+          {intl.messages["swipe.match.sendMessage"]}
         </Button>
       </div>
     </div>

@@ -1,17 +1,17 @@
 import React from 'react';
 import { Card, Icon } from 'antd';
-
+import { injectIntl } from 'react-intl';
 import './contact.css';
 
 class Contact extends React.Component {
 
     render() {
+        const { messages } = this.props.intl;
         return (
             <div className="container contact">
-                <Card title="Contact us">
-                    If you need further information or if you want to tell us your opinion,
-                    please do not hesitate to get in touch with us! <br />We will be happy to help you!< br />
-                    <a href="mailto:support@tarely.com">support@tarely.com</a>
+                <Card title={messages["contactUs.title"]}>
+                    <p dangerouslySetInnerHTML={{ __html: messages["contactUs.content"] }} />
+                    <a href={`mailto:${messages["app.email.support"]}`}>{messages["app.email.support"]}</a>
                     <div className="social">
                         <a href="https://www.facebook.com/" rel="noopener noreferrer" target="_blank"><Icon type="facebook" /></a>
                         <a href="https://www.twitter.com/" rel="noopener noreferrer" target="_blank"><Icon type="twitter" /></a>
@@ -23,4 +23,4 @@ class Contact extends React.Component {
     }
 }
 
-export default Contact;
+export default injectIntl(Contact);

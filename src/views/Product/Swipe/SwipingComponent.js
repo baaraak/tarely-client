@@ -2,8 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 import { Carousel, Spin, Icon } from 'antd';
-import Lightbox from 'react-image-lightbox';
-import 'react-image-lightbox/style.css';
+import Lightbox from 'react-images';
 
 import MatchSuccessModal from './MatchSuccessModal';
 import { BASE_URL } from '../../../services/constans';
@@ -16,10 +15,38 @@ import {
   closeMatchModal,
 } from '../../../redux/actions/product.actions';
 
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style }}
+      onClick={onClick}
+    >
+      <Icon type="right" />
+    </div>
+  );
+}
+
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style }}
+      onClick={onClick}
+    >
+      <Icon type="left" />
+    </div>
+  );
+}
+
 const carouselSettings = {
   dots: true,
-  infinite: false,
   slidesToShow: 4,
+  arrows: true,
+  nextArrow: <SampleNextArrow />,
+  prevArrow: <SamplePrevArrow />,
   slidesToScroll: 4,
   initialSlide: 0,
   responsive: [
@@ -105,24 +132,25 @@ class SwipingComponent extends React.Component {
     this.props.handleSwipe(data);
   }
 
-  handleClickImage = (e, image) => {
+  handleClickImage = (e, i) => {
     this.setState({
-      lightboxView: image
-    })
+      lightboxView: i
+    });
+    document.removeEventListener('keydown', this.handleKeyPress);
   }
 
   renderCards() {
-    ;
     return this.state.products.map(product => (
       <Card
         key={product._id}
+        isMobile={this.props.isMobile}
         onSwipeLeft={() => this.handleSwiping('left', product._id)}
         onSwipeRight={() => this.handleSwiping('right', product._id)}
       >
         <div className="card--container" ref={ref => this.card = ref}>
           <Carousel {...carouselSettings}>
-            {product.images.map(image => (
-              <img src={BASE_URL + image} key={image} alt="" onClick={e => this.handleClickImage(e, BASE_URL + image)} />
+            {product.images.map((image, i) => (
+              <img src={BASE_URL + image} key={image} alt="" onClick={e => this.handleClickImage(e, i)} />
             ))}
           </Carousel>
         </div>
@@ -157,11 +185,14 @@ class SwipingComponent extends React.Component {
   closeLightbox = (e) => {
     this.setState({
       lightboxView: null
-    })
+    });
+    document.addEventListener('keydown', this.handleKeyPress);
   }
 
   renderNoProductsToSwipe() {
-    return <div>Sorry, no products available to swipe</div>;
+    return (
+      <div className="productPage__swiping productPage__swiping--noMessage" dangerouslySetInnerHTML={{ __html: this.props.intl.messages["swipe.noSwiping"] }} />
+    );
   }
 
   closeMatchModal() {
@@ -195,6 +226,8 @@ class SwipingComponent extends React.Component {
           onEnd={this.onEnd}
           className="swiping-cards"
           onChangeIndex={this.handleChangeIndex}
+          alertRight={<Icon type="like" />}
+          alertLeft={<Icon type="dislike" />}
         >
           {this.renderCards()}
         </Cards>
@@ -244,12 +277,22 @@ class SwipingComponent extends React.Component {
             />
           )
         }
-        {this.state.lightboxView &&
-          <Lightbox
-            mainSrc={this.state.lightboxView}
-            onCloseRequest={this.closeLightbox}
-          />
-        }
+        <Lightbox
+          images={product.images.map(i => Object.assign({}, { src: BASE_URL + i }))}
+          currentImage={this.state.lightboxView}
+          isOpen={!!this.state.lightboxView || this.state.lightboxView === 0}
+          onClickPrev={() =>
+            this.setState({
+              lightboxView: (this.state.lightboxView + product.images.length - 1) % product.images.length,
+            })
+          }
+          onClickNext={() =>
+            this.setState({
+              lightboxView: (this.state.lightboxView + 1) % product.images.length,
+            })
+          }
+          onClose={this.closeLightbox}
+        />
       </div >
     );
   }
@@ -260,6 +303,7 @@ const mapStateToProps = state => ({
   userLocation: state.app.user.location,
   categories: state.app.categories,
   isMatch: state.product.isMatch,
+  isMobile: state.app.isMobile,
 });
 
 export default connect(

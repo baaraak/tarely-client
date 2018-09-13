@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Icon } from 'antd';
+import { Icon, Tooltip } from 'antd';
 import { injectIntl, FormattedMessage } from 'react-intl';
 
 import { BASE_URL } from '../../services/constans';
@@ -41,21 +41,27 @@ const ProductsListComponent = ({ products, onDeleteProduct }) => {
           <div className="product__description">{product.description}</div>
           <div className="product__footer">
             <div className="product__icon">
-              <Link to={`/product/edit/${product._id}`}>
-                <Icon type="edit" />
-              </Link>
+              <Tooltip placement="bottom" title="Edit">
+                <Link to={`/product/edit/${product._id}`}>
+                  <Icon type="edit" />
+                </Link>
+              </Tooltip>
             </div>
-            <div className="product__icon">
-              <Link to={`/product/${product._id}/swipe`}>
-                <Icon type="eye-o" />
-              </Link>
-            </div>
-            <div
-              className="product__icon"
-              onClick={() => onDeleteProduct(product._id)}
-            >
-              <Icon type="delete" />
-            </div>
+            <Tooltip placement="bottom" title="View">
+              <div className="product__icon">
+                <Link to={`/product/${product._id}/swipe`}>
+                  <Icon type="eye-o" />
+                </Link>
+              </div>
+            </Tooltip>
+            <Tooltip placement="bottom" title="Delete">
+              <div
+                className="product__icon"
+                onClick={() => onDeleteProduct(product._id)}
+              >
+                <Icon type="delete" />
+              </div>
+            </Tooltip>
           </div>
         </div>
       ))}

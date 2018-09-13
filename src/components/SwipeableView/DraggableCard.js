@@ -44,9 +44,12 @@ class DraggableCard extends Component {
     });
   }
   panend() {
+    console.log('***********************');
+    console.log(this.props.isMobile);
+    console.log('***********************');
     const screen = this.props.containerSize;
     const card = ReactDOM.findDOMNode(this);
-    const margin = 300;
+    const margin = this.props.isMobile ? 150 : 300;
     const getDirection = () => {
       switch (true) {
         case this.state.x < -margin:

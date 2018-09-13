@@ -120,19 +120,19 @@ class EditProductForm extends React.PureComponent {
 
   render() {
     const { fileList, errors, location } = this.state;
-    const { product } = this.props;
+    const { product, intl } = this.props;
     const { getFieldDecorator } = this.props.form;
     if (this.state.isLoading) return null;
     return (
       <Form className="container upload__form" onSubmit={this.handleSubmit}>
-        <Card title="Product Details">
+        <Card title={intl.messages["product"]}>
           <FormItem
             label={
               <span>
-                Title&nbsp;
+                {intl.messages["product.title"]}&nbsp;
                 <Tooltip
                   placement="right"
-                  title="Describe your product in a few words"
+                  title={intl.messages["product.title.info"]}
                 >
                   <Icon type="question-circle-o" />
                 </Tooltip>
@@ -152,15 +152,15 @@ class EditProductForm extends React.PureComponent {
                   message: 'Please enter title',
                 },
               ],
-            })(<Input maxLength={20} placeholder="Type title" />)}
+            })(<Input maxLength={20} placeholder={intl.messages["product.title.placeholder"]} />)}
           </FormItem>
           <FormItem
             label={
               <span>
-                Category&nbsp;
+                {intl.messages["product.category"]}&nbsp;
                 <Tooltip
                   placement="right"
-                  title="Choose the category of the product you have"
+                  title={intl.messages["product.category"]}
                 >
                   <Icon type="question-circle-o" />
                 </Tooltip>
@@ -177,7 +177,7 @@ class EditProductForm extends React.PureComponent {
                 },
               ],
             })(
-              <Select placeholder="Choose category">
+              <Select placeholder={intl.messages["product.category.placeholder"]}>
                 {this.props.categories.map(
                   category =>
                     category.id !== 0 ? (
@@ -192,10 +192,10 @@ class EditProductForm extends React.PureComponent {
           <FormItem
             label={
               <span>
-                Description&nbsp;
+                {intl.messages["product.description"]}&nbsp;
                 <Tooltip
                   placement="right"
-                  title="Add some information about the product. his condition, warranty and specs"
+                  title={intl.messages["product.description.info"]}
                 >
                   <Icon type="question-circle-o" />
                 </Tooltip>
@@ -213,16 +213,16 @@ class EditProductForm extends React.PureComponent {
                 },
               ],
             })(
-              <Input.TextArea maxLength={255} placeholder="Add description" />
+              <Input.TextArea maxLength={255} placeholder={intl.messages["product.description.info"]} />
             )}
           </FormItem>
           <FormItem
             label={
               <span>
-                Price&nbsp;
+                {intl.messages["product.price"]}&nbsp;
                 <Tooltip
                   placement="right"
-                  title="Your product price estimation"
+                  title={intl.messages["product.title.info"]}
                 >
                   <Icon type="question-circle-o" />
                 </Tooltip>
@@ -235,6 +235,7 @@ class EditProductForm extends React.PureComponent {
             })(
               <InputNumber
                 min={1}
+                placeholder={intl.messages["product.price.min.placeholder"]}
                 formatter={value =>
                   `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                 }
@@ -247,6 +248,7 @@ class EditProductForm extends React.PureComponent {
             })(
               <InputNumber
                 max={100000}
+                placeholder={intl.messages["product.price.min.placeholder"]}
                 formatter={value =>
                   `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                 }
@@ -257,13 +259,13 @@ class EditProductForm extends React.PureComponent {
           <FormItem
             label={
               <span>
-                Images&nbsp;
+                {intl.messages["product.images"]}&nbsp;
                 <Tooltip placement="right" title="Allow PNG, JPG, JPEG, ">
                   <Icon type="question-circle-o" />
                 </Tooltip>
               </span>
             }
-            extra="PNG, JPG, JPEG. Max file size 10mb"
+            extra={intl.messages["product.images.info"]}
             required
           >
             {getFieldDecorator('images', {})(
@@ -277,7 +279,7 @@ class EditProductForm extends React.PureComponent {
                 onChange={this.onUploadImage}
               >
                 <Button>
-                  <Icon type="upload" /> upload
+                  <Icon type="upload" /> {intl.messages["product.images.button"]}
                 </Button>
                 {errors.fileList && (
                   <div className="error">Please upload at least one image</div>
@@ -289,10 +291,10 @@ class EditProductForm extends React.PureComponent {
             className={errors.location && 'has-error'}
             label={
               <span>
-                Location&nbsp;
+                {intl.messages["product.location"]}&nbsp;
                 <Tooltip
                   placement="right"
-                  title="Choose the region of the exchange"
+                  title={intl.messages["product.location.info"]}
                 >
                   <Icon type="question-circle-o" />
                 </Tooltip>
@@ -309,7 +311,7 @@ class EditProductForm extends React.PureComponent {
                 <div>
                   <input
                     {...getInputProps({
-                      placeholder: 'Type location',
+                      placeholder: intl.messages["product.location.placeholder"],
                       className: 'ant-input',
                     })}
                   />
@@ -336,10 +338,10 @@ class EditProductForm extends React.PureComponent {
           <FormItem
             label={
               <span>
-                Want in return&nbsp;
+                {intl.messages["product.wanted"]}&nbsp;
                 <Tooltip
                   placement="right"
-                  title="Choose the categories that you would like to trade in return"
+                  title={intl.messages["product.wanted.info"]}
                 >
                   <Icon type="question-circle-o" />
                 </Tooltip>
@@ -372,7 +374,7 @@ class EditProductForm extends React.PureComponent {
           htmlType="submit"
           className="upload__form--button"
         >
-          Update<Icon type="right" />
+          {intl.messages["editProduct.button"]}<Icon type="right" />
         </Button>
       </Form>
     );

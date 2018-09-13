@@ -19,6 +19,14 @@
     max-width: 85%;
     width: 1000px;
     margin: 0 auto;
+    height: calc(100% - 48px);
+    &--noMessage {
+        font-size: 24px;
+        text-align: center;
+        line-height: 40px;
+        margin-top: 40px;
+        color: rgba(0, 0, 0, 0.7);
+    }
     &--loading {
         display: flex;
         align-items: center;
@@ -91,8 +99,10 @@
         box-shadow: none;
     }
     .alert {
-        width: 45%;
-        min-height: 10%;
+        width: 70px;
+        height: 70px;
+        left: calc(50% - 35px);
+        top: calc(50% - 35px);
         position: absolute;
         z-index: 9999;
         opacity: 0;
@@ -100,23 +110,16 @@
         color: white;
         vertical-align: middle;
         line-height: 3rem;
+        font-size: 70px;
     }
     .alert-visible {
         opacity: 1;
     }
     .alert-right {
-        top: 0;
-        right: 0;
-        background: green;
-        border-top-left-radius: 50px;
-        border-bottom-left-radius: 50px;
+        color: green;
     }
     .alert-left {
-        top: 0;
-        left: 0;
-        background: red;
-        border-top-right-radius: 50px;
-        border-bottom-right-radius: 50px;
+        color: red;
     }
     .swiping-cards-actionButtons {
         display: flex;
@@ -211,6 +214,7 @@
     }
     .ant-carousel {
         height: 100%;
+        margin: 0 20px;
     }
     .slick-slider,
     .slick-list,
@@ -236,6 +240,27 @@
     .ant-carousel .slick-dots li.slick-active button {
         background: linear-gradient(-20deg, #43b7e2 0%, #21d4fd 100%);
         width: 17px !important;
+    }
+    .ant-carousel .slick-prev,
+    .ant-carousel .slick-next {
+        color: #000;
+        background: #f1f3f7;
+        font-size: 11px;
+        left: -20px;
+        height: 30px;
+        text-align: center;
+        line-height: 30px;
+        border-radius: 0 10px 10px 0;
+        box-shadow: 0px 0px 2px 0 rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        &:before {
+            display: none;
+        }
+    }
+    .ant-carousel .slick-next {
+        left: auto;
+        right: -20px;
+        border-radius: 10px 0 0 10px;
     }
 }
 

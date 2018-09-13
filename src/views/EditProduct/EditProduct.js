@@ -15,10 +15,11 @@ class EditProduct extends React.Component {
       this.props.editProductSuccess === null &&
       this.props.editProductSuccess !== nextProps.editProductSuccess
     ) {
+      const { messages } = this.props.intl;
       if (typeof nextProps.editProductSuccess === 'string') {
         message.error(nextProps.editProductSuccess);
       } else {
-        message.success('Product updated successfully');
+        message.success(messages['product.update.message.success']);
       }
     }
   }
@@ -36,7 +37,7 @@ class EditProduct extends React.Component {
     const token = localStorage.getItem('tarelyJWTToken');
     return (
       <div className="editProduct page">
-        <PageTitle label={this.props.intl.messages[""]} icon="edit" />
+        <PageTitle label={this.props.intl.messages["editProduct.header"]} icon="edit" />
         <EditProductForm
           onSubmit={this.props.updateProduct}
           categories={this.props.categories}

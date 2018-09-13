@@ -29,7 +29,7 @@ class UploadProduct extends React.Component {
   render() {
     return (
       <div className="upload page">
-        <PageTitle label={<FormattedMessage id="uploadProduct.title" />} icon="upload" />
+        <PageTitle label={<FormattedMessage id="product.header" />} icon="upload" />
         <UploadProductForm
           errorMessage={this.state.errorMessage}
           categories={this.props.categories}

@@ -46,15 +46,15 @@ class MatchesComponent extends React.Component {
       this.props.matches !== nextProps.matches &&
       Array.isArray(nextProps.matches)
     ) {
-      const currentMatchID = this.props.match.params.matchId
-        ? this.props.match.params.matchId
+      const currentMatchID = this.props.match.params.roomId
+        ? this.props.match.params.roomId
         : nextProps.matches.length
           ? nextProps.matches[0].matchId
           : null;
       this.setState({
         matches: nextProps.matches,
         currentMatchID,
-        isLoading: false,
+        isLoading: !!!this.props.match.params.roomId,
       });
       this.redirectToRoom(currentMatchID);
       this.initSocket();
@@ -63,7 +63,7 @@ class MatchesComponent extends React.Component {
 
     if (this.props.matches !== nextProps.matches) {
       const currentMatchID = nextProps.matches[0] ? nextProps.matches[0].matchId : null;
-      this.setState({ matches: nextProps.matches, isLoading: false, currentMatchID, messages: null });
+      this.setState({ matches: nextProps.matches, isLoading: !!!this.props.match.params.roomId, currentMatchID, messages: null });
       this.redirectToRoom(currentMatchID);
       if (currentMatchID) this.props.getMatchMessages(currentMatchID);
     }

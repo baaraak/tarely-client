@@ -137,7 +137,16 @@ a {
 
 .ant-form-item {
     margin-bottom: 15px;
-    font-weight: 100;
+}
+
+.ant-tooltip {
+    font-size: 12px;
+    min-width: 70px;
+    .ant-tooltip-inner {
+        text-align: center;
+        padding: 5px;
+        min-height: auto;
+    }
 }
 
 .ant-form label {

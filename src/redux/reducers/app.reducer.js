@@ -13,6 +13,7 @@ const initialState = {
   globalError: null,
   user: null,
   categories: null,
+  isMobile: /Mobi|Android/i.test(navigator.userAgent)
 };
 
 export default function app(state = initialState, action = {}) {

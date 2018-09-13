@@ -24,14 +24,14 @@ const ProductDetailsCard = ({
   token,
   intl,
 }) => (
-    <Card title={intl.messages["uploadProduct.details"]}>
+    <Card title={intl.messages["product.description"]}>
       <FormItem
         label={
           <span>
-            {intl.messages["uploadProduct.details.title"]}&nbsp;
+            {intl.messages["product.title"]}&nbsp;
           <Tooltip
               placement="right"
-              title={intl.messages["uploadProduct.details.title.info"]}
+              title={intl.messages["product.title.info"]}
             >
               <Icon type="question-circle-o" />
             </Tooltip>
@@ -50,15 +50,15 @@ const ProductDetailsCard = ({
               message: 'Please enter title',
             },
           ],
-        })(<Input maxLength={20} placeholder={intl.messages["uploadProduct.details.title.placeholder"]} />)}
+        })(<Input maxLength={20} placeholder={intl.messages["product.title.placeholder"]} />)}
       </FormItem>
       <FormItem
         label={
           <span>
-            {intl.messages["uploadProduct.details.category"]}&nbsp;
+            {intl.messages["product.category"]}&nbsp;
           <Tooltip
               placement="right"
-              title={intl.messages["uploadProduct.details.category.info"]}
+              title={intl.messages["product.category.info"]}
             >
               <Icon type="question-circle-o" />
             </Tooltip>
@@ -74,7 +74,7 @@ const ProductDetailsCard = ({
             },
           ],
         })(
-          <Select placeholder={intl.messages["uploadProduct.details.category.placeholder"]}>
+          <Select placeholder={intl.messages["product.category.placeholder"]}>
             {categories.map(
               category =>
                 category.id !== 0 ? (
@@ -89,10 +89,10 @@ const ProductDetailsCard = ({
       <FormItem
         label={
           <span>
-            {intl.messages["uploadProduct.details.description"]}&nbsp;
+            {intl.messages["product.description"]}&nbsp;
           <Tooltip
               placement="right"
-              title={intl.messages["uploadProduct.details.description.info"]}
+              title={intl.messages["product.description.info"]}
             >
               <Icon type="question-circle-o" />
             </Tooltip>
@@ -108,13 +108,13 @@ const ProductDetailsCard = ({
               message: 'Please enter description',
             },
           ],
-        })(<Input.TextArea maxLength={255} placeholder={intl.messages["uploadProduct.details.description.placeholder"]} />)}
+        })(<Input.TextArea maxLength={255} placeholder={intl.messages["product.description.placeholder"]} />)}
       </FormItem>
       <FormItem
         label={
           <span>
-            {intl.messages["uploadProduct.details.price"]}&nbsp;
-          <Tooltip placement="right" title={intl.messages["uploadProduct.details.price.info"]}>
+            {intl.messages["product.price"]}&nbsp;
+          <Tooltip placement="right" title={intl.messages["product.price.info"]}>
               <Icon type="question-circle-o" />
             </Tooltip>
           </span>
@@ -124,7 +124,7 @@ const ProductDetailsCard = ({
         {getFieldDecorator('price.min', { initialValue: 150 })(
           <InputNumber
             min={1}
-            placeholder={intl.messages["uploadProduct.details.price.min.placeholder"]}
+            placeholder={intl.messages["product.price.min.placeholder"]}
             formatter={value =>
               `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
             }
@@ -135,7 +135,7 @@ const ProductDetailsCard = ({
         {getFieldDecorator('price.max', { initialValue: 300 })(
           <InputNumber
             max={100000}
-            placeholder={intl.messages["uploadProduct.details.price.max.placeholder"]}
+            placeholder={intl.messages["product.price.max.placeholder"]}
             formatter={value =>
               `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
             }
@@ -146,13 +146,13 @@ const ProductDetailsCard = ({
       <FormItem
         label={
           <span>
-            {intl.messages["uploadProduct.details.images"]}&nbsp;
-          <Tooltip placement="right" title={intl.messages["uploadProduct.details.images.info"]}>
+            {intl.messages["product.images"]}&nbsp;
+          <Tooltip placement="right" title={intl.messages["product.images.info"]}>
               <Icon type="question-circle-o" />
             </Tooltip>
           </span>
         }
-        extra={intl.messages["uploadProduct.details.images.extra"]}
+        extra={intl.messages["product.images.extra"]}
         required
       >
         {getFieldDecorator('images', {})(
@@ -166,7 +166,7 @@ const ProductDetailsCard = ({
             onChange={onUploadImage}
           >
             <Button>
-              <Icon type="upload" /> {intl.messages["uploadProduct.details.images.button"]}
+              <Icon type="upload" /> {intl.messages["product.images.button"]}
             </Button>
             {fileListError && (
               <div className="error">Please upload at least one image</div>

@@ -25,7 +25,7 @@ class HeaderUserInfo extends React.PureComponent {
     return (
       <div className="header__userInfo">
         <Link to="/upload" state={{ modal: true }}>
-          <Button type="secondary">
+          <Button>
             <FormattedMessage id="product.add" />
           </Button>
         </Link>

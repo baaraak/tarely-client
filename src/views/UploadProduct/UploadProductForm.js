@@ -70,9 +70,15 @@ class UploadProductForm extends React.PureComponent {
 
   onUploadImage({ file, fileList }) {
     const newState = {};
+    if (file.status === 'removed' && file.response.path) {
+      newState.images = this.state.images.filter(img => img !== file.response.path);
+      if (newState.images.length === 0) {
+        newState.errors = { ...this.state.errors, fileList: true };
+      }
+    }
     if (file.status === 'done' && !file.error && file.response.path) {
       newState.images = [...this.state.images, file.response.path];
-      newState.fileListError = false;
+      newState.errors = { ...this.state.errors, fileList: false };
     }
     this.setState({ ...newState, fileList });
   }
@@ -109,7 +115,7 @@ class UploadProductForm extends React.PureComponent {
           htmlType="submit"
           className="upload__form--button"
         >
-          {this.props.intl.messages["uploadProduct.button"]}<Icon type="right" />
+          {this.props.intl.messages["product.button.upload"]}<Icon type="right" />
         </Button>
       </Form>
     );

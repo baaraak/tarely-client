@@ -5,14 +5,8 @@ import { AnimatedSwitch } from 'react-router-transition';
 import { injectIntl } from 'react-intl';
 
 import Header from '../../components/Header';
-import Home from '../Home/Home';
-import Product from '../Product/Product';
-import Settings from '../Settings/Settings';
-import Contact from '../Contact/Contact';
-import UploadProduct from '../UploadProduct/UploadProduct';
-import EditProduct from '../EditProduct/EditProduct';
-import UserProfile from '../UserProfile/UserProfile';
 import NotFound from '../misc/NotFound';
+import routes from '../../routes';
 
 class App extends React.PureComponent {
   componentDidMount() {
@@ -22,6 +16,17 @@ class App extends React.PureComponent {
   logOut() {
     localStorage.removeItem('tarelyJWTToken');
     window.location.href = '/';
+  }
+
+  renderRoutes() {
+    return routes.map((route, i) => {
+      return (
+        <Route
+          {...route}
+          key={i}
+        />
+      )
+    });
   }
 
   render() {
@@ -37,23 +42,14 @@ class App extends React.PureComponent {
                 atActive={{ opacity: 1 }}
                 className="switch-wrapper"
               >
-                <Route exact path="/" component={Home} />
-                <Route exact path="/upload" component={UploadProduct} />
-                <Route exact path="/product/edit/:id" component={EditProduct} />
-                <Route exact path="/product/:id" component={Product} />
-                <Route exact path="/product/:id/:view" component={Product} />
+                {this.renderRoutes()}
                 <Route
-                  exact
-                  path="/product/:id/:view/:roomId"
-                  component={Product}
+                  path="/logout"
+                  render={this.logOut}
                 />
-                <Route path="/user/profile/" component={UserProfile} />
-                <Route path="/user/settings/" component={Settings} />
-                {/* <Route path="/search" component={Search} /> */}
-                {/* <Route path="/bids" component={Bids} /> */}
-                <Route path="/contact" component={Contact} />
-                <Route path="/logout" render={this.logOut} />
-                <Route component={NotFound} />
+                <Route
+                  component={NotFound}
+                />
               </AnimatedSwitch>
             </Switch>
           </div>

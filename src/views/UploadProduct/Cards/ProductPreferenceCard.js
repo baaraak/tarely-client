@@ -14,13 +14,13 @@ const ProductPreferenceCard = ({
   categories,
   intl,
 }) => (
-    <Card title={intl.messages["uploadProduct.preferences"]}>
+    <Card title={intl.messages["product.preferences"]}>
       <FormItem
         className={errors.location && 'has-error'}
         label={
           <span>
-            {intl.messages["uploadProduct.preferences.location"]}&nbsp;
-          <Tooltip placement="right" title={intl.messages["uploadProduct.preferences.location.info"]}>
+            {intl.messages["product.location"]}&nbsp;
+          <Tooltip placement="right" title={intl.messages["product.location.info"]}>
               <Icon type="question-circle-o" />
             </Tooltip>
           </span>
@@ -36,7 +36,7 @@ const ProductPreferenceCard = ({
             <div>
               <input
                 {...getInputProps({
-                  placeholder: intl.messages["uploadProduct.preferences.location.placeholder"],
+                  placeholder: intl.messages["product.location.placeholder"],
                   className: 'ant-input',
                 })}
               />
@@ -63,10 +63,10 @@ const ProductPreferenceCard = ({
       <FormItem
         label={
           <span>
-            {intl.messages["uploadProduct.preferences.wanted"]}&nbsp;
+            {intl.messages["product.wanted"]}&nbsp;
             <Tooltip
               placement="right"
-              title={intl.messages["uploadProduct.preferences.wanted.info"]}
+              title={intl.messages["product.wanted.info"]}
             >
               <Icon type="question-circle-o" />
             </Tooltip>

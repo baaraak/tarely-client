@@ -61,7 +61,8 @@
 }
 
 .ant-modal.loginModal {
-    max-width: 400px;
+    width: 400px !important;
+    max-width: 85%;
     .ant-alert {
         margin-bottom: 10px;
     }

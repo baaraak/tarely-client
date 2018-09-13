@@ -53,7 +53,7 @@ class Home extends React.Component {
     onStepClick = (step) => {
         if (this.state.instructionStep === step) return;
         this.currentStepRef.classList.add('instructionStep--hide');
-        setTimeout(() => this.setState({ instructionStep: step }), 1000);
+        this.setState({ instructionStep: step });
     }
 
     onForgotPassword = () => {
@@ -114,6 +114,7 @@ class Home extends React.Component {
                 <Modal
                     footer={null}
                     className="loginModal"
+                    destroyOnClose
                     onCancel={this.toggleLoginModal}
                     visible={this.state.loginModalOpen}
                 >
@@ -138,7 +139,7 @@ class Home extends React.Component {
                     <div className="authButton">
                         <FacebookLogin
                             appId="2232059320356745"
-                            fields="name,email,picture"
+                            fields="name,email,picture,location{location}"
                             callback={this.responseFacebook}
                             className="authButton__faceboook"
                             render={props => (
