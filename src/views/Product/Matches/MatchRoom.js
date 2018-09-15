@@ -1,9 +1,9 @@
 import React from 'react';
-import { Spin } from 'antd';
+import { Spin, Icon } from 'antd';
 
 import ChatInput from '../../../components/ChatInput';
 
-const MatchRoom = ({ messages, title, onSubmit, productId, setContentRef, intl }) => {
+const MatchRoom = ({ messages, title, onSubmit, productId, setContentRef, intl, isMobile, onClickInfo }) => {
   const renderMessages = () =>
     messages.map(message => {
       const className = productId === message.from ? 'message__self' : '';
@@ -22,8 +22,11 @@ const MatchRoom = ({ messages, title, onSubmit, productId, setContentRef, intl }
       </div>
     );
   return (
-    <div className="matches__messages">
-      <div className="matches__messages--title">{title}</div>
+    <div className={`matches__messages ${isMobile ? 'mobile' : ''}`}>
+      <div className="matches__messages--title">
+        {title}
+        {isMobile && <Icon onClick={onClickInfo} type="info-circle" theme="outlined" />}
+      </div>
       <div className="matches__messages--content" ref={setContentRef}>
         {messages.length === 0 ? (
           <div className="messages__empty">{intl.messages["matches.match.noMessages"]}</div>

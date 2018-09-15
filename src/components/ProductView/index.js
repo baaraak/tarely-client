@@ -4,7 +4,7 @@ import { BASE_URL } from '../../services/constans';
 
 import './productView.css';
 
-const ProductViewComponent = ({ product, onClose, categories, onDismatch, intl }) => {
+const ProductViewComponent = ({ product, onClose, categories, onDismatch, intl, isMobile }) => {
 
   // const renderActions = () => {
   //   if (asProduct) {
@@ -18,7 +18,7 @@ const ProductViewComponent = ({ product, onClose, categories, onDismatch, intl }
   // }
   const wantedCategories = categories.filter(c => product.wanted.some(pId => c.id === Number(pId))).map(cat => cat.displayName);
   return (
-    <div className="productView">
+    <div className={`productView ${isMobile ? 'mobile' : ''}`}>
       {onClose && (
         <div className="product__close" onClick={onClose}>
           x

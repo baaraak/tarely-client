@@ -28,6 +28,7 @@ class MatchesComponent extends React.Component {
       currentMatchID: null,
       socket: null,
       messages: null,
+      isProductViewOpen: !props.isMobile,
     };
     this.changeCurrentMatch = this.changeCurrentMatch.bind(this);
     this.onSubmitMessage = this.onSubmitMessage.bind(this);
@@ -195,6 +196,10 @@ class MatchesComponent extends React.Component {
     });
   }
 
+  onClickInfo = () => {
+    this.setState({ isProductViewOpen: !this.state.isProductViewOpen });
+  }
+
   handleDelete() {
     if (this.Modal) this.Modal.destroy();
     this.props.onUnmatch(this.state.currentMatchID);
@@ -202,7 +207,8 @@ class MatchesComponent extends React.Component {
 
 
   render() {
-    const { matches, currentMatchID, isLoading, messages } = this.state;
+    const { matches, currentMatchID, isLoading, messages, isProductViewOpen } = this.state;
+    const { isMobile } = this.props;
     if (isLoading)
       return (
         <div className="productPage__matches">
@@ -219,6 +225,7 @@ class MatchesComponent extends React.Component {
           currentMatchID={currentMatchID}
           onClick={this.changeCurrentMatch}
           intl={this.props.intl}
+          isMobile={isMobile}
         />
         <MatchRoom
           productId={this.props.productId}
@@ -227,14 +234,18 @@ class MatchesComponent extends React.Component {
           intl={this.props.intl}
           title={product.title}
           setContentRef={this.setContentRefAndScroll}
+          isMobile={isMobile}
+          onClickInfo={this.onClickInfo}
         />
-        <ProductView
+        {isProductViewOpen && <ProductView
           withActions={false}
           intl={this.props.intl}
           categories={this.props.categories}
           product={product}
           onDismatch={this.onDismatch}
-        />
+          isMobile={isMobile}
+          onClose={isMobile && this.onClickInfo}
+        />}
       </div>
     );
   }
@@ -243,6 +254,7 @@ class MatchesComponent extends React.Component {
 const mapStateToProps = state => ({
   matches: state.product.matches,
   categories: state.app.categories,
+  isMobile: state.app.isMobile,
   messages: state.product.messages,
 });
 

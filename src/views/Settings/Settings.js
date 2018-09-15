@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Card, Form, Switch } from 'antd';
+import { Card, Form, Switch, Select } from 'antd';
 import { injectIntl } from 'react-intl';
 import PageTitle from '../../components/PageTitle';
 import ChangePasswordForm from '../../components/ChangePassword';
@@ -28,6 +28,17 @@ class Settings extends React.Component {
             <div className="page settings">
                 <PageTitle label={intl.messages["settings.title"]} icon="edit" />
                 <div className="container">
+                    <Card title={intl.messages["settings.general"]}>
+                        <Form.Item label={intl.messages["settings.language"]} >
+                            <Select
+                                style={{ width: '100%' }}
+                                placeholder={intl.messages["settings.language.placeholder"]}
+                            >
+                                <Select.Option value="en">{intl.messages["english"]}</Select.Option>
+                                <Select.Option value="he">{intl.messages["hebrew"]}</Select.Option>
+                            </Select>
+                        </Form.Item>
+                    </Card>
                     <Card title={intl.messages["settings.changePassword"]}>
                         <ChangePasswordForm
                             changePasswordResult={changePasswordResult}

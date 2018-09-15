@@ -36,6 +36,7 @@ class Product extends React.Component {
         <ProductMenu
           handleClick={this.handleMenuClick}
           currentView={this.state.currentView}
+          isMobile={this.props.isMobile}
           id={id}
         />
         <Route
@@ -71,6 +72,7 @@ class Product extends React.Component {
 const mapStateToProps = state => ({
   products: state.app.user.products,
   categories: state.app.categories,
+  isMobile: state.app.isMobile,
 });
 
 export default connect(mapStateToProps)(Product);

@@ -207,7 +207,7 @@ class SwipingComponent extends React.Component {
   }
 
   render() {
-    const { categories, intl } = this.props;
+    const { categories, intl, isMobile } = this.props;
     if (this.state.isLoading)
       return (
         <div className="productPage__swiping productPage__swiping--loading">
@@ -218,7 +218,7 @@ class SwipingComponent extends React.Component {
     const product = this.state.products[this.state.index];
     const wantedCategories = categories.filter(c => product.wanted.some(pId => c.id === Number(pId))).map(cat => cat.displayName);
     return (
-      <div className="productPage__swiping">
+      <div className={`productPage__swiping ${isMobile ? 'mobile' : ''}`}>
         <div className="swiping-cards-productTitle">{product.title}</div>
         <div className="swiping-cards-productDistance">{product.location.address}</div>
         <Cards
