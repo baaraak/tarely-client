@@ -10,6 +10,8 @@ import {
   Form,
   Icon,
 } from 'antd';
+import { AwesomeButton } from 'react-awesome-button';
+
 import { injectIntl } from 'react-intl';
 import { API_URI } from '../../../services/constans';
 
@@ -165,9 +167,9 @@ const ProductDetailsCard = ({
             mutiple
             onChange={onUploadImage}
           >
-            <Button>
+            <AwesomeButton size="small">
               <Icon type="upload" /> {intl.messages["product.images.button"]}
-            </Button>
+            </AwesomeButton>
             {fileListError && (
               <div className="error">Please upload at least one image</div>
             )}

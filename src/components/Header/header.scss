@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     padding: 0 20px;
-    background: #fff;
+    background: #2591bf;
     border-bottom: 1px solid $bright_gray;
     box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.3);
     height: $headerHeight;
@@ -17,8 +17,11 @@
             cursor: pointer;
             font-size: 20px;
         }
-        .ant-btn {
+        button.aws-btn {
             font-size: 11px;
+            height: 35px;
+            margin-right: 20px;
+            font-weight: 500;
         }
     }
     /* reset-antd header badges icons */

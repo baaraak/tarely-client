@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { Avatar, Popover, Button } from 'antd';
+import { AwesomeButton } from 'react-awesome-button';
 
 import AvatarMenuComponent from './AvatarMenuComponent';
 import { BASE_URL } from '../../services/constans';
@@ -25,9 +26,7 @@ class HeaderUserInfo extends React.PureComponent {
     return (
       <div className="header__userInfo">
         <Link to="/upload" state={{ modal: true }}>
-          <Button>
-            <FormattedMessage id="product.add" />
-          </Button>
+          <AwesomeButton type="secondary"><FormattedMessage id="product.add" /></AwesomeButton>
         </Link>
         <Popover
           content={

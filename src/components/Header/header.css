@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   padding: 0 20px;
-  background: #fff;
+  background: #2591bf;
   border-bottom: 1px solid #f1f4f6;
   box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.3);
   height: 55px;
@@ -16,8 +16,11 @@
     .header__userInfo .icon {
       cursor: pointer;
       font-size: 20px; }
-    .header__userInfo .ant-btn {
-      font-size: 11px; }
+    .header__userInfo button.aws-btn {
+      font-size: 11px;
+      height: 35px;
+      margin-right: 20px;
+      font-weight: 500; }
   .header .ant-badge {
     margin-right: 25px; }
   .header .ant-avatar {

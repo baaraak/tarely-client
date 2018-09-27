@@ -41,20 +41,20 @@ const ProductsListComponent = ({ products, onDeleteProduct }) => {
           <div className="product__description">{product.description}</div>
           <div className="product__footer">
             <div className="product__icon">
-              <Tooltip placement="bottom" title="Edit">
+              <Tooltip placement="bottom" destroyTooltipOnHide={true} title="Edit" >
                 <Link to={`/product/edit/${product._id}`}>
                   <Icon type="edit" />
                 </Link>
               </Tooltip>
             </div>
-            <Tooltip placement="bottom" title="View">
+            <Tooltip placement="bottom" destroyTooltipOnHide={true} title="View">
               <div className="product__icon">
                 <Link to={`/product/${product._id}/swipe`}>
                   <Icon type="eye-o" />
                 </Link>
               </div>
             </Tooltip>
-            <Tooltip placement="bottom" title="Delete">
+            <Tooltip placement="bottom" destroyTooltipOnHide={true} title="Delete">
               <div
                 className="product__icon"
                 onClick={() => onDeleteProduct(product._id)}

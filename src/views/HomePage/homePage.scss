@@ -1,5 +1,6 @@
 .homePage {
     height: 100%;
+    background-image: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
     .topNav {
         display: flex;
         justify-content: space-between;
@@ -7,11 +8,6 @@
         max-width: 90%;
         margin: 0 auto;
         padding-top: 10vh;
-    }
-    .logo {
-        font-size: 36px;
-        font-weight: bold;
-        color: #4a6182;
     }
     .bars {
         position: absolute;
@@ -21,6 +17,9 @@
         justify-content: center;
         left: 0;
         right: 0;
+        h3 {
+            color: #fff;
+        }
     }
     .bar {
         margin: 0 30px;
@@ -38,12 +37,17 @@
                 width: 100%;
             }
         }
+        &--active {
+            h3 {
+                color: #a6fd86;
+            }
+        }
     }
     .bar__step {
         width: 20%;
-        height: 3px;
-        background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
-        margin-top: 5px;
+        height: 2px;
+        background: #a6fd86;
+        margin-top: 3px;
         transition: all 0.3s ease-in;
     }
     .instructionStep {
@@ -57,12 +61,23 @@
     }
     .loginBtn {
         width: 150px;
+        background: transparent;
+        border-radius: 30px;
+        border: 1px solid #fff;
+        &:hover {
+            background: #fff;
+            color: #000;
+            text-shadow: none;
+        }
     }
 }
 
 .ant-modal.loginModal {
     width: 400px !important;
     max-width: 85%;
+    .ant-modal-content {
+        box-shadow: none;
+    }
     .ant-alert {
         margin-bottom: 10px;
     }
@@ -85,8 +100,8 @@
         padding: 0;
     }
     .ant-modal-close {
-        right: -12px;
-        top: -12px;
+        right: -25px;
+        top: -25px;
         background: #fff;
         border-radius: 50%;
         width: 25px;
@@ -96,7 +111,7 @@
         width: 25px;
         height: 25px;
         line-height: 25px;
-        font-size: 11px;
+        font-size: 20px;
         font-weight: bold;
     }
     .ant-form {
@@ -172,6 +187,10 @@
         opacity: 1;
         text-decoration: underline;
     }
+}
+
+.ant-modal-mask {
+    background: #fff;
 }
 
 .container.resetPassword {

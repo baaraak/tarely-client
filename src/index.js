@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import 'react-awesome-button/dist/styles.css';
 
 import { I18nLoader } from './components/I18nLoader';
 import store from './redux/store';

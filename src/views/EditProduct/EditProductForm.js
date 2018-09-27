@@ -14,6 +14,7 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from 'react-places-autocomplete';
+import { AwesomeButton } from 'react-awesome-button';
 
 import { API_URI, BASE_URL } from '../../services/constans';
 
@@ -278,9 +279,9 @@ class EditProductForm extends React.PureComponent {
                 multiple
                 onChange={this.onUploadImage}
               >
-                <Button>
+                <AwesomeButton size="small" >
                   <Icon type="upload" /> {intl.messages["product.images.button"]}
-                </Button>
+                </AwesomeButton>
                 {errors.fileList && (
                   <div className="error">Please upload at least one image</div>
                 )}
@@ -368,14 +369,10 @@ class EditProductForm extends React.PureComponent {
             )}
           </FormItem>
         </Card>
-        <Button
-          type="primary"
-          size="large"
-          htmlType="submit"
-          className="upload__form--button"
-        >
+
+        <AwesomeButton className="upload__form--button">
           {intl.messages["editProduct.button"]}<Icon type="right" />
-        </Button>
+        </AwesomeButton>
       </Form>
     );
   }

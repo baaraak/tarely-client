@@ -43,7 +43,7 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        document.querySelectorAll('body')[0].classList.add('loaded');
+        document.querySelectorAll('body')[0].classList.add('loaded', this.props.isMobile && 'mobile');
     }
 
     toggleLoginModal = () => {
@@ -115,6 +115,7 @@ class Home extends React.Component {
                     footer={null}
                     className="loginModal"
                     destroyOnClose
+                    maskClosable={false}
                     onCancel={this.toggleLoginModal}
                     visible={this.state.loginModalOpen}
                 >
@@ -165,6 +166,7 @@ export default connect(
         loginError: store.auth.loginError,
         signupError: store.auth.signupError,
         forgotPasswordError: store.auth.forgotPasswordError,
+        isMobile: store.app.isMobile,
     }),
     { login, signup, forgotPassword }
 )(Home);

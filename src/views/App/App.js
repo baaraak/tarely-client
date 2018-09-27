@@ -61,6 +61,7 @@ class App extends React.PureComponent {
 
 const mapStateToProps = state => ({
   globalError: state.app.globalError,
+  isMobile: state.app.isMobile,
 });
 
 export default connect(mapStateToProps)(injectIntl(App));

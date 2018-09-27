@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Button, Icon, Alert } from 'antd';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import { injectIntl } from 'react-intl';
+import { AwesomeButton } from 'react-awesome-button';
 
 import ProductDetailsCard from './Cards/ProductDetailsCard';
 import ProductPreferenceCard from './Cards/ProductPreferenceCard';
@@ -109,14 +110,10 @@ class UploadProductForm extends React.PureComponent {
           errors={errors}
           location={location}
         />
-        <Button
-          type="primary"
-          size="large"
-          htmlType="submit"
-          className="upload__form--button"
-        >
+        <AwesomeButton className="upload__form--button">
           {this.props.intl.messages["product.button.upload"]}<Icon type="right" />
-        </Button>
+        </AwesomeButton>
+
       </Form>
     );
   }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, Button, Upload, Icon, Select, Input, Card } from 'antd';
+import { AwesomeButton } from 'react-awesome-button';
 
 import countries from '../../services/countries.json';
 import { API_URI, BASE_URL } from '../../services/constans';
@@ -94,9 +95,9 @@ class EditUserProfileDetails extends React.PureComponent {
                 showUploadList={{ showRemoveIcon: this.state.avatar.name !== 'avatar.png' }}
                 onChange={this.onUploadImage}
               >
-                <Button>
+                <AwesomeButton size="small" >
                   <Icon type="upload" />{this.props.intl.messages["profile.details.avatar.button"]}
-                </Button>
+                </AwesomeButton>
               </Upload>
             )}
           </FormItem>
@@ -164,14 +165,12 @@ class EditUserProfileDetails extends React.PureComponent {
               </Select>
             )}
           </FormItem>
-          <Button
-            type="primary"
+          <AwesomeButton
             size="large"
-            htmlType="submit"
             className="upload__form--button"
           >
             {this.props.intl.messages["profile.details.button"]}
-          </Button>
+          </AwesomeButton>
         </Card>
       </Form>
     );
