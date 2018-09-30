@@ -7,6 +7,7 @@ import {
   ADD_USER_PRODUCT,
   CHANGE_USER_AVATAR,
   EDIT_USER_PRODUCT,
+  CHANGE_USER_LANGUAGE,
 } from '../actions/app.actions';
 
 const initialState = {
@@ -70,6 +71,14 @@ export default function app(state = initialState, action = {}) {
         user: {
           ...state.user,
           avatar: action.avatar,
+        },
+      };
+    case CHANGE_USER_LANGUAGE:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          language: action.language,
         },
       };
     default:

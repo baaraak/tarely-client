@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, Input, Icon, Button, Alert } from 'antd';
+import { AwesomeButton } from 'react-awesome-button';
 
 const FormItem = Form.Item;
 
@@ -80,13 +81,10 @@ class ChangePasswordForm extends React.PureComponent {
                         <Input type="password" placeholder={intl.messages["settings.confirmPassword.placeholder"]} />
                     )}
                 </FormItem>
-                <Button
-                    prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                    type="primary"
-                    htmlType="submit"
-                >
+                <AwesomeButton>
+                    <Icon type="lock" />
                     {intl.messages["settings.changePassword.button"]}
-                </Button>
+                </AwesomeButton>
             </Form>
         );
     }

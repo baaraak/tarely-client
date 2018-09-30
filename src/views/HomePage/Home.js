@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import { Modal, Button, Tabs } from 'antd';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import { GoogleLogin } from 'react-google-login';
+import { AwesomeButton } from 'react-awesome-button';
 
 import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
+import Logo from '../../components/Logo';
 import ForgotPassword from './components/auth/ForgotPassword';
 
 import Swipe from './components/Swipe';
@@ -43,7 +45,7 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        document.querySelectorAll('body')[0].classList.add('loaded', this.props.isMobile && 'mobile');
+        document.querySelectorAll('body')[0].classList.add('loaded', this.props.isMobile && 'mobile', 'hp');
     }
 
     toggleLoginModal = () => {
@@ -94,8 +96,8 @@ class Home extends React.Component {
         return (
             <div className="homePage">
                 <div className="topNav">
-                    <div className="logo">tarely</div>
-                    <Button className="loginBtn" onClick={this.toggleLoginModal} >Login</Button>
+                    <Logo />
+                    <AwesomeButton type="secondary" className="loginBtn" action={this.toggleLoginModal}>Login</AwesomeButton>
                 </div>
                 {this.renderCurrentStep()}
                 <div className="bars">

@@ -15,10 +15,34 @@ import PlacesAutocomplete, {
   getLatLng,
 } from 'react-places-autocomplete';
 import { AwesomeButton } from 'react-awesome-button';
+import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
 
+import Uploader from '../../components/Uploader/Uploader';
 import { API_URI, BASE_URL } from '../../services/constans';
 
+import './editProduct.css';
+
 const FormItem = Form.Item;
+
+const SortableItem = SortableElement(({ value, handleDeleteImage }) => {
+  return (
+    <div className="uploader__imagePreviewBox" >
+      <img src={value.url ? value.url : `${BASE_URL}${value.response.path}`} alt="" />
+      <Icon type="close-circle" theme="outlined" onClick={() => handleDeleteImage(value)} />
+    </div>
+  )
+}
+);
+
+const SortableList = SortableContainer(({ items, handleDeleteImage }) => {
+  return (
+    <div className="uploader__imagePreview">
+      {items.map((value, index) => (
+        value.status === 'done' && <SortableItem key={`item-${index}`} index={index} value={value} handleDeleteImage={handleDeleteImage} />
+      ))}
+    </div>
+  );
+});
 
 class EditProductForm extends React.PureComponent {
   constructor(props) {
@@ -62,7 +86,6 @@ class EditProductForm extends React.PureComponent {
   }
 
   handleSubmit(e) {
-    e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       const errors = this.validateFields();
       if (Object.keys(errors).length > 0) return this.setState({ errors });
@@ -119,13 +142,24 @@ class EditProductForm extends React.PureComponent {
     });
   }
 
+  handleDeleteImage = (file) => {
+    this.setState({ fileList: this.state.fileList.filter(f => f.uid !== file.uid), images: this.state.images.filter(i => i.indexOf(file.name) === -1) });
+  }
+
+  onSortEnd = ({ oldIndex, newIndex }) => {
+    this.setState({
+      fileList: arrayMove(this.state.fileList, oldIndex, newIndex),
+      images: arrayMove(this.state.images, oldIndex, newIndex),
+    });
+  };
+
   render() {
     const { fileList, errors, location } = this.state;
     const { product, intl } = this.props;
     const { getFieldDecorator } = this.props.form;
     if (this.state.isLoading) return null;
     return (
-      <Form className="container upload__form" onSubmit={this.handleSubmit}>
+      <Form className="container edit__form">
         <Card title={intl.messages["product"]}>
           <FormItem
             label={
@@ -270,23 +304,22 @@ class EditProductForm extends React.PureComponent {
             required
           >
             {getFieldDecorator('images', {})(
-              <Upload
+              <Uploader
                 listType="picture"
                 accept="image/png,image/jpeg,image/jpg"
                 action={`${API_URI}/products/image`}
                 headers={{ authorization: this.props.token }}
                 fileList={fileList}
-                multiple
+                mutiple
                 onChange={this.onUploadImage}
-              >
-                <AwesomeButton size="small" >
-                  <Icon type="upload" /> {intl.messages["product.images.button"]}
-                </AwesomeButton>
-                {errors.fileList && (
-                  <div className="error">Please upload at least one image</div>
-                )}
-              </Upload>
+              />
             )}
+            <SortableList items={fileList} axis="xy" onSortEnd={this.onSortEnd} handleDeleteImage={this.handleDeleteImage} />
+            {
+              errors.fileList && (
+                <div className="error">Please upload at least one image</div>
+              )
+            }
           </FormItem>
           <FormItem
             className={errors.location && 'has-error'}
@@ -370,7 +403,7 @@ class EditProductForm extends React.PureComponent {
           </FormItem>
         </Card>
 
-        <AwesomeButton className="upload__form--button">
+        <AwesomeButton action={this.handleSubmit} className="floatR">
           {intl.messages["editProduct.button"]}<Icon type="right" />
         </AwesomeButton>
       </Form>

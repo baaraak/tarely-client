@@ -1,3 +1,4 @@
+@import "../../styles/vars.scss";
 .homePage {
     height: 100%;
     background-image: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
@@ -39,14 +40,14 @@
         }
         &--active {
             h3 {
-                color: #a6fd86;
+                color: $secondary;
             }
         }
     }
     .bar__step {
         width: 20%;
         height: 2px;
-        background: #a6fd86;
+        background: $secondary;
         margin-top: 3px;
         transition: all 0.3s ease-in;
     }
@@ -61,14 +62,6 @@
     }
     .loginBtn {
         width: 150px;
-        background: transparent;
-        border-radius: 30px;
-        border: 1px solid #fff;
-        &:hover {
-            background: #fff;
-            color: #000;
-            text-shadow: none;
-        }
     }
 }
 
@@ -189,8 +182,10 @@
     }
 }
 
-.ant-modal-mask {
-    background: #fff;
+.hp {
+    .ant-modal-mask {
+        background: #fff;
+    }
 }
 
 .container.resetPassword {

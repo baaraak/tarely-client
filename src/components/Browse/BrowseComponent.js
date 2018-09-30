@@ -179,9 +179,10 @@ class BrowseComponent extends React.Component {
         {currentProduct && (
           <ProductView
             product={currentProduct}
-            onDismatch={this.onDismatch}
             categories={this.props.categories}
             onClose={this.onCloseProductView}
+            onBid={this.props.onBid}
+            asBid
           />
         )}
       </div>

@@ -21,7 +21,7 @@ function renderApp(data) {
   store.dispatch(setCategories(data.categories));
   ReactDOM.render(
     <Provider store={store}>
-      <I18nLoader locale="en">
+      <I18nLoader locale={data.user.language}>
         <App />
       </I18nLoader>
     </Provider>,

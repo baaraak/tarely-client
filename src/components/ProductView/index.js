@@ -1,21 +1,11 @@
 import React from 'react';
 import { Carousel, Button } from 'antd';
 import { BASE_URL } from '../../services/constans';
+import { AwesomeButton } from 'react-awesome-button';
 
 import './productView.css';
 
-const ProductViewComponent = ({ product, onClose, categories, onDismatch, intl, isMobile }) => {
-
-  // const renderActions = () => {
-  //   if (asProduct) {
-  //     return <React.Fragment>
-  //       <Button className="btn_like" onClick={() => onLike(product._id)} >Like</Button>
-  //       <Button className="btn_dislike" onClick={() => onDislike(product._id)} >Dislike</Button>
-  //     </React.Fragment>
-  //   } else {
-  //     return <Button ghost type="primary" onClick={() => onBid(product._id)}>Send bid</Button>
-  //   }
-  // }
+const ProductViewComponent = ({ product, onClose, categories, onDismatch, intl, isMobile, asBid, onBid }) => {
   const wantedCategories = categories.filter(c => product.wanted.some(pId => c.id === Number(pId))).map(cat => cat.displayName);
   return (
     <div className={`productView ${isMobile ? 'mobile' : ''}`}>
@@ -59,8 +49,9 @@ const ProductViewComponent = ({ product, onClose, categories, onDismatch, intl, 
         </div>
       </div>
       <div className="product__spec product__spec--buttons">
-        {/* {withActions && renderActions()} */}
-        <Button type="danger" onClick={onDismatch} >{intl.messages["matches.unMatch.button"]}</Button>
+        {asBid ?
+          <AwesomeButton action={() => onBid(product._id)} >Send Bid</AwesomeButton> :
+          <Button type="danger" onClick={onDismatch} >{intl.messages["matches.unMatch.button"]}</Button>}
       </div>
     </div>
   )

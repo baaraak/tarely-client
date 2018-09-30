@@ -8,6 +8,7 @@ export const ADD_USER_PRODUCT = 'ADD_USER_PRODUCT';
 export const EDIT_USER_PRODUCT = 'EDIT_USER_PRODUCT';
 export const SEND_CONTACT = 'SEND_CONTACT';
 export const CHANGE_USER_AVATAR = 'CHANGE_USER_AVATAR';
+export const CHANGE_USER_LANGUAGE = 'CHANGE_USER_LANGUAGE';
 
 export function showGlobalMessageError(message) {
   return {
@@ -61,6 +62,13 @@ export function changeUserAvatar(avatar) {
   return {
     type: CHANGE_USER_AVATAR,
     avatar,
+  };
+}
+
+export function changeUserLanguage(language) {
+  return {
+    type: CHANGE_USER_LANGUAGE,
+    language,
   };
 }
 

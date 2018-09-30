@@ -11,13 +11,20 @@
         border: none;
     }
     .userProfile__social {
+        .aws-btn {
+            margin-top: 5px;
+        }
+        .aws-btn .aws-btn__content>span:nth-child(1) {
+            display: flex;
+            align-items: center;
+        }
         .ant-form-item-children {
             display: flex;
             align-items: center;
         }
         .anticon {
-            font-size: 24px;
-            margin-right: 20px;
+            font-size: 19px;
+            margin-right: 10px;
         }
     }
     i.anticon.anticon-close {

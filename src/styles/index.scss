@@ -8,9 +8,7 @@ body {
     margin: 0;
     padding: 0;
     color: $black;
-    background-image: linear-gradient(135deg, #fff 0%, #eff1f5 100%);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background: #fffff9;
     &.loaded {
         .loaderWrapper {
             animation: hideLoader 0.8s forwards;
@@ -19,10 +17,11 @@ body {
 }
 
 a {
-    color: $blue;
+    color: $link;
     outline: none;
     &:hover,
     &:visited {
+        color: $link_hover;
         text-decoration: none;
     }
 }
@@ -56,7 +55,7 @@ a {
 
 .container {
     height: 100%;
-    width: 980px;
+    width: 1160px;
     max-width: 90%;
     margin: 0 auto;
 }
@@ -157,16 +156,6 @@ a {
     line-height: 26px;
 }
 
-.ant-switch {
-    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
-    border: 1px solid #e8e7e7;
-}
-
-.ant-switch-checked {
-    border: 1px solid #e6bdc6;
-    background-image: linear-gradient(to top, #fad0c4 0%, #ffd1ff 100%);
-}
-
 .ant-confirm .ant-confirm-btns button+button {
     background: linear-gradient(-20deg, #ff2121 0%, #ff9e9e 100%);
     margin-left: 8px;
@@ -204,19 +193,41 @@ a {
     --button-raise-level: 3px;
     --button-hover-pressure: 0.5;
     --transform-speed: 0.185s;
-    --button-primary-color: #475472;
-    --button-primary-color-dark: #2a3143;
-    --button-primary-color-light: #ffffff;
-    --button-primary-color-hover: #424e6a;
+    --button-primary-color: #1D3557;
+    --button-primary-color-dark: rgb(15, 28, 46);
+    --button-primary-color-light: #fff;
+    --button-primary-color-hover: rgb(36, 58, 88);
     --button-primary-border: none;
     --button-secondary-color: #fffc6c;
     --button-secondary-color-dark: #b9b500;
     --button-secondary-color-light: #6c6a00;
     --button-secondary-color-hover: #fffb3e;
     --button-secondary-border: none;
-    --button-anchor-color: #f3c8ad;
-    --button-anchor-color-dark: #734922;
-    --button-anchor-color-light: #4c3016;
-    --button-anchor-color-hover: #f1bfa0;
-    --button-anchor-border: 1px solid #8c633c;
+    &--small {
+        height: 40px;
+        font-size: 12px;
+        .anticon {
+            font-size: 12px;
+        }
+    }
+    &.btn-google {
+        color: #fff;
+        --button-primary-color: #dd4b39;
+        --button-primary-color-dark: #ac3e30;
+        --button-primary-color-hover: #e65d4b;
+    }
+    .anticon {
+        margin-right: 10px;
+        font-size: 14px;
+    }
+    &.btn-danger {
+        --button-primary-color: #FF1654;
+        --button-primary-color-dark: #c70b3d;
+        --button-primary-color-light: #ffffff;
+        --button-primary-color-hover: #ff4879;
+    }
+}
+
+.floatR {
+    float: right;
 }

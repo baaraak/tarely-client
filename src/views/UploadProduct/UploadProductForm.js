@@ -3,6 +3,7 @@ import { Form, Button, Icon, Alert } from 'antd';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import { injectIntl } from 'react-intl';
 import { AwesomeButton } from 'react-awesome-button';
+import { arrayMove } from 'react-sortable-hoc';
 
 import ProductDetailsCard from './Cards/ProductDetailsCard';
 import ProductPreferenceCard from './Cards/ProductPreferenceCard';
@@ -41,7 +42,7 @@ class UploadProductForm extends React.PureComponent {
   }
 
   handleSubmit(e) {
-    e.preventDefault();
+    // e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       const errors = this.validateFields();
       if (Object.keys(errors).length > 0) return this.setState({ errors });
@@ -69,7 +70,7 @@ class UploadProductForm extends React.PureComponent {
       .catch(() => this.setState({ location: '' }));
   }
 
-  onUploadImage({ file, fileList }) {
+  onUploadImage({ fileList, file }) {
     const newState = {};
     if (file.status === 'removed' && file.response.path) {
       newState.images = this.state.images.filter(img => img !== file.response.path);
@@ -82,14 +83,26 @@ class UploadProductForm extends React.PureComponent {
       newState.errors = { ...this.state.errors, fileList: false };
     }
     this.setState({ ...newState, fileList });
+
   }
+
+  handleDeleteImage = (file) => {
+    this.setState({ fileList: this.state.fileList.filter(f => f.uid !== file.uid), images: this.state.images.filter(i => i.indexOf(file.name) === -1) });
+  }
+
+  onSortEnd = ({ oldIndex, newIndex }) => {
+    this.setState({
+      fileList: arrayMove(this.state.fileList, oldIndex, newIndex),
+      images: arrayMove(this.state.images, oldIndex, newIndex),
+    });
+  };
 
   render() {
     const token = localStorage.getItem('tarelyJWTToken');
     const { fileList, errors, location } = this.state;
     const { getFieldDecorator } = this.props.form;
     return (
-      <Form className="upload__form container" onSubmit={this.handleSubmit}>
+      <Form className="upload__form container">
         {this.props.errorMessage && (
           <Alert message={this.props.errorMessage} type="error" />
         )}
@@ -97,10 +110,12 @@ class UploadProductForm extends React.PureComponent {
           categories={this.props.categories}
           getFieldDecorator={getFieldDecorator}
           fileListError={errors.fileList}
-          fileList={fileList}
+          fileList={this.state.fileList}
           submitImage={this.submitImage}
           onUploadImage={this.onUploadImage}
           token={token}
+          handleDeleteImage={this.handleDeleteImage}
+          onSortEnd={this.onSortEnd}
         />
         <ProductPreferenceCard
           categories={this.props.categories}
@@ -110,7 +125,7 @@ class UploadProductForm extends React.PureComponent {
           errors={errors}
           location={location}
         />
-        <AwesomeButton className="upload__form--button">
+        <AwesomeButton action={this.handleSubmit} className="upload__form--button">
           {this.props.intl.messages["product.button.upload"]}<Icon type="right" />
         </AwesomeButton>
 

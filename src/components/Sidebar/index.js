@@ -3,8 +3,6 @@ import React from 'react';
 import SidebarSearch from './SidebarSearch';
 import SidebarFooter from './SidebarFooter';
 
-import './sidebar.css';
-
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);

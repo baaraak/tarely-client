@@ -11,11 +11,32 @@ import {
   Icon,
 } from 'antd';
 import { AwesomeButton } from 'react-awesome-button';
-
+import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import { injectIntl } from 'react-intl';
-import { API_URI } from '../../../services/constans';
+import { API_URI, BASE_URL } from '../../../services/constans';
 
+import Uploader from '../../../components/Uploader/Uploader';
 const FormItem = Form.Item;
+
+const SortableItem = SortableElement(({ value, handleDeleteImage }) => {
+  return (
+    <div className="uploader__imagePreviewBox" >
+      <img src={`${BASE_URL}${value.response.path}`} alt="" />
+      <Icon type="close-circle" theme="outlined" onClick={() => handleDeleteImage(value)} />
+    </div>
+  )
+}
+);
+
+const SortableList = SortableContainer(({ items, handleDeleteImage }) => {
+  return (
+    <div className="uploader__imagePreview">
+      {items.map((value, index) => (
+        value.status === 'done' && <SortableItem key={`item-${index}`} index={index} value={value} handleDeleteImage={handleDeleteImage} />
+      ))}
+    </div>
+  );
+});
 
 const ProductDetailsCard = ({
   categories,
@@ -25,6 +46,8 @@ const ProductDetailsCard = ({
   onUploadImage,
   token,
   intl,
+  onSortEnd,
+  handleDeleteImage
 }) => (
     <Card title={intl.messages["product.description"]}>
       <FormItem
@@ -158,7 +181,7 @@ const ProductDetailsCard = ({
         required
       >
         {getFieldDecorator('images', {})(
-          <Upload
+          <Uploader
             listType="picture"
             accept="image/png,image/jpeg,image/jpg"
             action={`${API_URI}/products/image`}
@@ -166,15 +189,14 @@ const ProductDetailsCard = ({
             fileList={fileList}
             mutiple
             onChange={onUploadImage}
-          >
-            <AwesomeButton size="small">
-              <Icon type="upload" /> {intl.messages["product.images.button"]}
-            </AwesomeButton>
-            {fileListError && (
-              <div className="error">Please upload at least one image</div>
-            )}
-          </Upload>
+          />
         )}
+        <SortableList items={fileList} axis="xy" onSortEnd={onSortEnd} handleDeleteImage={handleDeleteImage} />
+        {
+          fileListError && (
+            <div className="error">Please upload at least one image</div>
+          )
+        }
       </FormItem>
     </Card>
   );

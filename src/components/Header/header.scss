@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     padding: 0 20px;
-    background: #2591bf;
+    background: $primary;
     border-bottom: 1px solid $bright_gray;
     box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.3);
     height: $headerHeight;
@@ -52,7 +52,7 @@
         }
         &:focus {
             text-decoration: none;
-            color: $blue;
+            color: $link;
         }
     }
 }

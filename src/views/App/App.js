@@ -13,6 +13,14 @@ class App extends React.PureComponent {
     document.querySelectorAll('body')[0].classList.add('loaded');
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.user.language !== nextProps.user.language) {
+      console.log('***********************');
+      console.log(nextProps.user.language);
+      console.log('***********************');
+    }
+  }
+
   logOut() {
     localStorage.removeItem('tarelyJWTToken');
     window.location.href = '/';
@@ -62,6 +70,7 @@ class App extends React.PureComponent {
 const mapStateToProps = state => ({
   globalError: state.app.globalError,
   isMobile: state.app.isMobile,
+  user: state.app.user,
 });
 
 export default connect(mapStateToProps)(injectIntl(App));

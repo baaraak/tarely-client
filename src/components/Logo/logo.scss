@@ -1,8 +1,9 @@
 @import "../../styles/vars.scss";
-.logo {
+a.logo {
     font-size: 30px;
     font-weight: bold;
-    color: #fff;
+    color: $white !important;
+    text-decoration: underline;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
     font-style: italic;
     >img {

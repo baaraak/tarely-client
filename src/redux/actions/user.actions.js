@@ -7,6 +7,7 @@ export const VALIDATE_TOKEN = 'VALIDATE_TOKEN';
 export const VALIDATE_TOKEN_RESULT = 'VALIDATE_TOKEN_RESULT';
 export const RESET_PASSWORD = 'RESET_PASSWORD';
 export const RESET_PASSWORD_RESULT = 'RESET_PASSWORD_RESULT';
+export const UPDATE_USER_LANGUAGE = 'UPDATE_USER_LANGUAGE';
 
 export function updateUserProfile(user) {
   return {
@@ -72,6 +73,13 @@ export function resetPasswordResult(result) {
   return {
     type: RESET_PASSWORD_RESULT,
     result,
+  }
+}
+
+export function updateUserLanguage(language) {
+  return {
+    type: UPDATE_USER_LANGUAGE,
+    language,
   }
 }
 

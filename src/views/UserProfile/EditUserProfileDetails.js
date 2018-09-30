@@ -32,7 +32,6 @@ class EditUserProfileDetails extends React.PureComponent {
   }
 
   handleSubmit(e) {
-    e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         const file = this.state.avatar;
@@ -80,7 +79,7 @@ class EditUserProfileDetails extends React.PureComponent {
     const { getFieldDecorator } = this.props.form;
     const token = localStorage.getItem('tarelyJWTToken');
     return (
-      <Form className="upload__form" onSubmit={this.handleSubmit}>
+      <Form className="upload__form">
         <Card title={this.props.intl.messages["profile.details"]}>
           <FormItem label={this.props.intl.messages["profile.details.avatar"]}>
             {getFieldDecorator('avatar', {})(
@@ -167,7 +166,8 @@ class EditUserProfileDetails extends React.PureComponent {
           </FormItem>
           <AwesomeButton
             size="large"
-            className="upload__form--button"
+            className="floatR"
+            action={this.handleSubmit}
           >
             {this.props.intl.messages["profile.details.button"]}
           </AwesomeButton>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Icon } from 'antd';
 import { injectIntl } from 'react-intl';
+
 import './contact.css';
 
 class Contact extends React.Component {

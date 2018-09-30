@@ -1,6 +1,7 @@
 import React from 'react';
 import PlacesAutocomplete from 'react-places-autocomplete';
 import { Input, Checkbox, InputNumber, Button, Select } from 'antd';
+import { AwesomeButton } from 'react-awesome-button';
 
 const { Option } = Select;
 
@@ -120,12 +121,12 @@ const BrowseFilters = ({
         </div>
       </div>
       <div className="filters__cell--actions">
-        <Button size="small" type="primary" onClick={updateSearch}>
+        <AwesomeButton type="primary" action={updateSearch}>
           Search
-      </Button>
-        <Button size="small" onClick={resetSearch}>
+      </AwesomeButton>
+        <AwesomeButton className="btn-danger" action={resetSearch}>
           Reset
-      </Button>
+      </AwesomeButton>
       </div>
     </div>
   );

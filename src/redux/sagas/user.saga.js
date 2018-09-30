@@ -10,7 +10,9 @@ import {
   validateTokenResult,
   RESET_PASSWORD,
   resetPasswordResult,
+  UPDATE_USER_LANGUAGE,
 } from '../actions/user.actions';
+import { changeUserLanguage } from '../actions/app.actions';
 import callApi from '../../services/api';
 
 function* updateUserProfile(action) {
@@ -41,12 +43,20 @@ function* resetPassword(action) {
   yield put(resetPasswordResult(response));
 }
 
+function* updateUserLanguage(action) {
+  const response = yield call(callApi, '/users/language', 'POST', { language: action.language });
+  if (response.success) {
+    yield put(changeUserLanguage(action.language));
+  }
+}
+
 function* userSaga() {
   yield takeLatest(UPDATE_USER_PROFILE, updateUserProfile);
   yield takeLatest(CHANGE_PASSWORD, changePassword);
   yield takeLatest(TOGGLE_SUBSCRIBE, toggleSubscribe);
   yield takeLatest(VALIDATE_TOKEN, validateToken);
   yield takeLatest(RESET_PASSWORD, resetPassword);
+  yield takeLatest(UPDATE_USER_LANGUAGE, updateUserLanguage);
 }
 
 export default userSaga;

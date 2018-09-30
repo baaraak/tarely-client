@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { IntlProvider } from 'react-intl';
-import callApi from '../services/api';
+import { IntlProvider, addLocaleData } from 'react-intl';
+import he from 'react-intl/locale-data/he';
 
+import callApi from '../services/api';
+addLocaleData(he)
 export class I18nLoader extends React.Component {
     constructor() {
         super();
@@ -52,8 +54,6 @@ I18nLoader.defaultProps = {
     locale: 'en',
 };
 
-const getLocale = state => state.locale || 'en';
-
 export default connect(state => ({
-    locale: getLocale(state),
+    locale: state.app.user.language,
 }))(I18nLoader);

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Modal, Form, Input, InputNumber, Alert, message } from 'antd';
+import { AwesomeButton } from 'react-awesome-button';
 
 import SearchMenu from './SearchMenu';
 import BrowseComponent from '../../components/Browse/BrowseComponent';
@@ -33,6 +34,7 @@ class Search extends React.Component {
     if (isSuccess) {
       message.success('Bid sent!');
       this.setState({ bidProductID: null })
+      this.props.form.resetFields()
     }
   }
 
@@ -41,7 +43,6 @@ class Search extends React.Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
         this.props.submitBid({ ...values, productID: this.state.bidProductID })
@@ -60,17 +61,21 @@ class Search extends React.Component {
     return (
       <div className="page search">
         <SearchMenu
-          handleClick={this.handleMenuClick}
           id={this.props.history.location.pathname.substring(1)}
         />
-        <BrowseComponent asProduct={false} onBid={this.onBid} history={this.props.history} />
+        <BrowseComponent
+          asProduct={false}
+          onBid={this.onBid}
+          history={this.props.history}
+        />
         <Modal
           title="Send a bid"
-          okText="Send"
           visible={!!this.state.bidProductID}
-          onOk={this.handleSubmit}
-          onCancel={this.handleCancel}
           maskClosable={false}
+          footer={[
+            <AwesomeButton size="small" className="btn-danger" action={this.handleCancel}>Cancel</AwesomeButton>,
+            <AwesomeButton size="small" action={this.handleSubmit}>Send</AwesomeButton>,
+          ]}
         >
           <Form onSubmit={this.handleSubmit} className="login-form">
             {this.props.isBidSuccess === false && <Alert message="Something went wrong, please try again later" type="error" showIcon />}

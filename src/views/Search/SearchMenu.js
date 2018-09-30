@@ -7,8 +7,8 @@ const SearchMenu = ({ handleClick, id }) => (
         <Menu.Item key="search">
             <Link to="/search">Search</Link>
         </Menu.Item>
-        <Menu.Item key="bids">
-            <Link to="bids">Bids</Link>
+        <Menu.Item key="search/bids">
+            <Link to="/search/bids">Bids</Link>
         </Menu.Item>
     </Menu>
 );

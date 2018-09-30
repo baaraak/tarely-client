@@ -2,10 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Card, Form, Switch, Select } from 'antd';
 import { injectIntl } from 'react-intl';
+import { AwesomeButton } from 'react-awesome-button';
+
 import PageTitle from '../../components/PageTitle';
 import ChangePasswordForm from '../../components/ChangePassword';
 
-import { changePassword, toggleSubscribe } from '../../redux/actions/user.actions';
+import { changePassword, toggleSubscribe, updateUserLanguage } from '../../redux/actions/user.actions';
 
 import './settings.css';
 
@@ -15,7 +17,16 @@ class Settings extends React.Component {
         super(props);
         this.state = {
             bidProductID: null,
+            language: props.user.language,
         };
+    }
+
+    onLanguageSave = () => {
+        this.props.updateUserLanguage(this.state.language)
+    }
+
+    onChangeLanguage = (v) => {
+        this.setState({ language: v })
     }
 
     onChange(type) {
@@ -32,11 +43,14 @@ class Settings extends React.Component {
                         <Form.Item label={intl.messages["settings.language"]} >
                             <Select
                                 style={{ width: '100%' }}
+                                onChange={this.onChangeLanguage}
+                                value={this.state.language}
                                 placeholder={intl.messages["settings.language.placeholder"]}
                             >
                                 <Select.Option value="en">{intl.messages["english"]}</Select.Option>
                                 <Select.Option value="he">{intl.messages["hebrew"]}</Select.Option>
                             </Select>
+                            <AwesomeButton size="small" className="save-btn" action={this.onLanguageSave} >Save</AwesomeButton>
                         </Form.Item>
                     </Card>
                     <Card title={intl.messages["settings.changePassword"]}>
@@ -66,6 +80,7 @@ class Settings extends React.Component {
 const mapStateToProps = (state) => ({
     subscription: state.app.user.subscription,
     changePasswordResult: state.user.changePasswordResult,
+    user: state.app.user,
 });
 
-export default connect(mapStateToProps, { changePassword, toggleSubscribe })(injectIntl(Settings));
+export default connect(mapStateToProps, { changePassword, toggleSubscribe, updateUserLanguage })(injectIntl(Settings));

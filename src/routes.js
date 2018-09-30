@@ -21,6 +21,22 @@ export default [
     },
     {
         exact: true,
+        path: "/search",
+        component: Loadable({
+            loader: () => import('./views/Search/Search'),
+            loading: Loading,
+        })
+    },
+    {
+        exact: true,
+        path: "/search/bids",
+        component: Loadable({
+            loader: () => import('./views/Search/SearchBidsComponent'),
+            loading: Loading,
+        })
+    },
+    {
+        exact: true,
         path: "/product/edit/:id",
         component: Loadable({
             loader: () => import('./views/EditProduct/EditProduct'),

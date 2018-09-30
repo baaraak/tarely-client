@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Modal } from 'antd';
+import { Modal, Button } from 'antd';
 import { injectIntl, FormattedMessage } from 'react-intl';
+import { AwesomeButton } from 'react-awesome-button';
 
 import PageTitle from '../../components/PageTitle';
 import ProductsListComponent from '../../components/ProductsListComponent';
@@ -15,40 +16,45 @@ class Home extends Component {
     this.state = {
       isLoading: true,
       searchText: '',
+      isModalOpen: false,
     };
     this.onChange = this.onChange.bind(this);
-    this.onDeleteProduct = this.onDeleteProduct.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   onChange(searchText) {
     this.setState({ searchText });
   }
 
-  onDeleteProduct(productId) {
-    const { messages } = this.props.intl;
-    this.Modal = Modal.confirm({
-      title: messages["home.deleteProduct.modal.confirm"],
-      content: messages["home.deleteProduct.modal.message"],
-      okText: messages["button.delete"],
-      cancelText: messages["button.cancel"],
-      onOk: () => this.handleDelete(productId),
-    });
+  toggleModal(productId) {
+    this.setState({ isModalOpen: this.state.isModalOpen ? false : productId });
   }
 
-  handleDelete(productId) {
-    this.props.deleteProduct(productId);
-    if (this.Modal) this.Modal.destroy();
+  handleDelete() {
+    this.props.deleteProduct(this.state.isModalOpen);
+    this.toggleModal();
   }
 
   render() {
     const { products } = this.props.user;
+    const { messages } = this.props.intl;
     return (
       <div className="home">
         <PageTitle label={<FormattedMessage id="home.title" />} icon="home" />
         <ProductsListComponent
           products={products}
-          onDeleteProduct={this.onDeleteProduct}
+          onDeleteProduct={this.toggleModal}
         />
+        <Modal
+          visible={!!this.state.isModalOpen}
+          onCancel={this.toggleModal}
+          footer={[<AwesomeButton size="small" key={1} type="secondary" action={this.toggleModal} >Cancel</AwesomeButton>,
+          <AwesomeButton key={2} size="small" className="btn-danger" action={this.handleDelete} >Delete</AwesomeButton>]}
+        >
+          <h2>{messages["home.deleteProduct.modal.confirm"]}</h2>
+          <p dangerouslySetInnerHTML={{ __html: messages["home.deleteProduct.modal.message"] }} ></p>
+        </Modal>
       </div>
     );
   }
