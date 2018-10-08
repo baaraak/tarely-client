@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Modal, Button } from 'antd';
+import { Modal } from 'antd';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { AwesomeButton } from 'react-awesome-button';
 
@@ -45,6 +45,7 @@ class Home extends Component {
         <ProductsListComponent
           products={products}
           onDeleteProduct={this.toggleModal}
+          isMobile={this.props.isMobile}
         />
         <Modal
           visible={!!this.state.isModalOpen}
@@ -62,6 +63,7 @@ class Home extends Component {
 
 const mapStateToProps = state => ({
   user: state.app.user,
+  isMobile: state.app.isMobile,
 });
 
 export default connect(

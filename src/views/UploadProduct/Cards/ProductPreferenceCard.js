@@ -33,7 +33,7 @@ const ProductPreferenceCard = ({
           value={location}
         >
           {({ getInputProps, suggestions, getSuggestionItemProps }) => (
-            <div>
+            <div className="geo-autocomplete">
               <input
                 {...getInputProps({
                   placeholder: intl.messages["product.location.placeholder"],

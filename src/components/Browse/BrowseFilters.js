@@ -10,9 +10,10 @@ const BrowseFilters = ({
   onChange,
   values,
   updateSearch,
+  className,
   resetSearch,
 }) => (
-    <div className="browse__filters">
+    <div className={`browse__filters ${className}`}>
       <div className="filters__cell">
         <div className="filter__label">Search:</div>
         <div className="filter__content filter__content--search">
@@ -95,7 +96,7 @@ const BrowseFilters = ({
             onChange={v => onChange('location', v)}
           >
             {({ getInputProps, suggestions, getSuggestionItemProps }) => (
-              <div>
+              <div className="geo-autocomplete">
                 <input
                   {...getInputProps({
                     placeholder: 'Type location',

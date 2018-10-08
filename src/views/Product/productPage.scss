@@ -314,8 +314,7 @@
                 min-width: 40px;
             }
             .list__match--details {
-                display: flex;
-                align-items: center;
+                padding: 7px 10px;
             }
             .list__match--message {
                 margin-top: 0;
@@ -406,6 +405,7 @@
     align-items: center;
     justify-content: center;
     height: 100%;
+    background: #fff;
     &.mobile {
         padding-top: 50px;
         .matches__messages--title {
@@ -534,6 +534,17 @@
         height: auto;
         font-size: 13px;
         border: 1px solid #ffeded;
+    }
+}
+
+.productPage__matches--modal {
+    max-width: 430px;
+    h2 {
+        font-size: 15px;
+        font-weight: 500;
+    }
+    p {
+        margin: 10px 0;
     }
 }
 

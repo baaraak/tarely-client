@@ -5,25 +5,26 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 
 import { BASE_URL } from '../../services/constans';
 
-const ProductsListComponent = ({ products, onDeleteProduct }) => {
+const ProductsListComponent = ({ products, onDeleteProduct, isMobile }) => {
   return (
     <div className="productsList container">
-      <div className="productsList__product">
-        <div className="product__image">
-          <Icon type="search" />
-        </div>
-        <div className="product__title">Search</div>
-        <div className="product__description">
-          Browse between products and bid on them
-        </div>
-        <div className="product__footer">
-          <div className="product__icon">
-            <Link to="/search">
-              <Icon type="global" />
-            </Link>
+      {!isMobile &&
+        <div className="productsList__product">
+          <div className="product__image">
+            <Icon type="search" />
           </div>
+          <div className="product__title">Search</div>
+          <div className="product__description">
+            Browse between products and bid on them
         </div>
-      </div>
+          <div className="product__footer">
+            <div className="product__icon">
+              <Link to="/search">
+                <Icon type="global" />
+              </Link>
+            </div>
+          </div>
+        </div>}
       {products.map(product => (
         <div key={product._id} className="productsList__product">
           <div

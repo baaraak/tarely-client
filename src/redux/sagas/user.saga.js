@@ -11,6 +11,8 @@ import {
   RESET_PASSWORD,
   resetPasswordResult,
   UPDATE_USER_LANGUAGE,
+  GET_BIDS,
+  responseUserBids,
 } from '../actions/user.actions';
 import { changeUserLanguage } from '../actions/app.actions';
 import callApi from '../../services/api';
@@ -50,6 +52,13 @@ function* updateUserLanguage(action) {
   }
 }
 
+function* getBids(action) {
+  const response = yield call(callApi, '/users/bids');
+  if (response.bids) {
+    yield put(responseUserBids(response.bids));
+  }
+}
+
 function* userSaga() {
   yield takeLatest(UPDATE_USER_PROFILE, updateUserProfile);
   yield takeLatest(CHANGE_PASSWORD, changePassword);
@@ -57,6 +66,7 @@ function* userSaga() {
   yield takeLatest(VALIDATE_TOKEN, validateToken);
   yield takeLatest(RESET_PASSWORD, resetPassword);
   yield takeLatest(UPDATE_USER_LANGUAGE, updateUserLanguage);
+  yield takeLatest(GET_BIDS, getBids);
 }
 
 export default userSaga;

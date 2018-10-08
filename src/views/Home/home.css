@@ -72,3 +72,6 @@
           border-right: none; }
         .home .productsList .product__footer .product__icon:hover {
           background: linear-gradient(#ffffff 0%, #f3f3f3 100%); }
+
+.appContainer--mobile .home {
+  padding-bottom: 55px; }

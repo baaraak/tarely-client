@@ -1,7 +1,8 @@
 import React from 'react';
+import { Spin } from 'antd';
 import Loadable from 'react-loadable';
 
-const Loading = () => null;
+const Loading = () => <div className="loading"><Spin size="large" /></div>;
 export default [
     {
         exact: true,

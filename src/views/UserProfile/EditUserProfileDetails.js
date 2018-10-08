@@ -166,7 +166,6 @@ class EditUserProfileDetails extends React.PureComponent {
           </FormItem>
           <AwesomeButton
             size="large"
-            className="floatR"
             action={this.handleSubmit}
           >
             {this.props.intl.messages["profile.details.button"]}

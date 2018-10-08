@@ -3,9 +3,6 @@
         display: flex;
         flex-direction: column-reverse;
     }
-    .ant-upload.ant-upload-select.ant-upload-select-picture {
-        margin-top: 15px;
-    }
     .ant-upload-list-picture .ant-upload-list-item,
     .ant-upload-list-picture-card .ant-upload-list-item {
         border: none;
@@ -39,5 +36,14 @@
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+    .ant-upload-list-picture .ant-upload-list-item-name,
+    .ant-upload-list-picture-card .ant-upload-list-item-name {
+        display: none;
+    }
+    .ant-upload-list-picture .ant-upload-list-item-thumbnail,
+    .ant-upload-list-picture-card .ant-upload-list-item-thumbnail {
+        border-radius: 50%;
+        overflow: hidden;
     }
 }

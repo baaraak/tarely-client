@@ -4,6 +4,7 @@ import {
   CHANGE_PASSWORD,
   CHANGE_PASSWORD_RESULT,
   VALIDATE_TOKEN_RESULT,
+  GET_BIDS_RESPONSE,
   RESET_PASSWORD_RESULT,
 } from '../actions/user.actions';
 
@@ -12,6 +13,7 @@ const initialState = {
   changePasswordResult: null,
   validateTokenResult: null,
   resetPasswordResult: null,
+  bids: null,
 };
 
 export default function product(state = initialState, action = {}) {
@@ -45,6 +47,11 @@ export default function product(state = initialState, action = {}) {
       return {
         ...state,
         resetPasswordResult: action.result.success,
+      };
+    case GET_BIDS_RESPONSE:
+      return {
+        ...state,
+        bids: action.bids,
       };
 
     default:

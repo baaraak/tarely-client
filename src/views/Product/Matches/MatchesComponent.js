@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Spin } from 'antd';
 import io from 'socket.io-client';
 import { injectIntl } from 'react-intl';
+import { AwesomeButton } from 'react-awesome-button';
 
 import MatchesList from './MatchesList';
 import MatchRoom from './MatchRoom';
@@ -28,13 +29,14 @@ class MatchesComponent extends React.Component {
       currentMatchID: null,
       socket: null,
       messages: null,
+      isModalOpen: false,
       isProductViewOpen: !props.isMobile,
     };
     this.changeCurrentMatch = this.changeCurrentMatch.bind(this);
     this.onSubmitMessage = this.onSubmitMessage.bind(this);
     this.setContentRefAndScroll = this.setContentRefAndScroll.bind(this);
     this.addChat = this.addChat.bind(this);
-    this.onDismatch = this.onDismatch.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
   componentWillMount() {
@@ -186,14 +188,8 @@ class MatchesComponent extends React.Component {
   }
 
 
-  onDismatch() {
-    this.Modal = Modal.confirm({
-      title: this.props.intl.messages["matches.noMatches"],
-      content: this.props.intl.messages["matches.unMatch.modal.message"],
-      okText: this.props.intl.messages["matches.unMatch.modal.ok"],
-      cancelText: this.props.intl.messages["matches.unMatch.modal.cancel"],
-      onOk: () => this.handleDelete(),
-    });
+  toggleModal() {
+    this.setState({ isModalOpen: !this.state.isModalOpen })
   }
 
   onClickInfo = () => {
@@ -242,10 +238,20 @@ class MatchesComponent extends React.Component {
           intl={this.props.intl}
           categories={this.props.categories}
           product={product}
-          onDismatch={this.onDismatch}
+          onDismatch={this.toggleModal}
           isMobile={isMobile}
           onClose={isMobile && this.onClickInfo}
         />}
+        <Modal
+          visible={!!this.state.isModalOpen}
+          onCancel={this.toggleModal}
+          className="productPage__matches--modal"
+          footer={[<AwesomeButton size="small" key={1} type="secondary" action={this.toggleModal} >{this.props.intl.messages["matches.unMatch.modal.cancel"]}</AwesomeButton>,
+          <AwesomeButton key={2} size="small" className="btn-danger" action={this.handleDelete} >{this.props.intl.messages["matches.unMatch.modal.ok"]}</AwesomeButton>]}
+        >
+          <h2>{this.props.intl.messages["matches.noMatches"]}</h2>
+          <p dangerouslySetInnerHTML={{ __html: this.props.intl.messages["matches.unMatch.modal.message"] }} ></p>
+        </Modal>
       </div>
     );
   }

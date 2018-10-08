@@ -3,7 +3,7 @@ import { Spin } from 'antd';
 
 import { BASE_URL } from '../../services/constans';
 
-const BrowseProductsList = ({ products, onClick, isLoading, asProduct }) => {
+const BrowseProductsList = ({ products, onClick, isLoading }) => {
   if (isLoading || !Array.isArray(products))
     return (
       <div className="browse__products browse__products--loading">

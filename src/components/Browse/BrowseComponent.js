@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 // import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import isEqual from 'lodash/isEqual';
-
+import { Icon } from 'antd';
 import BrowseFilters from './BrowseFilters';
 import BrowseList from './BrowseList';
 import { getProductBrowse, handleSwipe } from '../../redux/actions/product.actions';
@@ -28,6 +28,7 @@ class BrowseComponent extends React.Component {
       isLoading: true,
       values: {},
       currentProduct: null,
+      isFiltersOpen: false, // for mobile only
     };
     this.onChange = this.onChange.bind(this);
     this.updateSearch = this.updateSearch.bind(this);
@@ -55,9 +56,7 @@ class BrowseComponent extends React.Component {
 
   getProducts() {
     const { search } = this.props.history.location;
-    const path = !this.props.asProduct ? 'all' : this.props.product._id;
-    let args = [path, search.slice(1)];
-    this.props.getProductBrowse(...args);
+    this.props.getProductBrowse('all', search.slice(1));
   }
 
   parseQueryFilters(query) {
@@ -136,6 +135,10 @@ class BrowseComponent extends React.Component {
     this.setState({ currentProduct });
   }
 
+  toggleFiltersVisibility = () => {
+    this.setState({ isFiltersOpen: !this.state.isFiltersOpen });
+  }
+
   onCloseProductView() {
     this.setState({ currentProduct: null });
   }
@@ -159,22 +162,37 @@ class BrowseComponent extends React.Component {
   }
 
   render() {
-    const { isLoading, values, currentProduct } = this.state;
+    const { isLoading, values, currentProduct, isFiltersOpen } = this.state;
     return (
-      <div className="browse">
-        <BrowseFilters
-          categories={this.props.categories}
-          onChange={this.onChange}
-          values={values}
-          updateSearch={this.updateSearch}
-          resetSearch={this.resetSearch}
-          handleKeyPress={this.handleKeyPress}
-        />
+      <div className={`browse ${this.props.isMobile ? 'browse--mobile' : ''}`}>
+        {this.props.isMobile ?
+          <React.Fragment>
+            <div className="browse__filtersToggle" onClick={this.toggleFiltersVisibility}>
+              <Icon type="bars" theme="outlined" />
+              Filters
+            </div>
+            <BrowseFilters
+              className={`browse__filters--mobile ${isFiltersOpen ? 'browse__filters--open' : 'browse__filters--close'}`}
+              categories={this.props.categories}
+              onChange={this.onChange}
+              values={values}
+              updateSearch={this.updateSearch}
+              resetSearch={this.resetSearch}
+              handleKeyPress={this.handleKeyPress}
+            />
+          </React.Fragment> :
+          <BrowseFilters
+            categories={this.props.categories}
+            onChange={this.onChange}
+            values={values}
+            updateSearch={this.updateSearch}
+            resetSearch={this.resetSearch}
+            handleKeyPress={this.handleKeyPress}
+          />}
         <BrowseList
           isLoading={isLoading}
           onClick={this.onClickProduct}
           products={this.props.products}
-          asProduct={this.props.product}
         />
         {currentProduct && (
           <ProductView
@@ -193,6 +211,7 @@ class BrowseComponent extends React.Component {
 const mapStateToProps = (state, props) => ({
   products: state.product.browse,
   categories: state.app.categories,
+  isMobile: state.app.isMobile,
 });
 
 export default connect(

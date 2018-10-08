@@ -342,7 +342,7 @@ class EditProductForm extends React.PureComponent {
               value={location.address}
             >
               {({ getInputProps, suggestions, getSuggestionItemProps }) => (
-                <div>
+                <div className="geo-autocomplete">
                   <input
                     {...getInputProps({
                       placeholder: intl.messages["product.location.placeholder"],

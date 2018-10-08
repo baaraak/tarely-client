@@ -49,14 +49,16 @@ class ChatInput extends React.Component {
     const { isPickerVisible } = this.state;
     return (
       <div className="chatInput">
-        <div className="chatInput__actions">
-          <div className="icon icon-emoji">
-            <Icon onClick={this.togglePickerVisibility} type="smile-o" />
-            {isPickerVisible && (
-              <Picker showPreview={false} onSelect={this.onSelectEmoji} />
-            )}
+        {
+          !this.props.isMobile && <div className="chatInput__actions">
+            <div className="icon icon-emoji">
+              <Icon onClick={this.togglePickerVisibility} type="smile-o" />
+              {isPickerVisible && (
+                <Picker showPreview={false} onSelect={this.onSelectEmoji} />
+              )}
+            </div>
           </div>
-        </div>
+        }
         <Textarea
           onChange={this.onChange}
           value={this.state.value}

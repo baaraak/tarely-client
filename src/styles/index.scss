@@ -8,7 +8,7 @@ body {
     margin: 0;
     padding: 0;
     color: $black;
-    background: #fffff9;
+    background: #fafdff;
     &.loaded {
         .loaderWrapper {
             animation: hideLoader 0.8s forwards;
@@ -58,6 +58,13 @@ a {
     width: 1160px;
     max-width: 90%;
     margin: 0 auto;
+}
+
+.loading {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .appContent {
@@ -116,7 +123,6 @@ a {
 
 .ant-card {
     margin-bottom: 40px;
-    overflow: hidden;
     box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -230,4 +236,23 @@ a {
 
 .floatR {
     float: right;
+}
+
+.geo-autocomplete {
+    .certain-category-search-dropdown {
+        position: relative;
+    }
+    ul.ant-select-dropdown-menu-item-group-list {
+        position: absolute;
+        background: #fff;
+        z-index: 100;
+        right: 0;
+        left: 0;
+        top: 3px;
+        border-radius: 5px;
+    }
+    .ant-select-dropdown-menu-item {
+        border: 1px solid $bright_gray;
+        border-width: 0 1px 1px;
+    }
 }

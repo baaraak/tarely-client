@@ -8,6 +8,8 @@ export const VALIDATE_TOKEN_RESULT = 'VALIDATE_TOKEN_RESULT';
 export const RESET_PASSWORD = 'RESET_PASSWORD';
 export const RESET_PASSWORD_RESULT = 'RESET_PASSWORD_RESULT';
 export const UPDATE_USER_LANGUAGE = 'UPDATE_USER_LANGUAGE';
+export const GET_BIDS = 'GET_BIDS';
+export const GET_BIDS_RESPONSE = 'GET_BIDS_RESPONSE';
 
 export function updateUserProfile(user) {
   return {
@@ -80,6 +82,19 @@ export function updateUserLanguage(language) {
   return {
     type: UPDATE_USER_LANGUAGE,
     language,
+  }
+}
+
+export function getBids() {
+  return {
+    type: GET_BIDS,
+  }
+}
+
+export function responseUserBids(bids) {
+  return {
+    type: GET_BIDS_RESPONSE,
+    bids
   }
 }
 

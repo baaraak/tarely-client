@@ -50,8 +50,8 @@ const ProductViewComponent = ({ product, onClose, categories, onDismatch, intl, 
       </div>
       <div className="product__spec product__spec--buttons">
         {asBid ?
-          <AwesomeButton action={() => onBid(product._id)} >Send Bid</AwesomeButton> :
-          <Button type="danger" onClick={onDismatch} >{intl.messages["matches.unMatch.button"]}</Button>}
+          <AwesomeButton action={() => onBid(product._id)}>Send Bid</AwesomeButton> :
+          <AwesomeButton className="btn-danger" action={onDismatch}>{intl.messages["matches.unMatch.button"]}</AwesomeButton>}
       </div>
     </div>
   )

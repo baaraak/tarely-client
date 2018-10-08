@@ -1,24 +1,17 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { AnimatedSwitch } from 'react-router-transition';
 import { injectIntl } from 'react-intl';
 
 import Header from '../../components/Header';
+import Navbar from '../../components/Navbar/Navbar';
 import NotFound from '../misc/NotFound';
 import routes from '../../routes';
 
 class App extends React.PureComponent {
   componentDidMount() {
     document.querySelectorAll('body')[0].classList.add('loaded');
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.user.language !== nextProps.user.language) {
-      console.log('***********************');
-      console.log(nextProps.user.language);
-      console.log('***********************');
-    }
   }
 
   logOut() {
@@ -40,8 +33,8 @@ class App extends React.PureComponent {
   render() {
     return (
       <Router>
-        <div className="appContainer">
-          <Header />
+        <div className={`appContainer ${this.props.isMobile ? 'appContainer--mobile' : ''}`}>
+          {this.props.isMobile ? <Navbar /> : <Header />}
           <div className="appContent">
             <Switch>
               <AnimatedSwitch

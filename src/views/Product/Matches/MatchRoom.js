@@ -35,7 +35,7 @@ const MatchRoom = ({ messages, title, onSubmit, productId, setContentRef, intl, 
           )}
       </div>
       <div className="matches__messages--input">
-        <ChatInput onSubmit={onSubmit} />
+        <ChatInput onSubmit={onSubmit} isMobile={isMobile} />
       </div>
     </div>
   );
