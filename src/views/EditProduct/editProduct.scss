@@ -1,5 +1,13 @@
 .edit__form {
-    .btn-upload {
-        margin-bottom: 15px;
+    .btn-update {
+        margin-bottom: 60px;
+    }
+}
+
+.appContainer--mobile .edit__form {
+    .btn-update {
+        margin-top: -20px;
+        width: 100%;
+        margin-bottom: 60px;
     }
 }

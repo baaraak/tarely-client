@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Form, Icon, Button } from 'antd';
+import { Card, Form, Icon } from 'antd';
 import { AwesomeButton } from 'react-awesome-button';
 
 const FormItem = Form.Item;

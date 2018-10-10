@@ -1,5 +1,5 @@
 import React from 'react';
-import { Carousel, Button } from 'antd';
+import { Carousel } from 'antd';
 import { BASE_URL } from '../../services/constans';
 import { AwesomeButton } from 'react-awesome-button';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Modal, Button, Tabs } from 'antd';
+import { Modal, Tabs } from 'antd';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import { GoogleLogin } from 'react-google-login';
 import { AwesomeButton } from 'react-awesome-button';
@@ -36,6 +36,7 @@ class Home extends React.Component {
     }
 
     componentWillMount() {
+
         // clean url
         window.history.replaceState(
             {},

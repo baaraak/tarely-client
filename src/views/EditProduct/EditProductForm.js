@@ -1,14 +1,12 @@
 import React from 'react';
 import {
   Form,
-  Button,
   Icon,
   Select,
   Input,
   InputNumber,
   Tooltip,
   Card,
-  Upload,
 } from 'antd';
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -403,7 +401,7 @@ class EditProductForm extends React.PureComponent {
           </FormItem>
         </Card>
 
-        <AwesomeButton action={this.handleSubmit} className="floatR">
+        <AwesomeButton action={this.handleSubmit} className="floatR btn-update">
           {intl.messages["editProduct.button"]}<Icon type="right" />
         </AwesomeButton>
       </Form>

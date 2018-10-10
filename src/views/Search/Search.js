@@ -57,7 +57,6 @@ class Search extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { id } = this.props.match.params;
     return (
       <div className="page search">
         <SearchMenu

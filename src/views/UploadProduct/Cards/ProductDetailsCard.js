@@ -1,16 +1,13 @@
 import React from 'react';
 import {
-  Button,
   Select,
   Input,
   InputNumber,
   Tooltip,
   Card,
-  Upload,
   Form,
   Icon,
 } from 'antd';
-import { AwesomeButton } from 'react-awesome-button';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import { injectIntl } from 'react-intl';
 import { API_URI, BASE_URL } from '../../../services/constans';

@@ -226,11 +226,8 @@ class Uploader extends React.Component {
         const {
             prefixCls = '',
             className,
-            showUploadList,
             listType,
-            type,
             disabled,
-            children,
         } = this.props;
 
         const rcUploadProps = {
@@ -243,8 +240,6 @@ class Uploader extends React.Component {
         };
 
         delete rcUploadProps.className;
-
-        const uploadList = showUploadList ? this.renderUploadList() : null;
 
         const uploadButtonCls = classNames(prefixCls, {
             [`${prefixCls}-select`]: true,

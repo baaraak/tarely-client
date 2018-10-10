@@ -1,6 +1,6 @@
 import React from 'react';
 import PlacesAutocomplete from 'react-places-autocomplete';
-import { Input, Checkbox, InputNumber, Button, Select } from 'antd';
+import { Input, Checkbox, InputNumber, Select } from 'antd';
 import { AwesomeButton } from 'react-awesome-button';
 
 const { Option } = Select;

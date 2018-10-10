@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, Upload, Icon, Select, Input, Card } from 'antd';
+import { Form, Upload, Icon, Select, Input, Card } from 'antd';
 import { AwesomeButton } from 'react-awesome-button';
 
 import countries from '../../services/countries.json';

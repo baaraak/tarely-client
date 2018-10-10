@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Icon, Button, Alert } from 'antd';
+import { Form, Input, Icon, Alert } from 'antd';
 import { AwesomeButton } from 'react-awesome-button';
 
 const FormItem = Form.Item;

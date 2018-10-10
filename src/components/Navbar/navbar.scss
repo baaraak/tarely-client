@@ -1,18 +1,18 @@
 @import "../../styles/vars.scss";
 .navbar {
     position: fixed;
-    height: 47px;
+    height: 44px;
     bottom: 0;
     width: 100%;
-    background: $primary;
+    background: #fff;
     z-index: 500;
     display: flex;
     align-items: center;
     justify-content: space-around;
+    border-top: 1px solid $gray;
     &__item {
         font-size: 17px;
         width: 20%;
-        border-right: 1px solid rgba(0, 0, 0, 0.4);
         height: 100%;
         &:last-child {
             border-right: none;
@@ -27,7 +27,7 @@
         }
         &--active {
             .navba__itemLink {
-                color: #fff;
+                color: $primary;
             }
         }
     }

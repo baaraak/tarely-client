@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Spin } from 'antd';
 import SearchMenu from './SearchMenu';
 import { injectIntl, FormattedMessage } from 'react-intl';
 
+import BidsTabs from './component/BidsTabs';
+import BidsList from './component/BidsList';
 import { getBids } from '../../redux/actions/user.actions';
 import './search.css';
 
@@ -12,6 +13,8 @@ class SearchBidsComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            menuFilters: 'ALL',
+            currentBidID: null,
             bids: null,
         }
     }
@@ -26,11 +29,28 @@ class SearchBidsComponent extends React.Component {
         }
     }
 
+    menuFilterHandler = (e) => {
+
+        this.setState({ menuFilters: e.key })
+    }
+
+    getCurrentBids = () => {
+        return this.state.menuFilters === 'ALL' ? this.state.bids : this.state.bids.filter(b => b.isMatch);
+    }
+
+    onBidClick = (id) => {
+        this.setState({ currentBidID: id });
+    }
+
     renderBids() {
         const { bids } = this.state;
         if (bids.length > 0) {
             return (
                 <React.Fragment>
+                    <div className="bids__list">
+                        <BidsTabs handleClick={this.menuFilterHandler} id={this.state.menuFilters} />
+                        <BidsList onClick={this.onBidClick} currentBidID={this.state.currentBidID} bids={this.getCurrentBids()} />
+                    </div>
                 </React.Fragment>
             )
         }
@@ -43,7 +63,7 @@ class SearchBidsComponent extends React.Component {
 
     render() {
         return (
-            <div className="page search">
+            <div className="page search bids">
                 <SearchMenu
                     id={this.props.history.location.pathname.substring(1)}
                 />

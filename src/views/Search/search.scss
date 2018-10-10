@@ -1,3 +1,4 @@
+@import "../../styles/vars.scss";
 .search {
     li.ant-menu-item {
         width: 50%;
@@ -10,5 +11,198 @@
     }
     .ant-menu-horizontal {
         overflow: hidden;
+        width: 100%;
+    }
+}
+
+.bids {
+    height: calc(100% - 48px);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: relative;
+    .bids__list {
+        width: 330px;
+        background: #fff;
+        height: 100%;
+        border-right: 1px solid $bright_gray;
+        &.mobile {
+            width: 100%;
+            height: 50px;
+            overflow: hidden;
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            z-index: 100;
+            box-shadow: 0px 5px 10px 0 rgba(0, 0, 0, 0.05);
+            .list__bid {
+                height: 50px;
+                padding: 5px 20px;
+                .anticon {
+                    display: block;
+                }
+            }
+            .list__bid--image {
+                height: 40px;
+                width: 40px;
+                min-width: 40px;
+            }
+            .list__bid--details {
+                padding: 7px 10px;
+            }
+            .list__bid--message {
+                margin-top: 0;
+            }
+            .list__bid--title {
+                width: 50vh;
+            }
+            .list__bid.active {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                background: #fff;
+                i.anticon.anticon-up {
+                    position: absolute;
+                    right: 20px;
+                    top: calc(50% - 8px);
+                    height: 15px;
+                    width: 15px;
+                    font-size: 15px;
+                    transform: all 0.3s ease-in;
+                    transform: rotate(180deg);
+                }
+            }
+            &.open {
+                padding-top: 50px;
+                animation: openMenu 0.3s forwards;
+                .list__bid.active i.anticon.anticon-up {
+                    animation: rotateIcon 0.3s forwards;
+                }
+            }
+        }
+    }
+    .list__bid {
+        height: 100px;
+        padding: 20px;
+        display: flex;
+        cursor: pointer;
+        transition: all 0.2s ease-in;
+        .anticon {
+            display: none;
+        }
+        &:hover {
+            box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.1);
+        }
+        &.active {
+            background: $bright_gray;
+            &:hover {
+                box-shadow: none;
+            }
+        }
+    }
+    .list__bid--image {
+        width: 60px;
+        height: 60px;
+        overflow: hidden;
+        border-radius: 50%;
+        border: 1px solid $bright_gray;
+        padding: 5px;
+    }
+    .list__bid--image>img {
+        width: 100%;
+        height: 100%;
+    }
+    .list__bid--title {
+        font-size: 14px;
+        font-weight: 400;
+    }
+    .list__bid--message {
+        font-weight: 100;
+        margin-top: 5px;
+        color: $dark_gray;
+    }
+    .list__bid--details {
+        padding: 10px;
+    }
+    &--noMessage {
+        font-size: 24px;
+        text-align: center;
+        margin-top: 40px;
+    }
+}
+
+.bids__messages {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background: #fff;
+    &.mobile {
+        padding-top: 50px;
+        .bids__messages--title {
+            display: flex;
+            .anticon {
+                margin-left: auto;
+                font-size: 19px;
+            }
+        }
+    }
+    >div {
+        width: 100%;
+    }
+    &--title {
+        padding: 15px 20px;
+        font-size: 16px;
+        color: $dark_gray;
+        font-weight: 100;
+        border-bottom: 1px solid $bright_gray;
+    }
+    &--input {
+        margin-top: auto;
+    }
+    &--content {
+        flex: 1;
+        overflow: hidden;
+        overflow-y: scroll;
+    }
+    .messages__empty {
+        font-size: 24px;
+        text-align: center;
+        margin-top: 50px;
+        color: gray;
+    }
+    .message {
+        margin: 20px;
+        display: flex;
+        position: relative;
+        .message__createdAt {
+            position: absolute;
+            bottom: -12px;
+            font-size: 9px;
+            color: $dark_gray;
+            font-weight: 100;
+        }
+        .message__content {
+            padding: 12px 15px;
+            border-radius: 15px 15px 15px 0;
+            background: $gray;
+            font-size: 14px;
+            animation-name: bounceIn;
+            animation-duration: 450ms;
+            animation-timing-function: linear;
+            animation-fill-mode: forwards;
+        }
+    }
+    .message__self {
+        flex-direction: row-reverse;
+        .message__content {
+            background: #1890ff;
+            color: #fff;
+            border-radius: 15px 15px 0 15px;
+        }
     }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, Icon, Alert } from 'antd';
+import { Form, Icon, Alert } from 'antd';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import { injectIntl } from 'react-intl';
 import { AwesomeButton } from 'react-awesome-button';
@@ -99,7 +99,7 @@ class UploadProductForm extends React.PureComponent {
 
   render() {
     const token = localStorage.getItem('tarelyJWTToken');
-    const { fileList, errors, location } = this.state;
+    const { errors, location } = this.state;
     const { getFieldDecorator } = this.props.form;
     return (
       <Form className="upload__form container">

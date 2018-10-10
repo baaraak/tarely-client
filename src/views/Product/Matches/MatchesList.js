@@ -19,7 +19,7 @@ class MatchesList extends React.Component {
   }
 
   render() {
-    const { matches, currentMatchID, productId, intl, isMobile } = this.props;
+    const { matches, currentMatchID, intl, isMobile } = this.props;
     return (
       <div className={`matches__list ${isMobile ? 'mobile' : ''} ${this.state.isOpen ? 'open' : ''}`}>
         {matches.map(match => {

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
-import { Avatar, Popover, Button } from 'antd';
+import { Avatar, Popover } from 'antd';
 import { AwesomeButton } from 'react-awesome-button';
 
 import AvatarMenuComponent from './AvatarMenuComponent';
