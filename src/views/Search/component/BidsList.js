@@ -11,7 +11,7 @@ const BidsList = ({ bids, currentBidID, onClick }) => (
             const className = id === currentBidID ? 'active' : '';
             const lastMessage = bid.isMatch ? bid.lastMessage ? bid.lastMessage.body : <FormattedMessage id="matches.match.noMessages" /> : <span>WAITING APPROVAL</span>;
             const title = bid.to.title;
-            const image = BASE_URL + bid.to ? bid.to.images[0] : bid.to;
+            const image = BASE_URL + bid.to && bid.to.images ? bid.to.images[0] : bid.to;
             return (
                 <div
                     className={`list__bid ${className}`}
