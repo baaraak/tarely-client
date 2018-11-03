@@ -216,7 +216,7 @@ class MatchesComponent extends React.Component {
           intl={this.props.intl}
           isMobile={isMobile}
         />
-        {cu}
+        {/* {cu} */}
         {isProductViewOpen && currentMatch.product && <ProductView
           buttonLabel={<FormattedMessage id="matches.unMatch.button" />}
           categories={this.props.categories}
