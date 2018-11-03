@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import SearchMenu from './SearchMenu';
 import { injectIntl, FormattedMessage } from 'react-intl';
 
-import BidsTabs from './component/BidsTabs';
 import BidsList from './component/BidsList';
+import BidPanel from './BidPanel';
 import { getBids } from '../../redux/actions/user.actions';
 import './search.css';
 
@@ -43,13 +43,23 @@ class SearchBidsComponent extends React.Component {
     }
 
     renderBids() {
-        const { bids } = this.state;
+        const { bids, currentBidID } = this.state;
         if (bids.length > 0) {
+            const currentBid = bids.filter(b => b._id === currentBidID)[0];
             return (
                 <React.Fragment>
-                    <div className="bids__list">
-                        <BidsTabs handleClick={this.menuFilterHandler} id={this.state.menuFilters} />
-                        <BidsList onClick={this.onBidClick} currentBidID={this.state.currentBidID} bids={this.getCurrentBids()} />
+                    <div className="bids__matches">
+                        <BidsList
+                            onFilterTabClick={this.menuFilterHandler}
+                            menuId={this.state.menuFilters}
+                            onClick={this.onBidClick}
+                            currentBidID={currentBidID}
+                            bids={this.getCurrentBids()}
+                        />
+                        <BidPanel
+                            bid={currentBid}
+                            currentBidID={currentBidID}
+                        />
                     </div>
                 </React.Fragment>
             )

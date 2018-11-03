@@ -19,8 +19,11 @@ import {
   handleSwipeResponseMatch,
   getMatchMessagesSuccess,
   sendMessageSuccess,
+  GET_BID_MESSAGES,
   SUBMIT_BID,
   submitBidResult,
+  getBidMessagesResponse,
+  SEND_BID_MESSAGE,
   ON_UNMATCH,
   submitUnmatchSuccess
 } from '../actions/product.actions';
@@ -75,7 +78,7 @@ function* handleSwipeSubmit(action) {
 function* getProductMatches(action) {
   const response = yield call(callApi, `/products/${action.id}/matches`);
   if (response) {
-    yield put(getProductMatchesListSuccess(response));
+    yield put(getProductMatchesListSuccess(response.matches));
   } else {
     yield put(editProductFail(response.message));
   }
@@ -142,6 +145,28 @@ function* submitUnmatch(action) {
   }
 }
 
+function* getBidMessages(action) {
+  const response = yield call(
+    callApi,
+    `/products/bid/${action.bidId}`,
+
+  );
+  if (response.messages) {
+    yield put(getBidMessagesResponse(response.messages));
+  }
+}
+
+function* sendBidMessage(action) {
+  const response = yield call(
+    callApi,
+    `/products/bid/${action.message.bid}`,
+
+  );
+  if (response.success) {
+    yield put(getBidMessagesResponse(response.messages));
+  }
+}
+
 function* productSaga() {
   yield takeLatest(UPLOAD_PRODUCT, uploadProduct);
   yield takeLatest(UPDATE_PRODUCT, updateProduct);
@@ -153,6 +178,8 @@ function* productSaga() {
   yield takeLatest(GET_PRODUCT_BROWSE, getProductBrowse);
   yield takeLatest(SUBMIT_BID, submitBid);
   yield takeLatest(ON_UNMATCH, submitUnmatch);
+  yield takeLatest(GET_BID_MESSAGES, getBidMessages);
+  yield takeLatest(SEND_BID_MESSAGE, sendBidMessage);
 }
 
 export default productSaga;

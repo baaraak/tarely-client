@@ -5,7 +5,7 @@ import { AwesomeButton } from 'react-awesome-button';
 
 import './productView.css';
 
-const ProductViewComponent = ({ product, onClose, categories, onDismatch, intl, isMobile, asBid, onBid }) => {
+const ProductViewComponent = ({ product, onClose, categories, isMobile, buttonLabel, onActionClick }) => {
   const wantedCategories = categories.filter(c => product.wanted.some(pId => c.id === Number(pId))).map(cat => cat.displayName);
   return (
     <div className={`productView ${isMobile ? 'mobile' : ''}`}>
@@ -49,9 +49,7 @@ const ProductViewComponent = ({ product, onClose, categories, onDismatch, intl, 
         </div>
       </div>
       <div className="product__spec product__spec--buttons">
-        {asBid ?
-          <AwesomeButton action={() => onBid(product._id)}>Send Bid</AwesomeButton> :
-          <AwesomeButton className="btn-danger" action={onDismatch}>{intl.messages["matches.unMatch.button"]}</AwesomeButton>}
+        <AwesomeButton action={() => onActionClick(product._id)}>{buttonLabel}</AwesomeButton>
       </div>
     </div>
   )

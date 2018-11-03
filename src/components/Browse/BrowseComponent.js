@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 // import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import isEqual from 'lodash/isEqual';
 import { Icon } from 'antd';
+import { injectIntl, FormattedMessage } from 'react-intl';
+
 import BrowseFilters from './BrowseFilters';
 import BrowseList from './BrowseList';
 import { getProductBrowse, handleSwipe } from '../../redux/actions/product.actions';
@@ -199,8 +201,8 @@ class BrowseComponent extends React.Component {
             product={currentProduct}
             categories={this.props.categories}
             onClose={this.onCloseProductView}
-            onBid={this.props.onBid}
-            asBid
+            buttonLabel={<FormattedMessage id="search.bids.send" />}
+            onActionClick={this.props.onBid}
           />
         )}
       </div>
@@ -220,4 +222,4 @@ export default connect(
     getProductBrowse,
     handleSwipe,
   }
-)(BrowseComponent);
+)(injectIntl(BrowseComponent));

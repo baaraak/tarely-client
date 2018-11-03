@@ -23,6 +23,9 @@ export const SUBMIT_BID = 'SUBMIT_BID';
 export const SUBMIT_BID_RESULT = 'SUBMIT_BID_RESULT';
 export const ON_UNMATCH = 'ON_UNMATCH';
 export const ON_UNMATCH_SUCCESS = 'ON_UNMATCH_SUCCESS';
+export const GET_BID_MESSAGES = 'GET_BID_MESSAGES';
+export const GET_BID_MESSAGES_RESPONSE = 'GET_BID_MESSAGES_RESPONSE';
+export const SEND_BID_MESSAGE = 'SEND_BID_MESSAGE';
 
 export function uploadProduct(product) {
   return {
@@ -181,5 +184,26 @@ export function submitUnmatchSuccess(matchId) {
   return {
     type: ON_UNMATCH_SUCCESS,
     matchId
+  };
+}
+
+export function getBidMessages(bidId) {
+  return {
+    type: GET_BID_MESSAGES,
+    bidId
+  };
+}
+
+export function getBidMessagesResponse(messages) {
+  return {
+    type: GET_BID_MESSAGES_RESPONSE,
+    messages
+  };
+}
+
+export function sendBidMessage(message) {
+  return {
+    type: SEND_BID_MESSAGE,
+    message
   };
 }

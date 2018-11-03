@@ -1,45 +1,40 @@
 @import "../../styles/vars.scss";
-
 .chatInput {
-  width: 100%;
-  display: flex;
-  padding: 10px 0;
-  border-top: 1px solid $bright_gray;
-  align-items: center;
-
-  textarea {
     width: 100%;
-    resize: none;
-    outline: none;
-    font-size: 16px;
-    font-weight: 100;
-    border-radius: 20px;
-    border: 1px solid $bright_gray;
-    padding: 10px 20px;
-    transition: all 0.2s ease-in;
-
-    &:hover, &:focus {
-      border-color: $dark_gray;
+    display: flex;
+    padding: 10px 0;
+    border-top: 1px solid $bright_gray;
+    align-items: center;
+    textarea {
+        width: 100%;
+        resize: none;
+        outline: none;
+        font-size: 16px;
+        font-weight: 100;
+        border-radius: 20px;
+        border: 1px solid $bright_gray;
+        padding: 10px 20px;
+        transition: all 0.2s ease-in;
+        &:hover,
+        &:focus {
+            border-color: $dark_gray;
+        }
     }
-  }
-
-  .chatInput__actions,
-  .chatInput__send {
-    margin: 0 10px;
-    font-size: 18px;
-    cursor: pointer;
-    color: $dark_gray;
-    transition: all 0.2s ease-in;
-    position: relative;
-
-    &:hover {
-      color: $black
+    .chatInput__actions,
+    .chatInput__send {
+        margin: 0 10px;
+        font-size: 18px;
+        cursor: pointer;
+        color: $dark_gray;
+        transition: all 0.2s ease-in;
+        position: relative;
+        &:hover {
+            color: $black
+        }
     }
-  }
-
-  .emoji-mart {
-    position: absolute;
-    bottom: 50px;
-    left: 0;
-  }
+    .emoji-mart {
+        position: absolute;
+        bottom: 50px;
+        left: 0;
+    }
 }

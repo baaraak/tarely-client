@@ -15,6 +15,8 @@ import {
   SUBMIT_BID,
   SUBMIT_BID_RESULT,
   ON_UNMATCH_SUCCESS,
+  GET_BID_MESSAGES,
+  GET_BID_MESSAGES_RESPONSE,
 } from '../actions/product.actions';
 
 const initialState = {
@@ -27,6 +29,7 @@ const initialState = {
   browse: undefined,
   isMatch: false,
   isBidSuccess: null,
+  bidMessages: null,
 };
 
 export default function product(state = initialState, action = {}) {
@@ -110,6 +113,16 @@ export default function product(state = initialState, action = {}) {
       return {
         ...state,
         matches: state.matches.filter(m => m.matchId !== action.matchId),
+      };
+    case GET_BID_MESSAGES_RESPONSE:
+      return {
+        ...state,
+        messages: action.messages,
+      };
+    case GET_BID_MESSAGES:
+      return {
+        ...state,
+        messages: null,
       };
     default:
       return state;
