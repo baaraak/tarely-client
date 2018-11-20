@@ -17,7 +17,10 @@ import {
   ON_UNMATCH_SUCCESS,
   GET_BID_MESSAGES,
   GET_BID_MESSAGES_RESPONSE,
+  REJECT_BID_SUCCESS,
+  ACCEPT_BID_SUCCESS,
 } from '../actions/product.actions';
+import ActionButton from 'antd/lib/modal/ActionButton';
 
 const initialState = {
   errorMessage: null,
@@ -30,6 +33,7 @@ const initialState = {
   isMatch: false,
   isBidSuccess: null,
   bidMessages: null,
+  currentMatchID: null,
 };
 
 export default function product(state = initialState, action = {}) {
@@ -123,6 +127,16 @@ export default function product(state = initialState, action = {}) {
       return {
         ...state,
         messages: null,
+      };
+    case ACCEPT_BID_SUCCESS:
+      return {
+        ...state,
+        matches: state.matches.map(m => m.bidId === action.bidId ? { ...m, bid: { ...m.bid, isMatch: true } } : m),
+      };
+    case REJECT_BID_SUCCESS:
+      return {
+        ...state,
+        matches: state.matches.filter(m => m.bidId !== action.bidId),
       };
     default:
       return state;

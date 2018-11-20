@@ -1,8 +1,9 @@
 import React from 'react';
 import { Icon, Menu } from 'antd';
+import { FormattedMessage } from 'react-intl';
+import { Scrollbars } from 'react-custom-scrollbars';
+
 import { BASE_URL } from '../../../services/constans';
-import { injectIntl, FormattedMessage } from 'react-intl';
-import { ENGINE_METHOD_DIGESTS } from 'constants';
 
 class MatchesList extends React.Component {
   constructor(props) {
@@ -58,11 +59,11 @@ class MatchesList extends React.Component {
     const bids = this.props.matches.filter(d => !!d.bid);
     if (bids.length === 0) return <div className="matches__list--noData"><FormattedMessage id="matches.menu.bids.noData" /></div>;
     return (
-      bids.map(bid => {
-        const id = bid.bidId;
+      bids.map(b => {
+        const id = b.bidId;
         const className = id === this.props.currentMatchID ? 'active' : '';
-        const lastMessage = bid.lastMessage ? bid.lastMessage.body : <FormattedMessage id="matches.match.noMessages" />;
-        const title = bid.bid.title;
+        const lastMessage = b.lastMessage ? b.lastMessage.body : <FormattedMessage id="matches.match.noMessages" />;
+        const title = b.bid.title;
         const image = 'https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/64x64/currency_dollar.png';
         return (
           <div
@@ -75,7 +76,7 @@ class MatchesList extends React.Component {
             </div>
             <div className="list__match--details">
               <div className="list__match--title">{title}</div>
-              <div className="list__match--message">{lastMessage}</div>
+              {b.bid.isMatch ? <div className="list__match--message">{lastMessage}</div> : null}
             </div>
             {id === this.props.currentMatchID ? <Icon type="up" theme="outlined" /> : null}
           </div>
@@ -96,7 +97,11 @@ class MatchesList extends React.Component {
             <FormattedMessage id="matches.menu.bids" />
           </Menu.Item>
         </Menu>
-        {this.state.menuId === 'MATCHES' ? this.renderMatches() : this.renderBids()}
+        <div className="matches__list--wrapper">
+          <Scrollbars>
+            {this.state.menuId === 'MATCHES' ? this.renderMatches() : this.renderBids()}
+          </Scrollbars>
+        </div>
       </div>
     )
   }

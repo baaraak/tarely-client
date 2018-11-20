@@ -295,7 +295,9 @@
         background: #fff;
         height: 100%;
         border-right: 1px solid $bright_gray;
-        overflow-y: scroll;
+        &--wrapper {
+            height: calc(100% - 48px);
+        }
         &--noData {
             font-size: 2em;
             color: $dark_gray;
@@ -400,6 +402,9 @@
         color: $dark_gray;
     }
     .list__match--details {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
         padding: 10px;
     }
     &--noMessage {
@@ -419,13 +424,6 @@
     background: #fff;
     &.mobile {
         padding-top: 50px;
-        .matches__messages--title {
-            display: flex;
-            .anticon {
-                margin-left: auto;
-                font-size: 19px;
-            }
-        }
     }
     >div {
         width: 100%;
@@ -436,6 +434,12 @@
         color: $dark_gray;
         font-weight: 100;
         border-bottom: 1px solid $bright_gray;
+        display: flex;
+        .anticon {
+            margin-left: auto;
+            cursor: pointer;
+            font-size: 19px;
+        }
     }
     &--input {
         margin-top: auto;
@@ -443,7 +447,6 @@
     &--content {
         flex: 1;
         overflow: hidden;
-        overflow-y: scroll;
     }
     .messages__empty {
         font-size: 24px;
@@ -479,6 +482,33 @@
             background: #1890ff;
             color: #fff;
             border-radius: 15px 15px 0 15px;
+        }
+    }
+    &--bid {
+        .buttons {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            button {
+                margin: 0 20px;
+            }
+        }
+        .content {
+            max-width: 400px;
+            width: 90%;
+            margin-bottom: 30px;
+            font-size: 14px;
+            color: $dark_gray;
+            font-weight: 100;
+            >div {
+                margin-bottom: 15px;
+            }
+            >div .title {
+                font-size: 16px;
+                color: $black;
+                margin-bottom: 3px;
+                font-weight: 400;
+            }
         }
     }
 }

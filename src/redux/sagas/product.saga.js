@@ -25,6 +25,10 @@ import {
   getBidMessagesResponse,
   SEND_BID_MESSAGE,
   ON_UNMATCH,
+  REJECT_BID,
+  ACCEPT_BID,
+  acceptBidSuccess,
+  rejectBidSuccess,
   submitUnmatchSuccess
 } from '../actions/product.actions';
 import { editUserProduct, addUserProduct } from '../actions/app.actions';
@@ -159,11 +163,32 @@ function* getBidMessages(action) {
 function* sendBidMessage(action) {
   const response = yield call(
     callApi,
-    `/products/bid/${action.message.bid}`,
-
+    '/products/bid/message',
+    'POST',
+    action.message
   );
   if (response.success) {
-    yield put(getBidMessagesResponse(response.messages));
+    yield put(sendMessageSuccess());
+  } else {
+    yield put(editProductFail(response.message));
+  }
+}
+
+function* rejectBid(action) {
+  try {
+    yield call(callApi, `/products/bid/cancel/${action.bidId}`);
+    yield put(rejectBidSuccess(action.bidId));
+  } catch (e) {
+    // yield put(globalError(response.message));
+  }
+}
+
+function* acceptBid(action) {
+  try {
+    yield call(callApi, `/products/bid/accept/${action.bidId}`);
+    yield put(acceptBidSuccess(action.bidId));
+  } catch (e) {
+    // yield put(globalError(response.message));
   }
 }
 
@@ -180,6 +205,8 @@ function* productSaga() {
   yield takeLatest(ON_UNMATCH, submitUnmatch);
   yield takeLatest(GET_BID_MESSAGES, getBidMessages);
   yield takeLatest(SEND_BID_MESSAGE, sendBidMessage);
+  yield takeLatest(ACCEPT_BID, acceptBid);
+  yield takeLatest(REJECT_BID, rejectBid);
 }
 
 export default productSaga;

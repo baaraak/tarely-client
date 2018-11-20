@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Spin } from 'antd';
+import { Spin, Modal } from 'antd';
 import io from 'socket.io-client';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { AwesomeButton } from 'react-awesome-button';
 
 import MatchesList from './MatchesList';
 import MatchRoom from './MatchRoom';
+import BidRoom from './BidRoom';
 import ProductView from '../../../components/ProductView';
 
 import {
@@ -15,9 +16,11 @@ import {
   getMatchMessages,
   sendMessage,
   getBidMessages,
+  sendBidMessage,
+  acceptBid,
+  rejectBid,
   onUnmatch,
 } from '../../../redux/actions/product.actions';
-import { Modal } from "antd/lib/index";
 
 const socketUrl = 'http://localhost:9000';
 
@@ -27,14 +30,14 @@ class MatchesComponent extends React.Component {
     this.state = {
       isLoading: true,
       matches: props.matches,
-      currentMatchID: null,
+      currentMatchID: props.currentMatchID,
       socket: null,
       messages: null,
       isModalOpen: false,
       isProductViewOpen: !props.isMobile,
     };
     this.changeCurrentMatch = this.changeCurrentMatch.bind(this);
-    this.onSubmitMessage = this.onSubmitMessage.bind(this);
+    this.onSubmitMatchMessage = this.onSubmitMatchMessage.bind(this);
     this.setContentRefAndScroll = this.setContentRefAndScroll.bind(this);
     this.addChat = this.addChat.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -59,7 +62,9 @@ class MatchesComponent extends React.Component {
       this.initSocket();
       if (currentMatchID) this.props.getMatchMessages(currentMatchID);
     }
-
+    if (this.props.currentMatchID !== nextProps.currentMatchID) {
+      this.setState({ currentMatchID: nextProps.currentMatchID })
+    }
     if (this.props.matches !== nextProps.matches) {
       const currentMatchID = nextProps.matches[0] ? nextProps.matches[0].matchId : null;
       this.setState({ matches: nextProps.matches, isLoading: false, currentMatchID, messages: null });
@@ -131,7 +136,7 @@ class MatchesComponent extends React.Component {
 
   changeCurrentMatch(currentMatchID, type) {
     if (this.state.currentMatchID === currentMatchID) return;
-    this.setState({ currentMatchID });
+    this.setState({ currentMatchID, isProductViewOpen: true, });
     if (type === 'MATCHES') {
       this.props.getMatchMessages(currentMatchID);
     } else {
@@ -161,7 +166,7 @@ class MatchesComponent extends React.Component {
     }
   }
 
-  onSubmitMessage(body) {
+  onSubmitMatchMessage(body) {
     const message = {
       body,
       from: this.props.productId,
@@ -180,6 +185,25 @@ class MatchesComponent extends React.Component {
     this.props.sendMessage(message);
   }
 
+  onSubmitBidMessage = (body) => {
+    const message = {
+      body,
+      from: { model: 'Product', id: this.props.productId },
+      to: { model: 'User', id: this.getCurrentProduct().bid.from },
+      bid: this.state.currentMatchID,
+    };
+    this.state.socket.emit('MESSAGE_SENT', message);
+    this.setState({
+      messages: [...this.state.messages, {
+        _id: new Date(),
+        body,
+        createdAt: new Date(),
+        from: this.props.productId,
+      }]
+    }, this.setContentRefAndScroll)
+    this.props.sendBidMessage(message);
+  }
+
 
   toggleModal() {
     this.setState({ isModalOpen: !this.state.isModalOpen })
@@ -194,6 +218,45 @@ class MatchesComponent extends React.Component {
     this.props.onUnmatch(this.state.currentMatchID);
   }
 
+  handleBidReject = (bidId) => {
+    this.props.rejectBid(bidId);
+  };
+
+  handleBidAccept = (bidId) => {
+    this.props.acceptBid(bidId);
+  };
+
+  renderRoom = (currentMatch) => {
+    const { messages, currentMatchID } = this.state;
+    if (currentMatch.product) {
+      return (
+        <MatchRoom
+          productId={this.props.productId}
+          onSubmit={this.onSubmitMatchMessage}
+          messages={messages}
+          intl={this.props.intl}
+          title={currentMatch.product.title}
+          setContentRef={this.setContentRefAndScroll}
+          isMobile={this.props.isMobile}
+          onClickInfo={this.onClickInfo}
+        />
+      );
+    } else if (currentMatch.bid) {
+      return (
+        <BidRoom
+          productId={this.props.productId}
+          bid={currentMatch.bid}
+          intl={this.props.intl}
+          onSubmit={this.onSubmitBidMessage}
+          messages={messages}
+          setContentRef={this.setContentRefAndScroll}
+          isMobile={this.props.isMobile}
+          handleReject={this.handleBidReject}
+          handleAccept={this.handleBidAccept}
+        />
+      );
+    }
+  };
 
   render() {
     const { matches, currentMatchID, isLoading, messages, isProductViewOpen } = this.state;
@@ -216,14 +279,14 @@ class MatchesComponent extends React.Component {
           intl={this.props.intl}
           isMobile={isMobile}
         />
-        {/* {cu} */}
+        {this.renderRoom(currentMatch)}
         {isProductViewOpen && currentMatch.product && <ProductView
           buttonLabel={<FormattedMessage id="matches.unMatch.button" />}
           categories={this.props.categories}
           product={currentMatch.product}
           onActionClick={this.toggleModal}
           isMobile={isMobile}
-          onClose={isMobile && this.onClickInfo}
+          onClose={this.onClickInfo}
         />}
         <Modal
           visible={!!this.state.isModalOpen}
@@ -232,7 +295,7 @@ class MatchesComponent extends React.Component {
           footer={[<AwesomeButton size="small" key={1} type="secondary" action={this.toggleModal} >{this.props.intl.messages["matches.unMatch.modal.cancel"]}</AwesomeButton>,
           <AwesomeButton key={2} size="small" className="btn-danger" action={this.handleDelete} >{this.props.intl.messages["matches.unMatch.modal.ok"]}</AwesomeButton>]}
         >
-          <h2>{this.props.intl.messages["matches.noMatches"]}</h2>
+          <h2>{this.props.intl.messages["matches.noMatc hes"]}</h2>
           <p dangerouslySetInnerHTML={{ __html: this.props.intl.messages["matches.unMatch.modal.message"] }} ></p>
         </Modal>
       </div>
@@ -245,6 +308,7 @@ const mapStateToProps = state => ({
   categories: state.app.categories,
   isMobile: state.app.isMobile,
   messages: state.product.messages,
+  currentMatchID: state.product.currentMatchID,
 });
 
 export default connect(
@@ -256,5 +320,8 @@ export default connect(
     onUnmatch,
     sendMessage,
     getBidMessages,
+    acceptBid,
+    rejectBid,
+    sendBidMessage,
   }
 )(injectIntl(MatchesComponent));

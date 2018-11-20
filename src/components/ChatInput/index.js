@@ -37,7 +37,19 @@ class ChatInput extends React.Component {
   }
 
   togglePickerVisibility(e) {
-    this.setState({ isPickerVisible: !this.state.isPickerVisible });
+    this.setState({ isPickerVisible: !this.state.isPickerVisible }, () => {
+      if (this.state.isPickerVisible) {
+        document.addEventListener('click', this.myHandler);
+      } else {
+        document.removeEventListener('click', this.myHandler);
+      }
+    });
+  }
+
+  myHandler = (e) => {
+    if (!document.querySelectorAll('.emoji-mart')[0].contains(e.target)) {
+      this.togglePickerVisibility();
+    }
   }
 
   onSubmit() {

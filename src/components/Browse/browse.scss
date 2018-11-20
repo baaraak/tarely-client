@@ -8,11 +8,11 @@
         width: 280px;
         min-width: 280px;
         height: 100%;
-        overflow: hidden;
-        overflow-y: scroll;
-        padding: 25px;
         background: linear-gradient(to right, $bright_gray, #fff);
         border-right: 1px solid $bright_gray;
+        &--wrapper {
+            padding: 25px;
+        }
     }
     .filters__cell {
         margin-bottom: 20px;
@@ -33,8 +33,6 @@
     .filter__content--categories {
         border: 1px solid $gray;
         height: 150px;
-        overflow: hidden;
-        overflow-y: scroll;
         background: #fff;
         .filter__category {
             border-bottom: 1px solid $gray;
@@ -125,12 +123,11 @@
 }
 
 .browse__products {
-    height: 100%;
-    overflow-y: scroll;
     display: flex;
     padding-bottom: 40px;
     flex-wrap: wrap;
     width: 100%;
+    justify-content: space-evenly;
     &--noMessage {
         font-size: 24px;
         margin: 30px;
@@ -143,10 +140,10 @@
     }
     .productsList__product {
         width: 230px;
-        height: 250px;
+        height: 300px;
         background: #fff;
         box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
-        margin: 40px 0 0 40px;
+        margin: 15px;
         display: flex;
         flex-direction: column;
         cursor: pointer;

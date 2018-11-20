@@ -195,7 +195,6 @@ a {
 }
 
 .aws-btn {
-    width: auto;
     --button-default-height: 49px;
     --button-default-font-size: 13px;
     --button-default-border-radius: 25px;
@@ -213,6 +212,8 @@ a {
     --button-secondary-color-light: #6c6a00;
     --button-secondary-color-hover: #fffb3e;
     --button-secondary-border: none;
+    --button-large-width: 150px;
+    --button-large-height: 50px;
     &--small {
         height: 40px;
         font-size: 12px;

@@ -26,6 +26,10 @@ export const ON_UNMATCH_SUCCESS = 'ON_UNMATCH_SUCCESS';
 export const GET_BID_MESSAGES = 'GET_BID_MESSAGES';
 export const GET_BID_MESSAGES_RESPONSE = 'GET_BID_MESSAGES_RESPONSE';
 export const SEND_BID_MESSAGE = 'SEND_BID_MESSAGE';
+export const ACCEPT_BID = 'ACCEPT_BID';
+export const REJECT_BID = 'REJECT_BID';
+export const ACCEPT_BID_SUCCESS = 'ACCEPT_BID_SUCCESS';
+export const REJECT_BID_SUCCESS = 'REJECT_BID_SUCCESS';
 
 export function uploadProduct(product) {
   return {
@@ -205,5 +209,33 @@ export function sendBidMessage(message) {
   return {
     type: SEND_BID_MESSAGE,
     message
+  };
+}
+
+export function acceptBid(bidId) {
+  return {
+    type: ACCEPT_BID,
+    bidId
+  };
+}
+
+export function rejectBid(bidId) {
+  return {
+    type: REJECT_BID,
+    bidId
+  };
+}
+
+export function rejectBidSuccess(bidId) {
+  return {
+    type: REJECT_BID_SUCCESS,
+    bidId
+  };
+}
+
+export function acceptBidSuccess(bidId) {
+  return {
+    type: ACCEPT_BID_SUCCESS,
+    bidId
   };
 }

@@ -38,9 +38,6 @@ class BidPanel extends React.Component {
             },
             bid: this.props.currentBidID,
         };
-        console.log('***********************');
-        console.log(message);
-        console.log('***********************');
         this.setState({
             messages: [...this.state.messages, {
                 _id: new Date(),

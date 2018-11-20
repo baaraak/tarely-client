@@ -1,16 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Modal, Form, Input, InputNumber, Alert, message } from 'antd';
-import { AwesomeButton } from 'react-awesome-button';
 
 import SearchMenu from './SearchMenu';
 import BrowseComponent from '../../components/Browse/BrowseComponent';
 import { submitBid } from '../../redux/actions/product.actions';
-
+import SendBidModal from './component/SendBidModal';
 import './search.css';
 
-const Textarea = Input.TextArea;
-const FormItem = Form.Item;
+
 
 class Search extends React.Component {
 
@@ -42,7 +40,7 @@ class Search extends React.Component {
     this.setState({ bidProductID: productID });
   }
 
-  handleSubmit(e) {
+  handleSubmit(e, submit) {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         this.props.submitBid({ ...values, productID: this.state.bidProductID })
@@ -67,46 +65,13 @@ class Search extends React.Component {
           onBid={this.onBid}
           history={this.props.history}
         />
-        <Modal
-          title="Send a bid"
-          visible={!!this.state.bidProductID}
-          maskClosable={false}
-          footer={[
-            <AwesomeButton size="small" className="btn-danger" action={this.handleCancel}>Cancel</AwesomeButton>,
-            <AwesomeButton size="small" action={this.handleSubmit}>Send</AwesomeButton>,
-          ]}
-        >
-          <Form onSubmit={this.handleSubmit} className="login-form">
-            {this.props.isBidSuccess === false && <Alert message="Something went wrong, please try again later" type="error" showIcon />}
-            <FormItem label="Title" >
-              {getFieldDecorator('title', {
-                rules: [{ required: true, message: 'Please add title!' }],
-              })(
-                <Input placeholder="Title" />
-              )}
-            </FormItem>
-            <FormItem label="Description" >
-              {getFieldDecorator('description', {
-                rules: [{ required: true, message: 'Add some text to describe your request' }],
-              })(
-                <Textarea />
-              )}
-            </FormItem>
-            <FormItem label="Price" >
-              {getFieldDecorator('price', {
-                rules: [{ required: true, message: 'Add bid price' }],
-              })(
-                <InputNumber
-                  max={100000}
-                  formatter={value =>
-                    `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                  }
-                  parser={value => value.replace(/\$\s?|(,*)/g, '')}
-                />
-              )}
-            </FormItem>
-          </Form>
-        </Modal>
+        <SendBidModal
+          getFieldDecorator={getFieldDecorator}
+          bidProductID={this.state.bidProductID}
+          handleCancel={this.handleCancel}
+          handleSubmit={this.handleSubmit}
+          isBidSuccess={this.props.isBidSuccess}
+        />
       </div>
     )
   }
